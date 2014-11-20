@@ -14,7 +14,7 @@ public class EventType extends EntityBase {
      */
     private String eventTypeID;
 
-    private String eEventType;
+    private String eventType;
 
     /************************************************GETTER/SETTER*****************************************************/
 
@@ -26,11 +26,11 @@ public class EventType extends EntityBase {
         this.eventTypeID = eventTypeID;
     }
 
-    public String geteEventType() {
-        return eEventType;
+    public String getEventType() {
+        return eventType;
     }
 
-    public void seteEventType(String eEventType) {
-        this.eEventType = eEventType;
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 }
