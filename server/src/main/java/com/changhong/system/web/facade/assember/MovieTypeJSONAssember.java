@@ -157,7 +157,26 @@ public class MovieTypeJSONAssember {
         return null;
     }
 
-    public static List<EventType> toMovieEventTypeList(String response) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+    public static List<EventType> toMovieEventTypeList(String json) {
+        JSONObject o = JSON.parseObject(json);
+        int status = o.getJSONObject("ResponseHeader").getIntValue("Status");
+        if (status == 0) {
+            JSONObject typeJSON = o.getJSONObject("EventType");
+            JSONArray itemsJSON = typeJSON.getJSONArray("EventType_item");
+
+            List<EventType> events = new ArrayList<EventType>();
+            for (int i = 0; i < itemsJSON.size(); i++) {
+                JSONObject object = itemsJSON.getJSONObject(i);
+
+                EventType event = new EventType();
+                event.setEventTypeID(object.getString("EventTypeID"));
+                event.setEventType(object.getString("EventType"));
+                events.add(event);
+            }
+
+            return events;
+        }
+
+        return null;
     }
 }

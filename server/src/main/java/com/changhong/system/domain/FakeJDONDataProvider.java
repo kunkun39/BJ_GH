@@ -134,9 +134,90 @@ public class FakeJDONDataProvider {
             "},\"EventType\":{\n" +
             "    \"EventType_item\":[\n" +
             "        {\n" +
-            "            \"ChannelTypeID\":\"1\",\n" +
-            "            \"ChannelType\":\"\\u7535\\u5f71\"\n" +
+            "            \"EventTypeID\":\"1\",\n" +
+            "            \"EventType\":\"\\u7535\\u5f71\"\n" +
             "        },\n" +
             "    ]\n" +
             "}}";
+
+    public static String MOVIE_COLUMN_DATA = "{\n" +
+            "    \"ResponseHeader\": {\n" +
+            "        \"TransactionId\": \"20140708143719_18329\",\n" +
+            "        \"Status\": \"0\",\n" +
+            "        \"Params\": {\n" +
+            "            \"ColumnID\": \"50046\",\n" +
+            "            \"QueryFlag\": \"1\"\n" +
+            "        }\n" +
+            "    },\n" +
+            "    \"Columns\": [\n" +
+            "        {\n" +
+            "            \"ColumnID\": \"50046\",\n" +
+            "            \"ColumnTypeCode\": \"mf\",\n" +
+            "            \"Type\": \"1\",\n" +
+            "            \"ParentID\": \"50041\",\n" +
+            "            \"ColumnName\": null,\n" +
+            "            \"Alias\": \"免费点播\",\n" +
+            "            \"Describe\": \"\",\n" +
+            "            \"Display\": \"1\",\n" +
+            "            \"Rank\": \"5\",\n" +
+            "            \"Url\": \"\",\n" +
+            "            \"UrlType\": null,\n" +
+            "            \"UpdateTime\": \"Wed Jul 16 00:00:00 CST 2014\",\n" +
+            "            \"RelevantChargeMode\": \"0\",\n" +
+            "            \"ProductID\": \"1048584\",\n" +
+            "            \"ResourceType\": null\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"ColumnID\": \"50047\",\n" +
+            "            \"ColumnTypeCode\": \"US\",\n" +
+            "            \"Type\": \"1\",\n" +
+            "            \"ParentID\": \"50046\",\n" +
+            "            \"ColumnName\": null,\n" +
+            "            \"Alias\": \"电影\",\n" +
+            "            \"Describe\": \"\",\n" +
+            "            \"Display\": \"1\",\n" +
+            "            \"Rank\": \"2\",\n" +
+            "            \"Url\": \"\",\n" +
+            "            \"UrlType\": null,\n" +
+            "            \"UpdateTime\": \"Tue Jul 22 00:00:00 CST 2014\",\n" +
+            "            \"RelevantChargeMode\": \"0\",\n" +
+            "            \"ProductID\": null,\n" +
+            "            \"ResourceType\": null\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"ColumnID\": \"50048\",\n" +
+            "            \"ColumnTypeCode\": \"rhjj\",\n" +
+            "            \"Type\": \"1\",\n" +
+            "            \"ParentID\": \"50046\",\n" +
+            "            \"ColumnName\": null,\n" +
+            "            \"Alias\": \"电视剧\",\n" +
+            "            \"Describe\": \"\",\n" +
+            "            \"Display\": \"1\",\n" +
+            "            \"Rank\": \"3\",\n" +
+            "            \"Url\": \"\",\n" +
+            "            \"UrlType\": null,\n" +
+            "            \"UpdateTime\": \"Tue Jul 22 00:00:00 CST 2014\",\n" +
+            "            \"RelevantChargeMode\": \"0\",\n" +
+            "            \"ProductID\": null,\n" +
+            "            \"ResourceType\": null\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"ColumnID\": \"50049\",\n" +
+            "            \"ColumnTypeCode\": \"gtxp\",\n" +
+            "            \"Type\": \"1\",\n" +
+            "            \"ParentID\": \"50046\",\n" +
+            "            \"ColumnName\": null,\n" +
+            "            \"Alias\": \"经典影视\",\n" +
+            "            \"Describe\": \"\",\n" +
+            "            \"Display\": \"1\",\n" +
+            "            \"Rank\": \"4\",\n" +
+            "            \"Url\": \"\",\n" +
+            "            \"UrlType\": null,\n" +
+            "            \"UpdateTime\": \"Tue Jul 22 00:00:00 CST 2014\",\n" +
+            "            \"RelevantChargeMode\": \"0\",\n" +
+            "            \"ProductID\": null,\n" +
+            "            \"ResourceType\": null\n" +
+            "        }\n" +
+            "    ]\n" +
+            "}";
 }

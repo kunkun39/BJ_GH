@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.changhong.common.utils.CHStringUtils;
 import com.changhong.common.utils.WebUtils;
 import com.changhong.system.domain.FakeJDONDataProvider;
+import com.changhong.system.domain.column.Column;
 import com.changhong.system.domain.movietype.*;
 import com.changhong.system.repository.MovieDao;
+import com.changhong.system.web.facade.assember.MovieColumnJSONAssember;
 import com.changhong.system.web.facade.assember.MovieTypeJSONAssember;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.springframework.stereotype.Service;
@@ -38,7 +40,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
-            requestHeader.put("TransactionId", System.currentTimeMillis());
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "type");
@@ -64,7 +66,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
-            requestHeader.put("TransactionId", System.currentTimeMillis());
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "dramatype");
@@ -90,7 +92,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
-            requestHeader.put("TransactionId", System.currentTimeMillis());
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "area");
@@ -116,7 +118,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
-            requestHeader.put("TransactionId", System.currentTimeMillis());
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "areagroup");
@@ -142,7 +144,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
-            requestHeader.put("TransactionId", System.currentTimeMillis());
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "clienttype");
@@ -168,7 +170,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
-            requestHeader.put("TransactionId", System.currentTimeMillis());
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "channeltype");
@@ -194,7 +196,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
-            requestHeader.put("TransactionId", System.currentTimeMillis());
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "eventtype");
@@ -211,6 +213,33 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
     }
 
+    public void updateMovieColumn() {
+        String response = null;
+        if (LOCAL) {
+            response = FakeJDONDataProvider.MOVIE_COLUMN_DATA;
+        } else {
+            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryColumn.action");
+            JSONObject json = new JSONObject();
+            JSONObject requestHeader = new JSONObject();
+            requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
+            json.put("RequestHeader", requestHeader);
+            JSONObject requestParams = new JSONObject();
+            requestParams.put("ColumnID", "");
+            requestParams.put("QueryFlag", "");
+            json.put("RequestParams", requestParams);
+            postMethod.addParameter("json", json.toJSONString());
+            response = WebUtils.httpPostRequest(postMethod);
+        }
+
+        if (StringUtils.hasText(response)) {
+            List<Column> columns = MovieColumnJSONAssember.toMovieColumneList(response);
+            if (columns != null && !columns.isEmpty()) {
+                movieDao.saveAll(columns);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         MovieUpdateServiceImpl movieService = new MovieUpdateServiceImpl();
 //        movieService.updateMovieType();
@@ -218,6 +247,8 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
 //        movieService.updateMovieArea();
 //        movieService.updateMovieAreaGroup();
 //        movieService.updateMovieClientType();
-        movieService.updateMovieChannelType();
+//        movieService.updateMovieChannelType();
+//        movieService.updateMovieEventType();
+        movieService.updateMovieColumn();
     }
 }

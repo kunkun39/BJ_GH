@@ -8,4 +8,18 @@ package com.changhong.system.service;
 public interface MovieUpdateService {
 
     void updateMovieType();
+
+    void updateMovieDramaType();
+
+    void updateMovieArea();
+
+    void updateMovieAreaGroup();
+
+    void updateMovieClientType();
+
+    void updateMovieChannelType();
+
+    void updateMovieEventType();
+
+    void updateMovieColumn();
 }
