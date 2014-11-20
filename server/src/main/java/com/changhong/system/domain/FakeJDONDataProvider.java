@@ -220,4 +220,85 @@ public class FakeJDONDataProvider {
             "        }\n" +
             "    ]\n" +
             "}";
+
+    public static String MOVIE_INFO_DATA = "{\"ResponseHeader\":{\n" +
+            "    \"TransactionId\":\"TransactionId\",\n" +
+            "    \"Status\":0,\n" +
+            "    \"Params\":{\n" +
+            "        \"TypeID\":\"1\",\n" +
+            "        \"DramaTypeID\":\"2\",\n" +
+            "        \"Year\":\"2012\",\n" +
+            "        \"AreaID\":\"\",\n" +
+            "        \"AreaGroupID\":\"4\",\n" +
+            "        \"PS\":1,\n" +
+            "        \"P\":2,\n" +
+            "        \"Sort\":\"1\"\n" +
+            "    }\n" +
+            "},\"Typecount\":{\n" +
+            "    \"Typeitem\":[\n" +
+            "        {\n" +
+            "            \"TypeID\":\"1\",\n" +
+            "            \"Typecount\":\"21\"\n" +
+            "        }\n" +
+            "    ]\n" +
+            "},\"Item_title\":{\n" +
+            "    \"TotalNumber\":\"21\"\n" +
+            "},\"Matches\":{\n" +
+            "    \"Matches_item\":[\n" +
+            "        {\n" +
+            "            \"MovieInfo\":{\n" +
+            "                \"MovieID\":\"144265\",\n" +
+            "                \"MovieName\":\"\\u6e29\\u67d4\\u6740\\u622e\",\n" +
+            "                \"MovieAliasName\":\"\\u975e\\u6cd5\\u4ea4\\u6613\\/\\u593a\\u547d\\u65e0\\u58f0\\/\\u67ef\\u6839\\u7684\\u4ea4\\u6613\\/\\u6e29\\u67d4\\u5730\\u6740\\u6b7b\\u4ed6\\u4eec\\/\\u6740\\u622e\\u884c\\u52a8\\/\\u6e29\\u67d4\\u7684\\u6740\\u622e\\/Killing Them Softly\\/Cogan\\\\\\\\\\\\'s Trade\",\n" +
+            "                \"TypeID\":\"1\",\n" +
+            "                \"DramaTypeID\":\"2,12\",\n" +
+            "                \"AreaID\":\"31\",\n" +
+            "                \"Year\":\"2012\",\n" +
+            "                \"Director\":\";\\u5b89\\u5fb7\\u9c81\\u00b7\\u591a\\u7c73\\u5c3c\\u514b;\",\n" +
+            "                \"Actor\":\";\\u5e03\\u62c9\\u5fb7\\u00b7\\u76ae\\u7279;\\u65af\\u79d1\\u7279\\u00b7\\u9ea6\\u514b\\u7eb3\\u91cc;\\u672c\\u00b7\\u95e8\\u5fb7\\u5c14\\u68ee;\",\n" +
+            "                \"Host\":\"\",\n" +
+            "                \"Station\":\"\",\n" +
+            "                \"Author\":\"\",\n" +
+            "                \"RunTime\":\"97\",\n" +
+            "                \"Count\":\"0\",\n" +
+            "                \"SummaryShort\":\"    \\u5e03\\u62c9\\u5fb7\\u00b7\\u76ae\\u7279\\u9970\\u6f14\\u7684\\u6770\\u57fa\\u00b7\\u67ef\\u6839\\u662f\\u4e00\\u4f4d\\u5f3a\\u786c\\u7684\\u804c\\u4e1a\\u6267\\u6cd5\\u4eba\\uff0c\\u4ed6\\u4ecb\\u5165\\u8c03\\u67e5\\u4e00\\u6869\\u62a2\\u52ab\\u6848\\uff0c\\u6848\\u4ef6\\u53d1\\u751f\\u5728\\u4e00\\u6b21\\u7531\\u9ed1\\u5e2e\\u4fdd\\u62a4\\u7684\\u91cd\\u91d1\\u6251\\u514b\\u8d4c\\u5c40\\u4e2d\\u3002\",\n" +
+            "                \"Commentary\":\"\\u6781\\u9177\\u7684\\u98ce\\u683c\\u5316\",\n" +
+            "                \"Tag\":\"\\u5341\\u6708\\u9884\\u544a\",\n" +
+            "                \"SuggestPrice\":null,\n" +
+            "                \"RecommendClass1\":\"6.1\",\n" +
+            "                \"RecommendClass2\":null,\n" +
+            "                \"RecommendClass3\":null,\n" +
+            "                \"RecommendClass4\":null,\n" +
+            "                \"Area\":\"\\u5185\\u5730\",\n" +
+            "                \"DramaType\":\"\\u60ca\\u609a,\\u72af\\u7f6a\",\n" +
+            "                \"Type\":\"\\u7535\\u5f71\",\n" +
+            "                \"OtherInfoArray\":\"\"\n" +
+            "            },\n" +
+            "            \"PlayInfo\":{\n" +
+            "                \"PlayPlatform\":\"WEB\",\n" +
+            "                \"AssetID\":null,\n" +
+            "                \"AssetName\":null,\n" +
+            "                \"ContentProviderID\":\"youku\",\n" +
+            "                \"ProductOfferingUID\":null,\n" +
+            "                \"PlayUrl\":\"http:\\/\\/v.youku.com\\/v_show\\/id_XNjIxMTU1Mzg4.html\",\n" +
+            "                \"PlayUrlID\":\"8873125\",\n" +
+            "                \"PlaySwfUrl\":\"http:\\/\\/player.youku.com\\/player.php\\/sid\\/XNjIxMTU1Mzg4\\/v.swf\",\n" +
+            "                \"MainCacheUrl\":\"\",\n" +
+            "                \"Series\":\"\",\n" +
+            "                \"SinglePriceInfo\":null,\n" +
+            "                \"CopyRightInfo\":null,\n" +
+            "                \"VideoCodecInfo\":null,\n" +
+            "                \"AudioCodecInfo\":null,\n" +
+            "                \"MuxInfo\":null,\n" +
+            "                \"RunTimeInfo\":null,\n" +
+            "                \"ResolutionInfo\":null,\n" +
+            "                \"BitRateInfo\":null,\n" +
+            "                \"OtherInfoArray\":null,\n" +
+            "                \"ContentProviderIDArray\":\"youku,tudou\",\n" +
+            "                \"SeriesArray\":\"\"\n" +
+            "            },\n" +
+            "            \"Poster\":[]\n" +
+            "        }\n" +
+            "    ]\n" +
+            "}}";
 }

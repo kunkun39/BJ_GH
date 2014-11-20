@@ -9,11 +9,11 @@ public class PagingUtils {
 
     private int currentPage  = 1;
     /**
-     * This parameter is used for check every page has how many items
+     * 分页每一页的大小
      */
-    private int maxItems = 20;
+    public static int pageItems = 20;
     /**
-     * This parameter is used for check how many items in total list
+     * 总共的数据
      */
     private int numItems = 1;
 
@@ -21,11 +21,11 @@ public class PagingUtils {
 		setNumItems(numItems);
 	}
 
-    public int getMaxItems(){
-        return maxItems;
+    public int getPageItems(){
+        return pageItems;
     }
     public int getStartPosition(){
-        return (currentPage - 1) * maxItems;
+        return (currentPage - 1) * pageItems;
     }
 
 	public void setNumItems(int numItems) {
@@ -48,15 +48,15 @@ public class PagingUtils {
 	}
 
 	private void setMaxItems(int maxItems) {
-		if (maxItems > 0) this.maxItems = maxItems;
+		if (maxItems > 0) this.pageItems = maxItems;
 	}
 
 	public int getBegin() {
-		return (currentPage - 1) * maxItems;
+		return (currentPage - 1) * pageItems;
 	}
 
 	public int getEnd() {
-		int end = currentPage * maxItems;
+		int end = currentPage * pageItems;
 		return end > numItems ? numItems : end;
 	}
 
@@ -65,8 +65,8 @@ public class PagingUtils {
 	}
 
 	public int getNumPages() {
-		int num = numItems / maxItems;
-		if (numItems % maxItems > 0) num++;
+		int num = numItems / pageItems;
+		if (numItems % pageItems > 0) num++;
 		return num;
 	}
 

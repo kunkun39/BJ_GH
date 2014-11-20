@@ -22,4 +22,6 @@ public interface MovieUpdateService {
     void updateMovieEventType();
 
     void updateMovieColumn();
+
+    void getMovieListByType(String movieType);
 }

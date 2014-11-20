@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class MovieColumnJSONAssember {
 
-    public static List<Column> toMovieColumneList(String json) {
+    public static List<Column> toMovieColumnList(String json) {
         JSONObject o = JSON.parseObject(json);
         int status = o.getJSONObject("ResponseHeader").getIntValue("Status");
         if (status == 0) {

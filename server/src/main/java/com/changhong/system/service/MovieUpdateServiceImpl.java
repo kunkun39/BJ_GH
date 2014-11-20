@@ -2,12 +2,15 @@ package com.changhong.system.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.changhong.common.utils.CHStringUtils;
+import com.changhong.common.utils.PagingUtils;
 import com.changhong.common.utils.WebUtils;
 import com.changhong.system.domain.FakeJDONDataProvider;
 import com.changhong.system.domain.column.Column;
+import com.changhong.system.domain.movielist.MovieInfo;
 import com.changhong.system.domain.movietype.*;
 import com.changhong.system.repository.MovieDao;
 import com.changhong.system.web.facade.assember.MovieColumnJSONAssember;
+import com.changhong.system.web.facade.assember.MovieListJSONAssember;
 import com.changhong.system.web.facade.assember.MovieTypeJSONAssember;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.springframework.stereotype.Service;
@@ -24,7 +27,7 @@ import java.util.List;
 @Service("movieUpdateService")
 public class MovieUpdateServiceImpl implements MovieUpdateService {
 
-    private final static String TX_FLAG = "CH_";
+    private final static String TX_FLAG = "CH_"; //例子中给的是 System.currentTimeMillis() +　"_" + 5位随机数
 
     private final static boolean LOCAL = true;
 
@@ -216,7 +219,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
     public void updateMovieColumn() {
         String response = null;
         if (LOCAL) {
-            response = FakeJDONDataProvider.MOVIE_COLUMN_DATA;
+            response = FakeJDONDataProvider.MOVIE_INFO_DATA;
         } else {
             PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryColumn.action");
             JSONObject json = new JSONObject();
@@ -233,9 +236,81 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
 
         if (StringUtils.hasText(response)) {
-            List<Column> columns = MovieColumnJSONAssember.toMovieColumneList(response);
+            List<Column> columns = MovieColumnJSONAssember.toMovieColumnList(response);
             if (columns != null && !columns.isEmpty()) {
                 movieDao.saveAll(columns);
+            }
+        }
+    }
+
+    /**
+     * 没有事务
+     */
+    public void getMovieListByType(String movieType) {
+        String response = null;
+        if (LOCAL) {
+            response = FakeJDONDataProvider.MOVIE_INFO_DATA;
+        } else {
+            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieList.action");
+            JSONObject json = new JSONObject();
+            JSONObject requestHeader = new JSONObject();
+            requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
+            json.put("RequestHeader", requestHeader);
+            JSONObject requestParams = new JSONObject();
+            requestParams.put("TypeID", movieType);
+            requestParams.put("DramaTypeID", "");
+            requestParams.put("Year", "");
+            requestParams.put("AreaID", "");
+            requestParams.put("AreaGroupID", "");
+            requestParams.put("PS", PagingUtils.pageItems);
+            requestParams.put("P", "1");
+            requestParams.put("Sort", "1");
+            json.put("RequestParams", requestParams);
+            postMethod.addParameter("json", json.toJSONString());
+            response = WebUtils.httpPostRequest(postMethod);
+        }
+
+        if (StringUtils.hasText(response)) {
+            int total = MovieListJSONAssember.getTotalMovieSize(response);
+            if (total > 0) {
+                PagingUtils paging = new PagingUtils(total);
+                for (int pageNumber=1; pageNumber<=paging.getNumPages(); pageNumber++) {
+                    updateMovieListByPage(movieType, pageNumber);
+                }
+            }
+        }
+    }
+
+    private void updateMovieListByPage(String movieType, int pageNumber) {
+        String response = null;
+        if (LOCAL) {
+            response = FakeJDONDataProvider.MOVIE_INFO_DATA;
+        } else {
+            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieList.action");
+            JSONObject json = new JSONObject();
+            JSONObject requestHeader = new JSONObject();
+            requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
+            json.put("RequestHeader", requestHeader);
+            JSONObject requestParams = new JSONObject();
+            requestParams.put("TypeID", movieType);
+            requestParams.put("DramaTypeID", "");
+            requestParams.put("Year", "");
+            requestParams.put("AreaID", "");
+            requestParams.put("AreaGroupID", "");
+            requestParams.put("PS", PagingUtils.pageItems);
+            requestParams.put("P", pageNumber);
+            requestParams.put("Sort", "1");
+            json.put("RequestParams", requestParams);
+            postMethod.addParameter("json", json.toJSONString());
+            response = WebUtils.httpPostRequest(postMethod);
+        }
+
+        if (StringUtils.hasText(response)) {
+            List<MovieInfo> movies = MovieListJSONAssember.toMovieInfoList(response);
+            if (movies != null && !movies.isEmpty()) {
+                movieDao.saveAll(movies);
             }
         }
     }
@@ -249,6 +324,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
 //        movieService.updateMovieClientType();
 //        movieService.updateMovieChannelType();
 //        movieService.updateMovieEventType();
-        movieService.updateMovieColumn();
+//        movieService.updateMovieColumn();
+        movieService.getMovieListByType("1");
     }
 }
