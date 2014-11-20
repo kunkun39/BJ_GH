@@ -12,46 +12,37 @@
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-    <!--<context:annotation-config/>-->
+    <context:annotation-config/>
 
-    <!--<context:component-scan base-package="com.changhong"/>-->
+    <context:component-scan base-package="com.changhong"/>
 
-    <!--<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">-->
-        <!--<property name="basenames">-->
-            <!--<list>-->
-                <!--<value>-->
-                    <!--messages.errors-->
-                <!--</value>-->
-                <!--<value>-->
-                    <!--messages.messages-->
-                <!--</value>-->
-            <!--</list>-->
-        <!--</property>-->
-        <!--<property name="useCodeAsDefaultMessage" value="true"/>-->
-    <!--</bean>-->
-
-    <!--<bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">-->
-        <!--<property name="providers">-->
-            <!--<list>-->
-                <!--<bean class="org.springframework.security.authentication.AnonymousAuthenticationProvider">-->
-                    <!--<property name="key" value="changeThis"/>-->
-                <!--</bean>-->
-                <!--<bean class="org.springframework.security.authentication.RememberMeAuthenticationProvider">-->
-                    <!--<property name="key" value="changeThis"/>-->
-                <!--</bean>-->
-            <!--</list>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-    <!--<bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl"/>-->
-
-    <bean id="clientPersonService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
-        <property name="serviceUrl">
-            <value>rmi://localhost:1200/RemoteUserService</value>
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>
+                    messages.errors
+                </value>
+                <value>
+                    messages.messages
+                </value>
+            </list>
         </property>
-        <property name="serviceInterface">
-            <value>com.changhong.system.service.UserService</value>
+        <property name="useCodeAsDefaultMessage" value="true"/>
+    </bean>
+
+    <bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+        <property name="providers">
+            <list>
+                <bean class="org.springframework.security.authentication.AnonymousAuthenticationProvider">
+                    <property name="key" value="changeThis"/>
+                </bean>
+                <bean class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+                    <property name="key" value="changeThis"/>
+                </bean>
+            </list>
         </property>
     </bean>
+
+    <bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl"/>
 
 </beans>
