@@ -5,6 +5,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.MultipartPostMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
 
 import java.io.InputStream;
 
@@ -24,7 +25,7 @@ public class WebUtils {
         connectionManager.getParams().setConnectionTimeout(timeOutMilliSeconds);
     }
 
-    public String httpGetRequest(String url) {
+    public static String httpGetRequest(String url) {
         HttpClient client = new HttpClient(connectionManager);
         client.getParams().setSoTimeout(timeOutMilliSeconds);
         client.getParams().setContentCharset("UTF-8");
@@ -43,22 +44,22 @@ public class WebUtils {
         return response;
     }
 
-    public InputStream httpGetRequest(GetMethod httpGet) {
+    public static String httpGetRequest(GetMethod httpGet) {
         HttpClient client = new HttpClient(connectionManager);
         client.getParams().setSoTimeout(timeOutMilliSeconds);
         client.getParams().setContentCharset("UTF-8");
 
-        InputStream response = null;
+        String response = null;
         try {
             client.executeMethod(httpGet);
-            response = httpGet.getResponseBodyAsStream();
+            response = httpGet.getResponseBodyAsString();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return response;
     }
 
-    public String httpPostRequest(MultipartPostMethod postMethod) {
+    public static String httpPostRequest(PostMethod postMethod) {
         HttpClient client = new HttpClient(connectionManager);
         client.setConnectionTimeout(timeOutMilliSeconds);
         client.getParams().setContentCharset("UTF-8");

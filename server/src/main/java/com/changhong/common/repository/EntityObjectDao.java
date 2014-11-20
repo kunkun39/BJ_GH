@@ -20,4 +20,6 @@ public interface EntityObjectDao {
     EntityBase findById(int id, Class clazz);
 
     <T extends EntityBase> List<T> findByIds(String[] ids, Class<T> clazz);
+
+    void saveAll(List list);
 }

@@ -2,6 +2,7 @@ package com.changhong.common.repository;
 
 import com.changhong.common.domain.EntityBase;
 import com.changhong.common.utils.CHStringUtils;
+import org.apache.poi.hssf.record.formula.functions.T;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -49,5 +50,9 @@ public class HibernateEntityObjectDao extends HibernateDaoSupport implements Ent
             return getHibernateTemplate().find("from " + clazz.getName() + " do where do.id in (" + CHStringUtils.convertListToSQLIn(ids) + ")");
         }
         return new ArrayList<T>();
+    }
+
+    public void saveAll(List list) {
+        getHibernateTemplate().saveOrUpdateAll(list);
     }
 }
