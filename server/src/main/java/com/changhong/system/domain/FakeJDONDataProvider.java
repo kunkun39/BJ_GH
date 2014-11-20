@@ -140,6 +140,22 @@ public class FakeJDONDataProvider {
             "    ]\n" +
             "}}";
 
+    public static String MOVIE_PROVIDER_DATA = "{\"ResponseHeader\":{\n" +
+            "    \"TransactionId\":\"TransactionId\",\n" +
+            "    \"Status\":0,\n" +
+            "    \"Params\":{\n" +
+            "        \"Class\":\"provider\"\n" +
+            "    }\n" +
+            "},\"Provider\":{\n" +
+            "    \"Provider_item\":[\n" +
+            "        {\n" +
+            "            \"ProviderID\":\"1\",\n" +
+            "            \"ProviderName\":\"\\u7535\\u5f71\",\n" +
+            "            \"ProviderType\":\"WEB\"\n" +
+            "        },\n" +
+            "    ]\n" +
+            "}}";
+
     public static String MOVIE_COLUMN_DATA = "{\n" +
             "    \"ResponseHeader\": {\n" +
             "        \"TransactionId\": \"20140708143719_18329\",\n" +

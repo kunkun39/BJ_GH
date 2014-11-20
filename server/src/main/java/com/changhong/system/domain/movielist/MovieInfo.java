@@ -14,6 +14,7 @@ public class MovieInfo extends EntityBase {
     private String movieID;
     private String movieName;
     private String movieAliasName;
+    private String productID; //TODO:是不是通过这个字段把Column和MOVIE联系起来的, 最后是不是通过COLUMN来查询所有的MOVIE，然后再更新MOVIE的这个字段
     private String type;
     private String typeID;
     private String dramaType;
@@ -97,6 +98,14 @@ public class MovieInfo extends EntityBase {
 
     public void setMovieAliasName(String movieAliasName) {
         this.movieAliasName = movieAliasName;
+    }
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
     }
 
     public String getType() {

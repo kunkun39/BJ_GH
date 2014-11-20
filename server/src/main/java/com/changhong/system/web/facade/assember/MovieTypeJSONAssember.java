@@ -179,4 +179,28 @@ public class MovieTypeJSONAssember {
 
         return null;
     }
+
+    public static List<Provider> toMovieProviderList(String json) {
+        JSONObject o = JSON.parseObject(json);
+        int status = o.getJSONObject("ResponseHeader").getIntValue("Status");
+        if (status == 0) {
+            JSONObject typeJSON = o.getJSONObject("Provider");
+            JSONArray itemsJSON = typeJSON.getJSONArray("Provider_item");
+
+            List<Provider> providers = new ArrayList<Provider>();
+            for (int i = 0; i < itemsJSON.size(); i++) {
+                JSONObject object = itemsJSON.getJSONObject(i);
+
+                Provider provider = new Provider();
+                provider.setProviderID(object.getString("ProviderID"));
+                provider.setProviderName(object.getString("ProviderName"));
+                provider.setProviderType(object.getString("ProviderType"));
+                providers.add(provider);
+            }
+
+            return providers;
+        }
+
+        return null;
+    }
 }

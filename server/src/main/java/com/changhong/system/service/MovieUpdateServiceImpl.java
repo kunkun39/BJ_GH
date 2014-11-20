@@ -216,6 +216,32 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
     }
 
+    public void updateMovieProvider() {
+        String response = null;
+        if (LOCAL) {
+            response = FakeJDONDataProvider.MOVIE_PROVIDER_DATA;
+        } else {
+            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieClass.action");
+            JSONObject json = new JSONObject();
+            JSONObject requestHeader = new JSONObject();
+            requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
+            json.put("RequestHeader", requestHeader);
+            JSONObject requestParams = new JSONObject();
+            requestParams.put("Class", "provider");
+            json.put("RequestParams", requestParams);
+            postMethod.addParameter("json", json.toJSONString());
+            response = WebUtils.httpPostRequest(postMethod);
+        }
+
+        if (StringUtils.hasText(response)) {
+            List<Provider> providers = MovieTypeJSONAssember.toMovieProviderList(response);
+            if (providers != null && !providers.isEmpty()) {
+                movieDao.saveAll(providers);
+            }
+        }
+    }
+
     public void updateMovieColumn() {
         String response = null;
         if (LOCAL) {
@@ -324,7 +350,8 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
 //        movieService.updateMovieClientType();
 //        movieService.updateMovieChannelType();
 //        movieService.updateMovieEventType();
+        movieService.updateMovieProvider();
 //        movieService.updateMovieColumn();
-        movieService.getMovieListByType("1");
+//        movieService.getMovieListByType("1");
     }
 }
