@@ -32,10 +32,10 @@ public class MovieInfo extends EntityBase {
     private String commentary;
     private String tag;
     private String suggestPrice;
-    private int recommendClass1;
-    private int recommendClass2;
-    private int recommendClass3;
-    private int recommendClass4;
+    private double recommendClass1;
+    private double recommendClass2;
+    private double recommendClass3;
+    private double recommendClass4;
     private String otherInfoArray1;
 
     /**
@@ -71,6 +71,7 @@ public class MovieInfo extends EntityBase {
     private String imageUrl;
     private String aspectRatio;
     private String series3;
+
 
     /************************************************GETTER/SETTER*****************************************************/
 
@@ -242,32 +243,36 @@ public class MovieInfo extends EntityBase {
         this.suggestPrice = suggestPrice;
     }
 
-    public int getRecommendClass1() {
+    public double getRecommendClass1() {
         return recommendClass1;
     }
 
-    public void setRecommendClass1(int recommendClass1) {
+    public void setRecommendClass1(double recommendClass1) {
         this.recommendClass1 = recommendClass1;
     }
 
-    public int getRecommendClass2() {
+    public double getRecommendClass2() {
         return recommendClass2;
     }
 
-    public void setRecommendClass2(int recommendClass2) {
+    public void setRecommendClass2(double recommendClass2) {
         this.recommendClass2 = recommendClass2;
     }
 
-    public int getRecommendClass3() {
+    public double getRecommendClass3() {
         return recommendClass3;
     }
 
-    public void setRecommendClass3(int recommendClass3) {
+    public void setRecommendClass3(double recommendClass3) {
         this.recommendClass3 = recommendClass3;
     }
 
-    public int getRecommendClass4() {
+    public double getRecommendClass4() {
         return recommendClass4;
+    }
+
+    public void setRecommendClass4(double recommendClass4) {
+        this.recommendClass4 = recommendClass4;
     }
 
     public void setRecommendClass4(int recommendClass4) {
