@@ -255,7 +255,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("ColumnID", "");
-            requestParams.put("QueryFlag", "");
+            requestParams.put("QueryFlag", "0");
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
@@ -272,7 +272,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
     /**
      * 没有事务
      */
-    public void getMovieListByType(String movieType) {
+    public void getMovieListByColumn(String columnID) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_INFO_DATA;
@@ -284,7 +284,8 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
-            requestParams.put("TypeID", movieType);
+            requestParams.put("ColumnID", columnID);
+            requestParams.put("TypeID", "");
             requestParams.put("DramaTypeID", "");
             requestParams.put("Year", "");
             requestParams.put("AreaID", "");
@@ -302,13 +303,13 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             if (total > 0) {
                 PagingUtils paging = new PagingUtils(total);
                 for (int pageNumber=1; pageNumber<=paging.getNumPages(); pageNumber++) {
-                    updateMovieListByPage(movieType, pageNumber);
+                    updateMovieListByPage(columnID, pageNumber);
                 }
             }
         }
     }
 
-    private void updateMovieListByPage(String movieType, int pageNumber) {
+    private void updateMovieListByPage(String columnID, int pageNumber) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_INFO_DATA;
@@ -320,7 +321,8 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
-            requestParams.put("TypeID", movieType);
+            requestParams.put("ColumnID", columnID);
+            requestParams.put("TypeID", "");
             requestParams.put("DramaTypeID", "");
             requestParams.put("Year", "");
             requestParams.put("AreaID", "");

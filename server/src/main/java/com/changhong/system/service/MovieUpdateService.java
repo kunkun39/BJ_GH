@@ -25,5 +25,5 @@ public interface MovieUpdateService {
 
     void updateMovieColumn();
 
-    void getMovieListByType(String movieType);
+    void getMovieListByColumn(String movieType);
 }
