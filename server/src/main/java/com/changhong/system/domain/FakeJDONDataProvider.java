@@ -317,4 +317,64 @@ public class FakeJDONDataProvider {
             "        }\n" +
             "    ]\n" +
             "}}";
+
+
+
+
+public  static String LIVE_CHANNEL_DATA="{\"ResponseHeader\":{\n" +
+            "    \"TransactionId\":\"TransactionId\",\n" +
+            "    \"Status\":0,\n" +
+            "    \"Params\":{\n" +
+            "        \"ChannelID\":31378,\n" +
+            "         \"ChannelTypeID\": null  }\n" +
+            "},\"ChannelList\": {\n" +
+            "        \"Channel_item\": [\n" +
+            "            {\n" +
+            "                \"id\": \"0b0b0f8e-5c66-4b43-a067-95dc38fc4c74\",\n" +
+            "                \"DVBAudioCodec\": \"AC3\",\n" +
+            "                \"DVBBitRate\": \"10000\",\n" +
+            "                \"DVBLogicChannelID\": \"622\",\n" +
+            "                \"DVBNetworkID\": \"16512\",\n" +
+            "                \"DVBResolution\": \"19201080\",\n" +
+            "                \"DVBServiceID\": \"622\",\n" +
+            "                \"DVBTSID\": \"26\",\n" +
+            "                \"DVBVideoCodec\": \"H264\",\n" +
+            "                \"AudioCodecInfo\": \"AAC\",\n" +
+            "                \"BitRateInfo\": \"800,1200\",\n" +
+            "                \"ChannelID\": \"31378\",\n" +
+            "                \"ChannelIcon\": \"/channel/icon/BTVWYHD.jpg\",\n" +
+            "                \"ChannelImage\": \"/channel/image/BTVWYHD_888_666.jpg;/channel/image/BTVWYHD_684_513.jpg;/channel/image/BTVWYHD_432_324.jpg\",\n" +
+            "                \"ChannelName\": \"BTV文艺高清\",\n" +
+            "                \"ChannelType\": \"高清频道\",\n" +
+            "                \"ChannelTypeID\": \"21\",\n" +
+            "                \"FeeType\": \"0\",\n" +
+            "                \"MuxInfo\": \"HLS\",\n" +
+            "                \"OtherInfoArray\": \"\",\n" +
+            "                \"PlayUrl\": \"{\\\"MAIN\\\":\\\"http://172.16.188.1:8088/live/BTVWYHD.m3u8\\\",\\\"800K\\\":\\\"http://172.16.188.1:8088/live/BTVWYHD_800.m3u8\\\",\\\"1200K\\\":\\\"http://172.16.188.1:8088/live/BTVWYHD_1200.m3u8\\\"}\",\n" +
+            "                \"ResolutionInfo\": \"640480,720576\",\n" +
+            "                \"VideoCodecInfo\": \"H264\",\n" +
+            "                \"VideoType\": \"1\",\n" +
+            "                \"DVBFrequency\": \"459\"\n" +
+            "            }\n" +
+            "        ]\n" +
+            "    }}";
+
+    public static String Live_Program_DATA="{\"ResponseHeader\":{\n" +
+            "    \"TransactionId\":\"TransactionId\",\n" +
+            "    \"Status\":0,\n" +
+            "    \"Params\":{\n" +
+            "        \"ChannelID\":21\n" +
+            "         \"Date\":\"2013-11-21\"\n"+
+            "    }\n" +
+            "},\"ProgramList\":{\n" +
+            "    \"Program_item\":[\n" +
+            "        {\n" +
+            "            \"ClientTypeID\":\"1\",\n" +
+            "            \"ClientType\":\"\\u7535\\u5f71\"\n" +
+            "        },\n" +
+            "    ]\n" +
+            "}}";
+
 }
+
+
