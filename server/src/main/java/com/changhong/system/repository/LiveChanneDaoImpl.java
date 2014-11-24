@@ -14,7 +14,7 @@ import java.util.List;
  * Time: 下午2:24
  * To change this template use File | Settings | File Templates.
  */
-@Repository("LiveChannelDao")
+@Repository("liveChannelDao")
 public class LiveChanneDaoImpl extends HibernateEntityObjectDao implements LiveChannelDao{
 
 }

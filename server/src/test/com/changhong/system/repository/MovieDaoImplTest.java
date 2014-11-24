@@ -1,9 +1,16 @@
 package com.changhong.system.repository;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.changhong.common.utils.PagingUtils;
 import com.changhong.system.domain.column.Column;
 import com.changhong.system.domain.movielist.MovieInfo;
 import com.changhong.system.domain.movietype.*;
+import com.sun.webpane.webkit.GlobalHistory;
 import junit.framework.TestCase;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -12,8 +19,12 @@ import org.junit.runner.RunWith;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.List;
 
 /**
  * User: Jack Wang
@@ -45,10 +56,10 @@ public class MovieDaoImplTest extends TestCase {
     @Test
     public void testSaveTypeEntity() {
         Type type = new Type();
-        type.setTypeID("1");
+        type.setTypeID("2");
         type.setType("\u7535\u5f71");
-        type.setTypeSequence(1);
-        type.setDramaType("1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,18,23,29,43,45,49,50,54,55,57,60,66,67,68,70,74,78,80,84");
+        type.setTypeSequence(2);
+        type.setDramaType("1,2,3,4,5,6,7,8,9,10,11,12,13");
         hibernateTemplate.save(type);
     }
 
@@ -191,5 +202,326 @@ public class MovieDaoImplTest extends TestCase {
         movieInfo.setSeries3("e");
 
         hibernateTemplate.save(movieInfo);
+    }
+
+    @Test
+    public void testObtainMovieType() {
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+
+        SQLQuery query = null;
+        query = session.createSQLQuery("SELECT type_id,type_name,type_sequence,drama_type_id FROM movie_type ORDER BY type_sequence ASC");
+        List list = query.list();
+
+        JSONObject result = new JSONObject();
+        JSONArray items = new JSONArray();
+        for (Object loop : list) {
+            JSONObject item = new JSONObject();
+            Object[] values = (Object[]) loop;
+            item.put("ID", values[0]);
+            item.put("Name", values[1]);
+            item.put("TypeSequence", values[2]);
+            item.put("DramaTypeIDs", values[3]);
+            items.add(item);
+        }
+        result.put("Type", items);
+        System.out.println(result.toJSONString());
+    }
+
+    @Test
+    public void testObtainMovieDatamaType() {
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+
+        SQLQuery query = null;
+        query = session.createSQLQuery("SELECT drama_type_id,drama_type_name,drama_type_sequence FROM movie_drama_type ORDER BY drama_type_sequence ASC");
+        List list = query.list();
+
+        JSONObject result = new JSONObject();
+        JSONArray items = new JSONArray();
+        for (Object loop : list) {
+            JSONObject item = new JSONObject();
+            Object[] values = (Object[]) loop;
+            item.put("ID", values[0]);
+            item.put("Name", values[1]);
+            item.put("DramaTypeSequence", values[2]);
+            items.add(item);
+        }
+        result.put("DatamaType", items);
+        System.out.println(result.toJSONString());
+    }
+
+    @Test
+    public void testObtainMovieArea() {
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+
+        SQLQuery query = null;
+        query = session.createSQLQuery("SELECT area_id,area_name,area_group_id FROM movie_area");
+        List list = query.list();
+
+        JSONObject result = new JSONObject();
+        JSONArray items = new JSONArray();
+        for (Object loop : list) {
+            JSONObject item = new JSONObject();
+            Object[] values = (Object[]) loop;
+            item.put("ID", values[0]);
+            item.put("Name", values[1]);
+            item.put("AreaGroupIDs", values[2]);
+            items.add(item);
+        }
+        result.put("Area", items);
+        System.out.println(result.toJSONString());
+    }
+
+    @Test
+    public void testObtainMovieAreaGroup() {
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+
+        SQLQuery query = null;
+        query = session.createSQLQuery("SELECT area_group_id,area_group_name FROM movie_area_group");
+        List list = query.list();
+
+        JSONObject result = new JSONObject();
+        JSONArray items = new JSONArray();
+        for (Object loop : list) {
+            JSONObject item = new JSONObject();
+            Object[] values = (Object[]) loop;
+            item.put("ID", values[0]);
+            item.put("Name", values[1]);
+            items.add(item);
+        }
+        result.put("AreaGroup", items);
+        System.out.println(result.toJSONString());
+    }
+
+    @Test
+    public void testObtainMovieYear() {
+        JSONObject result = new JSONObject();
+        JSONArray items = new JSONArray();
+        JSONObject year2014 = new JSONObject();
+        year2014.put("ID", "2014");
+        items.add(year2014);
+        JSONObject year2013 = new JSONObject();
+        year2013.put("ID", "2013");
+        items.add(year2013);
+        result.put("Year", items);
+        System.out.println(result.toJSONString());
+    }
+
+    @Test
+    public void testFindColumns() {
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+
+        /**
+         * 返回的结果
+         */
+        JSONObject result = new JSONObject();
+        JSONArray items = new JSONArray();
+
+        /**
+         * 查询并组装结果
+         */
+        SQLQuery query = session.createSQLQuery("SELECT column_id,column_parent_id,column_name,column_alias,column_product_id FROM movie_column ORDER BY column_rank ASC");
+        List list = query.list();
+        for (Object loop : list) {
+            JSONObject item = new JSONObject();
+            Object[] values = (Object[]) loop;
+            item.put("ColumnID", values[0]);
+            item.put("ParentID", values[1]);
+            item.put("ColumnName", values[2]);
+            item.put("Alias", values[3]);
+            item.put("ProductID", values[4]);
+            items.add(item);
+        }
+        result.put("Column", items);
+
+        System.out.println(result.toJSONString());
+    }
+
+    @Test
+    public void testFindMovies() {
+        String query = "{\n" +
+                "\t\"RequestParams\": {\n" +
+                "\t\t\"ContentProviderID\": \"\",\n" +
+                "\t\t\"ColumnID\":\"\",\n" +
+                "\t\t\"TypeID\": \"1\",\n" +
+                "\t\t\"DramaTypeID\": \"\",\n" +
+                "\t\t\"Year\": \"2014\",\n" +
+                "\t\t\"AreaID\": \"31\",\n" +
+                "\t\t\"AreaGroupID\": \"\",\n" +
+                "\t\t\"Page\": 1,\n" +
+                "\t}\n" +
+                "}";
+
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+        SQLQuery sqlQuery = null;
+
+        /**
+         * 解析JSON
+         */
+        JSONObject queryJSON = JSONObject.parseObject(query);
+        JSONObject requestParams = queryJSON.getJSONObject("RequestParams");
+        String providerID = requestParams.getString("ContentProviderID");
+        String columnID = requestParams.getString("ColumnID");
+        String typeID = requestParams.getString("TypeID");
+        String dramaTypeID = requestParams.getString("DramaTypeID");
+        String year = requestParams.getString("Year");
+        String areaID = requestParams.getString("AreaID");
+        String areaGroupID = requestParams.getString("AreaGroupID");
+        String currentPage = requestParams.getString("Page");
+
+        /**
+         * 构造分页
+         */
+        sqlQuery = session.createSQLQuery("select count(id) FROM movie_info");
+        int numItems = ((BigInteger) sqlQuery.list().get(0)).intValue();
+        PagingUtils paging = new PagingUtils(numItems);
+        paging.setCurrentPage(currentPage);
+
+        /**
+         * 查询MOVIE
+         */
+        StringBuilder builder = new StringBuilder();
+        builder.append("SELECT movie_id,movie_name,movie_alias_name,movie_runtime,movie_suggestprice FROM movie_info WHERE");
+        boolean addAnd = false;
+        if (StringUtils.hasText(providerID)) {
+            addAnd = true;
+            builder.append(" play_contentproviderid='" + providerID + "'");
+        }
+        if (StringUtils.hasText(typeID)) {
+            if (addAnd) {
+                builder.append(" AND ");
+            }
+            addAnd = true;
+            builder.append(" movie_type_id='" + typeID + "'");
+        }
+        if (StringUtils.hasText(dramaTypeID)) {
+            if (addAnd) {
+                builder.append(" AND ");
+            }
+            addAnd = true;
+            builder.append(" drama_type_id='" + dramaTypeID + "'");
+        }
+        if (StringUtils.hasText(year)) {
+            if (addAnd) {
+                builder.append(" AND ");
+            }
+            addAnd = true;
+            builder.append(" movie_year='" + year + "'");
+        }
+        if (StringUtils.hasText(areaID)) {
+            if (addAnd) {
+                builder.append(" AND ");
+            }
+            addAnd = true;
+            builder.append(" movie_area_id='" + areaID + "'");
+        }
+        builder.append(" LIMIT " + paging.getStartPosition() + "," + paging.getPageItems());
+        System.out.println(builder.toString());
+        sqlQuery = session.createSQLQuery(builder.toString());
+        List list = sqlQuery.list();
+
+        /**
+         * 处理返回的结果
+         */
+        JSONObject result = new JSONObject();
+        JSONObject total = new JSONObject();
+        total.put("TotalNumber", numItems);
+        result.put("ItemNumber", total);
+
+        JSONArray items = new JSONArray();
+        for (Object loop : list) {
+            JSONObject item = new JSONObject();
+            Object[] values = (Object[]) loop;
+            item.put("MovieID", values[0]);
+            item.put("MovieName", values[1]);
+            item.put("MovieAliasName", values[2]);
+            item.put("RunTime", values[3]);
+            item.put("SuggestPrice", values[4]);
+            items.add(item);
+        }
+        result.put("Items", items);
+
+        System.out.println(result.toJSONString());
+    }
+
+    @Test
+    public void testFindMovieByID() {
+        MovieInfo movie = (MovieInfo)hibernateTemplate.find("FROM MovieInfo m WHERE m.movieID = ?", new Object[]{"144265"}).get(0);
+        JSONObject result = new JSONObject();
+
+        /**
+         * 添加MOVIEINFO信息
+         */
+        JSONObject movieInfo = new JSONObject();
+
+        movieInfo.put("MovieID", movie.getMovieID());
+        movieInfo.put("MovieName", movie.getMovieName());
+        movieInfo.put("MovieAliasName", movie.getMovieAliasName());
+        movieInfo.put("Area", movie.getArea());
+        movieInfo.put("Type", movie.getType());
+        movieInfo.put("DramaType", movie.getDramaType());
+        movieInfo.put("Year", movie.getYear());
+        movieInfo.put("Director", movie.getDirector());
+        movieInfo.put("Actor", movie.getActor());
+        movieInfo.put("Host", movie.getHost());
+        movieInfo.put("Station", movie.getStation());
+        movieInfo.put("Author", movie.getAuthor());
+        movieInfo.put("RunTime", movie.getRunTime());
+        movieInfo.put("Count", movie.getRunTime());
+        movieInfo.put("SummaryShort", movie.getSummaryShort());
+        movieInfo.put("Commentary", movie.getCommentary());
+        movieInfo.put("Tag", movie.getTag());
+        movieInfo.put("SuggestPrice", movie.getSuggestPrice());
+        movieInfo.put("RecommendClass1", movie.getRecommendClass1());
+        movieInfo.put("RecommendClass2", movie.getRecommendClass2());
+        movieInfo.put("RecommendClass3", movie.getRecommendClass3());
+        movieInfo.put("RecommendClass4", movie.getRecommendClass4());
+        movieInfo.put("OtherInfoArray", movie.getOtherInfoArray1());
+
+        result.put("MovieInfo", movieInfo);
+        /**
+         * 添加PlayInfo信息
+         */
+        JSONObject playInfo = new JSONObject();
+
+        playInfo.put("PlayPlatform", movie.getPlayPlatform());
+        playInfo.put("AssetID", movie.getAssetID());
+        playInfo.put("AssetName", movie.getAssetName());
+        playInfo.put("ContentProviderID", movie.getContentProviderID());
+        playInfo.put("ProductOfferingUID", movie.getProductOfferingUID());
+        playInfo.put("PlayUrl", movie.getPlayUrl());
+        playInfo.put("PlayUrlID", movie.getPlayUrlID());
+        playInfo.put("PlaySwfUrl", movie.getPlaySwfUrl());
+        playInfo.put("MainCacheUrl", movie.getMainCacheUrl());
+        playInfo.put("Series", movie.getSeries2());
+        playInfo.put("SinglePriceInfo", movie.getSinglePriceInfo());
+        playInfo.put("CopyRightInfo", movie.getCopyRightInfo());
+        playInfo.put("VideoCodecInfo", movie.getVideoCodecInfo());
+        playInfo.put("AudioCodecInfo", movie.getAudioCodecInfo());
+        playInfo.put("MuxInfo", movie.getMuxInfo());
+        playInfo.put("RunTimeInfo", movie.getRunTimeInfo());
+        playInfo.put("ResolutionInfo", movie.getResolutionInfo());
+        playInfo.put("BitRateInfo", movie.getBitRateInfo());
+        playInfo.put("OtherInfoArray", movie.getOtherInfoArray2());
+        playInfo.put("ContentProviderIDArray", movie.getContentProviderIDArray());
+        playInfo.put("SeriesArray", movie.getSeriesArray());
+
+        result.put("PlayInfo", playInfo);
+
+        /**
+         * 添加Poster信息
+         */
+        JSONObject poster = new JSONObject();
+
+        poster.put("PosterID", movie.getPosterID());
+        poster.put("ImageUrl", movie.getImageUrl());
+        poster.put("AspectRatio", movie.getAspectRatio());
+        poster.put("Series3", movie.getSeries3());
+
+        result.put("Poster", poster);
+
+        /**
+         * 返回结果
+         */
+        System.out.println(result.toJSONString());
     }
 }

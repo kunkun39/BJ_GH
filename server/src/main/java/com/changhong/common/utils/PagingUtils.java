@@ -11,7 +11,7 @@ public class PagingUtils {
     /**
      * 分页每一页的大小
      */
-    public static int pageItems = 20;
+    public static int pageItems = 10;
     /**
      * 总共的数据
      */
