@@ -1,0 +1,138 @@
+请求URl：http://localhost:/
+------------------------------------------------*****************************----------------------------------------
+直播频道：
+输入数据格式：
+{
+	"RequestHeader": {
+		"TransactionId": "TransactionId",
+		"TransactionTime": "123456789"
+	},
+	"RequestParams": {
+	    "ChannelTypeID":"CCTV,weishi,beijing,quxian,gehuagaoqing,gaoqing,shopping,recommend1,recommend2,recommend3
+		"ChannelID": "27",
+		"ChannelName":"",
+	}
+}
+参数说明：
+业务编号
+事务时间
+频道类型
+频道ID
+频道名称
+------------------------------------------------***********************---------------------------------------------
+输出数据格式：
+{
+    "ResponseHeader": {
+        "TransactionId": null,
+        "Status": "0",
+        "Params": {
+            "ChannelID": "31378",
+            "ChannelTypeID": null
+        }
+    },
+    "ChannelList": {
+        "Channel_item": [
+            {
+                "ChannelIcon":"/channel/icon/BTVWYHD.jpg",
+                "ChannelImage":"/channel/image/BTVWYHD_888_666.jpg;/channel/image/BTVWYHD_684_513.jpg;/channel/image/BTVWYHD_432_324.jpg",
+                "ChannelName": "BTV文艺高清",
+                "ChannelType": "高清频道",
+                "FeeType": "0",
+                "PlayUrl": "{\"MAIN\":\"http://172.16.188.1:8088/live/BTVWYHD.m3u8\",\"800K\":\"http://172.16.188.1:8088/live/BTVWYHD_800.m3u8\",\"1200K\":\"http://172.16.188.1:8088/live/BTVWYHD_1200.m3u8\"}",
+                "VideoType": "1",
+
+            }
+        ]
+    }
+}
+
+
+
+输入数据格式：
+{
+ "RequestHeader": {
+  "TransactionId": "TransactionId",
+  "TransactionTime": "123456789"
+ },
+ "RequestParams": {
+  "ChannelID": "27",
+  "EventTypeID": "27",
+  "Date": "2013-11-21",
+ }
+}
+参数说明：
+业务编号
+事务时间
+频道编号
+事件分类编号
+日期
+-----------------------------------------------------**************************----------------------------------------
+直播节目：
+输出数据格式：
+{
+    "ResponseHeader": {
+        "TransactionId": null,
+        "Status": "0",
+        "Params": {
+            "ChannelID": "11",
+            "EventTypeID": "",
+            "StartDate": "20131121",
+            "EndDate": "20161121",
+            "PosterAspectRatio": "10240768"
+        }
+    },
+    "ProgamList": {
+        "Program_item": [
+        {"ProgramInfo":{
+        "ProgramName":"节目名称",
+        "Playtime":"播放时间",
+        "EndTime":"结束时间",
+        "EventType":"节目类型",
+        "EventDesc":"描述",
+        "VideoType":"高清标识",
+        "ViewLevel":"观看等级",
+        "PlayUrl":"播放地址",
+        "EventImageUrl":"节目海报",
+        "ContentProvider":"节目提供商",
+        "LocalEntryUID":"VOD产品"
+
+        },"MovieInfo":{
+        "MovieName":"影片名称",
+        "MovieAliasName":"影片别名",
+        "Type":"主类型",
+        "DramaType":"副类型",
+        "Area":"地区" ,
+        "Year":"年份" ,
+        "Actor":"演员" ,
+        "Author":"作者" ,
+        "RunTime":"影片时长",
+        "Count":"集数" ,
+        "SummaryShort":"简评",
+        "Commentary":"影片简介" ,
+        "Tag":"标签",
+        "SuggestPrice":"定价",
+        "RecommendClass1":"评分1",
+        "RecommendClass2":"评分2" ,
+        "RecommendClass3":"评分3" ,
+        "RecommendClass4":"评分4"
+        },"Poster":{
+        "ImageUrl":"海报地址",
+        "Series":"关联集"
+        }
+        }]
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
