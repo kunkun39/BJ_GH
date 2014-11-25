@@ -35,7 +35,7 @@ public class ClientDispatcherServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       doPost(request, response);
+        doPost(request, response);
     }
 
     @Override
@@ -45,26 +45,23 @@ public class ClientDispatcherServlet extends HttpServlet {
         }
 
         String requestURL = request.getRequestURI();
-        String jsonString=request.getParameter("json");
-        String responseJSON="";
-        JSONObject requestJson= JSON.parseObject(jsonString);
-        JSONObject requestParams=requestJson.getJSONObject("RequestParams");
-        String channelType=requestParams.getString("ChannelTypeID");
-        int channelID=requestParams.getInteger("ChannelID");
-        String channelName=requestParams.getString("ChannelName");
-        LiveDao liveChannelDao=new LiveDaoImpl();
-        java.util.List<LiveChannel> channels=new ArrayList<LiveChannel>();
-        if(channelType!=null&&channelType.length()>0){
-
-
-
-        }else {
-           channels=liveChannelDao.loadliveChannelByID(channelID);
+        String jsonString = request.getParameter("json");
+        String responseJSON = "";
+        JSONObject requestJson = JSON.parseObject(jsonString);
+        JSONObject requestParams = requestJson.getJSONObject("RequestParams");
+        String channelType = requestParams.getString("ChannelTypeID");
+        int channelID = requestParams.getInteger("ChannelID");
+        String channelName = requestParams.getString("ChannelName");
+        LiveDao liveChannelDao = new LiveDaoImpl();
+        java.util.List<LiveChannel> channels = new ArrayList<LiveChannel>();
+        if (channelType != null && channelType.length() > 0) {
+        } else {
+            channels = liveChannelDao.loadLiveChannelByID(channelID);
 
         }
 
-        JSONObject responseChannels= LiveJSONAssember.toChannelJsonObjec(channels);
-        responseJSON=responseChannels.toString();
+        JSONObject responseChannels = LiveJSONAssember.toChannelJsonObjec(channels);
+        responseJSON = responseChannels.toString();
 
 
         //首页推荐操作
