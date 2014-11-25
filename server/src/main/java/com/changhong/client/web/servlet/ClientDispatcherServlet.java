@@ -9,8 +9,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import com.changhong.system.domain.live.LiveChannel;
-import com.changhong.system.repository.LiveChanneDaoImpl;
-import com.changhong.system.repository.LiveChannelDao;
+import com.changhong.system.repository.LiveDaoImpl;
+import com.changhong.system.repository.LiveDao;
 import com.changhong.system.web.facade.assember.LiveJSONAssember;
 
 
@@ -52,7 +52,7 @@ public class ClientDispatcherServlet extends HttpServlet {
         String channelType=requestParams.getString("ChannelTypeID");
         int channelID=requestParams.getInteger("ChannelID");
         String channelName=requestParams.getString("ChannelName");
-        LiveChannelDao liveChannelDao=new LiveChanneDaoImpl();
+        LiveDao liveChannelDao=new LiveDaoImpl();
         java.util.List<LiveChannel> channels=new ArrayList<LiveChannel>();
         if(channelType!=null&&channelType.length()>0){
 

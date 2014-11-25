@@ -12,7 +12,7 @@ import java.util.List;
  * Time: 上午11:13
  * To change this template use File | Settings | File Templates.
  */
-public class LiveProgramInfo extends EntityBase{
+public class LiveProgram extends EntityBase {
     private int programID;
     private String programName;
     private int channelID;
@@ -32,15 +32,10 @@ public class LiveProgramInfo extends EntityBase{
     private String contentProvider;
     private String localEntryUID;
     private String productOfferin;
+
     private MovieInfo movie;
 
-    public MovieInfo getMovie() {
-        return movie;
-    }
-
-    public void setMovie(MovieInfo movie) {
-        this.movie = movie;
-    }
+    /************************************************GETTER/SETTER*****************************************************/
 
     public int getProgramID() {
         return programID;
@@ -192,5 +187,13 @@ public class LiveProgramInfo extends EntityBase{
 
     public void setProductOfferin(String productOfferin) {
         this.productOfferin = productOfferin;
+    }
+
+    public MovieInfo getMovie() {
+        return movie;
+    }
+
+    public void setMovie(MovieInfo movie) {
+        this.movie = movie;
     }
 }

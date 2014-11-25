@@ -1,16 +1,13 @@
 package com.changhong.system.repository;
 
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.changhong.common.repository.HibernateEntityObjectDao;
-import com.changhong.system.domain.live.LiveProgramInfo;
-import com.changhong.system.domain.live.ProgramItem;
+import com.changhong.system.domain.live.LiveChannel;
+import com.changhong.system.domain.live.LiveProgram;
 import com.changhong.system.domain.movielist.MovieInfo;
-import org.directwebremoting.json.JsonArray;
-import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
-import org.hibernate.Session;
+import org.hibernate.classic.Session;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,20 +18,54 @@ import java.util.List;
  * Created by IntelliJ IDEA.
  * User: maren
  * Date: 14-11-20
- * Time: 下午2:58
+ * Time: 下午2:24
  * To change this template use File | Settings | File Templates.
  */
-@Repository("liveChannelProgramDao")
-public class LiveChannelProgramDaoImpl extends HibernateEntityObjectDao implements LiveChannelProgramDao {
+@Repository("liveDao")
+public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
+
+    public String loadLiveChannelsByType(String sql) {
+        List<LiveChannel> liveChannels;
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        SQLQuery query = null;
+        query = session.createSQLQuery("select channel_icon,channel_image,channel_type,play_url,fee_type,video_type from live_channel where live_channel.channel_type='高清频道' ");
+        liveChannels = query.list();
+        JSONArray channelList = new JSONArray();
+        for (Object loop : liveChannels) {
+            JSONObject channelItem = new JSONObject();
+            Object[] values = (Object[]) loop;
+            channelItem.put("ChannelIcon", values[0]);
+            channelItem.put("ChannelImage", values[1]);
+            channelItem.put("ChannelType", values[2]);
+            channelItem.put("PlayUrl", values[3]);
+            channelItem.put("FeeType", values[4]);
+            channelItem.put("VideoType", values[5]);
+            channelItem.put("ChannelItem", channelItem);
+            channelList.add(channelItem);
+        }
+        JSONObject channels = new JSONObject();
+        channels.put("ChannelList", channelList);
+
+        return channels.toJSONString();
+    }
+
+    public List<LiveChannel> loadLiveChannelByID(int id) {
+        List<LiveChannel> liveChannels;
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        SQLQuery query = null;
+        query = session.createSQLQuery("select * from live_channel where channel_id=" + id);
+        liveChannels = query.list();
+
+        return liveChannels;
+    }
+
     public String obtainLiveProgram(int channelID) {
-
-
         HibernateTemplate hibernateTemplate = getHibernateTemplate();
-        List<LiveProgramInfo> programInfos = new ArrayList<LiveProgramInfo>();
+        List<LiveProgram> programInfos = new ArrayList<LiveProgram>();
         programInfos = hibernateTemplate.find("from LiveProgramInfo lp where lp.channelID=?", new Object[]{channelID});
         JSONArray programs = new JSONArray();
         JSONObject programItem=new JSONObject();
-        for(LiveProgramInfo programInfo:programInfos){
+        for(LiveProgram programInfo:programInfos){
 
             JSONObject program=new JSONObject();
             JSONObject programInfo1=new JSONObject();

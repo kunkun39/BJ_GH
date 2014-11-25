@@ -46,8 +46,6 @@ public class MovieInfo extends EntityBase {
     private double recommendClass4;
     private String otherInfoArray1;
 
-
-
     /**
      * PlayInfo
      */

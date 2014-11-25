@@ -1,24 +1,16 @@
 package com.changhong.system.repository;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.changhong.system.domain.live.LiveChannel;
-import com.changhong.system.domain.live.LiveProgramInfo;
 import com.changhong.system.service.LiveUpdateServiceImpl;
-import com.changhong.system.service.MovieUpdateServiceImpl;
-import com.changhong.system.web.facade.assember.LiveJSONAssember;
 import junit.framework.TestCase;
 import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,8 +31,9 @@ public class LiveChannelImplTest extends TestCase{
     LiveUpdateServiceImpl liveUpdateService;
 
     HibernateTemplate hibernateTemplate;
-    @Resource(name = "liveChannelProgramDao")
-    LiveChannelProgramDao liveChannelProgramDao;
+
+    @Resource(name = "liveDao")
+    LiveDao liveDao;
 
     @Before
     public void setUp() {

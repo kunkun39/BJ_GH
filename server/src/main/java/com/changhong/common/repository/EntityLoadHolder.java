@@ -1,6 +1,6 @@
 package com.changhong.common.repository;
 
-import com.changhong.system.repository.LiveChannelDao;
+import com.changhong.system.repository.LiveDao;
 import com.changhong.system.repository.UserDao;
 
 /**
@@ -11,15 +11,6 @@ import com.changhong.system.repository.UserDao;
 public class EntityLoadHolder {
 
     private static UserDao userDao;
-    private static LiveChannelDao liveChannelDao;
-
-    public static LiveChannelDao getLiveChannelDao() {
-        return liveChannelDao;
-    }
-
-    public static void setLiveChannelDao(LiveChannelDao liveChannelDao) {
-        EntityLoadHolder.liveChannelDao = liveChannelDao;
-    }
 
     public static UserDao getUserDao() {
         return userDao;

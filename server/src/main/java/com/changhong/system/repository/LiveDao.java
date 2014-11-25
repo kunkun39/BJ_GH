@@ -13,7 +13,11 @@ import java.util.List;
  * Time: 下午2:23
  * To change this template use File | Settings | File Templates.
  */
-public interface LiveChannelDao extends EntityObjectDao{
-   public  String  loadliveChannelsByType(String sql);
-   public  List<LiveChannel>  loadliveChannelByID(int id);
+public interface LiveDao extends EntityObjectDao {
+
+    String loadLiveChannelsByType(String sql);
+
+    List<LiveChannel> loadLiveChannelByID(int id);
+
+    String obtainLiveProgram(int channelID);
 }

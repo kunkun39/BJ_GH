@@ -181,7 +181,6 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
          */
         JSONObject queryJSON = JSONObject.parseObject(query);
         JSONObject requestParams = queryJSON.getJSONObject("RequestParams");
-        String providerID = requestParams.getString("ContentProviderID");
         String columnID = requestParams.getString("ColumnID");
         String typeID = requestParams.getString("TypeID");
         String dramaTypeID = requestParams.getString("DramaTypeID");
@@ -205,9 +204,9 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
         StringBuilder builder = new StringBuilder();
         builder.append("SELECT movie_id,movie_name,movie_alias_name,movie_runtime,movie_suggestprice FROM movie_info WHERE");
         boolean addAnd = false;
-        if (StringUtils.hasText(providerID)) {
+        if (StringUtils.hasText(columnID)) {
             addAnd = true;
-            builder.append(" play_contentproviderid='" + providerID + "'");
+            builder.append(" column_id='" + columnID + "'");
         }
         if (StringUtils.hasText(typeID)) {
             if (addAnd) {

@@ -40,7 +40,7 @@ public class MovieDaoImplTest extends TestCase {
     @Resource(name = "liveChannelProgramDao")
      LiveChannelProgramDao liveChannelProgramDao;
     @Resource(name="liveChannelDao")
-      LiveChannelDao liveChannelDao;
+    LiveDao liveChannelDao;
 
     HibernateTemplate hibernateTemplate;
 

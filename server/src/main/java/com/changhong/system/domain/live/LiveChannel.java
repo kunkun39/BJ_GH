@@ -37,8 +37,6 @@ public class LiveChannel extends EntityBase{
     private String otherInfoArray;
     private String playUrl;
 
-
-
     /************************************************GETTER/SETTER*****************************************************/
 
     public int getChannelID() {

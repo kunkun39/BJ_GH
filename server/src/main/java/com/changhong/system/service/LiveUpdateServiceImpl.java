@@ -5,20 +5,14 @@ import com.changhong.common.utils.CHStringUtils;
 import com.changhong.common.utils.WebUtils;
 import com.changhong.system.domain.FakeJDONDataProvider;
 import com.changhong.system.domain.live.LiveChannel;
-import com.changhong.system.domain.live.LiveProgramInfo;
-import com.changhong.system.domain.movietype.Type;
-import com.changhong.system.repository.LiveChannelDao;
-import com.changhong.system.repository.LiveChannelProgramDao;
-import com.changhong.system.repository.MovieDao;
+import com.changhong.system.domain.live.LiveProgram;
+import com.changhong.system.repository.LiveDao;
 import com.changhong.system.web.facade.assember.LiveJSONAssember;
-import com.changhong.system.web.facade.assember.MovieTypeJSONAssember;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.poi.util.StringUtil;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.nio.channels.NonWritableChannelException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,11 +30,8 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
 
     private final static boolean LOCAL = true;
 
-    @Resource(name = "liveChannelDao")
-    private LiveChannelDao liveChannelDao;
-
-    @Resource(name = "LiveChannelProgramDao")
-    private LiveChannelProgramDao liveChannelProgramDao;
+    @Resource(name = "liveDao")
+    private LiveDao liveDao;
 
     public void updateLiveChannel() {
         String response = null;
@@ -64,7 +55,7 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
         if (StringUtils.hasText(response)) {
             List<LiveChannel> channels = LiveJSONAssember.toLiveChannelList(response);
             if (channels != null && !channels.isEmpty()) {
-                liveChannelDao.saveAll(channels);
+                liveDao.saveAll(channels);
             }
         }
     }
@@ -91,18 +82,12 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
 
         }
         if (StringUtils.hasText(response)) {
-            List<LiveProgramInfo> programInfos = new ArrayList<LiveProgramInfo>();
+            List<LiveProgram> programInfos = new ArrayList<LiveProgram>();
             if (programInfos != null && !programInfos.isEmpty()) {
-                liveChannelProgramDao.saveAll(programInfos);
-
+                liveDao.saveAll(programInfos);
             }
 
         }
-    }
-
-    public void setLiveChannelDao(LiveChannelDao liveChannelDao) {
-        this.liveChannelDao = liveChannelDao;
-
     }
 
 }

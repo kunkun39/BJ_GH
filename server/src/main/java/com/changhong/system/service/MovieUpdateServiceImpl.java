@@ -39,7 +39,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_TYPE_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieClass.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movietype");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -65,7 +65,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_DRAMATYPE_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieClass.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movietype");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -91,7 +91,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_AREA_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieClass.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movietype");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -117,7 +117,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_AREAGROUP_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieClass.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movietype");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -143,7 +143,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_CLIENTTYPE_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieClass.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movietype");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -169,7 +169,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_CHANNELTYPE_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieClass.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movietype");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -195,7 +195,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_EVENTTYPE_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieClass.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movietype");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -221,7 +221,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_PROVIDER_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieClass.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movietype");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -247,7 +247,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_INFO_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryColumn.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.column");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -277,7 +277,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_INFO_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieList.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movielist");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -315,7 +315,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_INFO_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryMovieList.action");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movielist");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
