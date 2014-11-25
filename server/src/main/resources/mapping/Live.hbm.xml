@@ -57,7 +57,7 @@
          <property name="contentProvider" column="content_provider" insert="true" update="true" type="java.lang.String"/>
          <property name="localEntryUID" column="local_entry_uid" insert="true" update="true" type="java.lang.String"/>
          <property name="productOfferin" column="product_offerin" insert="true" update="true" type="java.lang.String"/>
-         <one-to-one name="movie" cascade="all" class="com.changhong.system.domain.movielist.MovieInfo" lazy="proxy" foreign-key="programID" />
+         <one-to-one name="movie" cascade="all" class="com.changhong.system.domain.movielist.MovieInfo" lazy="proxy"/>
 
     </class>
 
