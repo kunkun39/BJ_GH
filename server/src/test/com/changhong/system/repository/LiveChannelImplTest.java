@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.changhong.system.domain.live.LiveChannel;
 import com.changhong.system.domain.live.LiveProgramInfo;
-import com.changhong.system.domain.live.ProgramItem;
 import com.changhong.system.service.LiveUpdateServiceImpl;
 import com.changhong.system.service.MovieUpdateServiceImpl;
 import com.changhong.system.web.facade.assember.LiveJSONAssember;
