@@ -307,6 +307,69 @@ public class MovieDaoImplTest extends TestCase {
     }
 
     @Test
+    public void testObtainMovieClient() {
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+
+        SQLQuery query = null;
+        query = session.createSQLQuery("SELECT client_type_id,client_type_name FROM movie_client_type");
+        List list = query.list();
+
+        JSONObject result = new JSONObject();
+        JSONArray items = new JSONArray();
+        for (Object loop : list) {
+            JSONObject item = new JSONObject();
+            Object[] values = (Object[]) loop;
+            item.put("ID", values[0]);
+            item.put("Name", values[1]);
+            items.add(item);
+        }
+        result.put("Client", items);
+        System.out.println(result.toJSONString());
+    }
+
+    @Test
+    public void testObtainMovieChannel() {
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+
+        SQLQuery query = null;
+        query = session.createSQLQuery("SELECT channel_type_id,channel_type_name FROM movie_channel_type");
+        List list = query.list();
+
+        JSONObject result = new JSONObject();
+        JSONArray items = new JSONArray();
+        for (Object loop : list) {
+            JSONObject item = new JSONObject();
+            Object[] values = (Object[]) loop;
+            item.put("ID", values[0]);
+            item.put("Name", values[1]);
+            items.add(item);
+        }
+        result.put("Channel", items);
+        System.out.println(result.toJSONString());
+    }
+
+    @Test
+    public void testObtainMovieEvent() {
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+
+        SQLQuery query = null;
+        query = session.createSQLQuery("SELECT event_type_id,event_type_name FROM movie_event_type");
+        List list = query.list();
+
+        JSONObject result = new JSONObject();
+        JSONArray items = new JSONArray();
+        for (Object loop : list) {
+            JSONObject item = new JSONObject();
+            Object[] values = (Object[]) loop;
+            item.put("ID", values[0]);
+            item.put("Name", values[1]);
+            items.add(item);
+        }
+        result.put("Event", items);
+        System.out.println(result.toJSONString());
+    }
+
+    @Test
     public void testFindColumns() {
         Session session = hibernateTemplate.getSessionFactory().openSession();
 

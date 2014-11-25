@@ -113,6 +113,9 @@ DROP TABLE IF EXISTS `movie_info`;
 CREATE TABLE `movie_info` (
   `id` int(11) NOT NULL auto_increment,
   `timestamp` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `recommend_page` varchar(10) default '',
+  `recommend` tinyint(1) default '0' COMMENT '1 for YES or 0 for NO',
+  `column_id` varchar(10) default '',
   `movie_id` varchar(10) default '',
   `movie_name` varchar(80) default '',
   `movie_alias_name` varchar(240) default '',
@@ -167,6 +170,9 @@ CREATE TABLE `movie_info` (
   `poster_series` varchar(100) default '',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_recommendpage(`recommend_page`);
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_recommend(`recommend`);
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_columnid(`column_id`);
 ALTER TABLE `movie_info` ADD INDEX  movie_column_index_id(`movie_id`);
 ALTER TABLE `movie_info` ADD INDEX  movie_column_index_typeid(`movie_type_id`);
 ALTER TABLE `movie_info` ADD INDEX  movie_column_index_dramatypeid(`drama_type_id`);

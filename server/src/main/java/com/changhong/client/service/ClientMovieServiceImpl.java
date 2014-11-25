@@ -17,12 +17,16 @@ public class ClientMovieServiceImpl implements ClientMovieService {
     @Resource(name="movieDao")
     private MovieDao movieDao;
 
-    public String obtainMovieType(TypeEnum type) {
-        return movieDao.findMovieType(type);
+    public String obtainIndexRecommend(String page, int size) {
+        return movieDao.findIndexRecommend(page, size);
     }
 
-    public String obtainColumns() {
+    public String obtainColumns(String page) {
         return movieDao.findColumns();
+    }
+
+    public String obtainMovieType(TypeEnum type) {
+        return movieDao.findMovieType(type);
     }
 
     public String obtainMovies(String queryJSON) {
@@ -31,5 +35,9 @@ public class ClientMovieServiceImpl implements ClientMovieService {
 
     public String obtainMovieByID(String movieID) {
         return movieDao.findMovieByID(movieID);
+    }
+
+    public String obtainMovieRecommend(String columnID, String typeID) {
+        return movieDao.findMovieRecommend(columnID, typeID);
     }
 }

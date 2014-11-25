@@ -26,7 +26,7 @@ public class MovieListJSONAssember {
         return 0;
     }
 
-    public static List<MovieInfo> toMovieInfoList(String json) {
+    public static List<MovieInfo> toMovieInfoList(String json, String columnID) {
         JSONObject o = JSON.parseObject(json);
         int status = o.getJSONObject("ResponseHeader").getIntValue("Status");
         if (status == 0) {
@@ -39,6 +39,8 @@ public class MovieListJSONAssember {
                 JSONObject basic = object.getJSONObject("MovieInfo");
 
                 MovieInfo movie = new MovieInfo();
+                movie.setColumnID(columnID);
+
                 movie.setMovieID(basic.getString("MovieID"));
                 movie.setMovieName(basic.getString("MovieName"));
                 movie.setMovieAliasName(basic.getString("MovieAliasName"));

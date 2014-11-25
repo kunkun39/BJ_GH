@@ -285,6 +285,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("ColumnID", columnID);
+            requestParams.put("ClientTypeID", "");//TODO:这个应该是直接从分类那边写死
             requestParams.put("TypeID", "");
             requestParams.put("DramaTypeID", "");
             requestParams.put("Year", "");
@@ -322,6 +323,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("ColumnID", columnID);
+            requestParams.put("ClientTypeID", "");//TODO:这个应该是直接从分类那边写死
             requestParams.put("TypeID", "");
             requestParams.put("DramaTypeID", "");
             requestParams.put("Year", "");
@@ -336,7 +338,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
 
         if (StringUtils.hasText(response)) {
-            List<MovieInfo> movies = MovieListJSONAssember.toMovieInfoList(response);
+            List<MovieInfo> movies = MovieListJSONAssember.toMovieInfoList(response, columnID);
             if (movies != null && !movies.isEmpty()) {
                 movieDao.saveAll(movies);
             }

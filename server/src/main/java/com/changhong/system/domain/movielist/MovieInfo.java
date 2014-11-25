@@ -8,6 +8,14 @@ import com.changhong.common.domain.EntityBase;
  * Time: 上午10:25
  */
 public class MovieInfo extends EntityBase {
+
+    /**
+     * Column info
+     */
+    private String columnID;
+    private String recommendPage; //INDEX, VOD, CHANNEL...
+    private boolean recommend;
+
     /**
      * MovieInfo
      */
@@ -72,8 +80,31 @@ public class MovieInfo extends EntityBase {
     private String aspectRatio;
     private String series3;
 
-
     /************************************************GETTER/SETTER*****************************************************/
+
+    public String getColumnID() {
+        return columnID;
+    }
+
+    public void setColumnID(String columnID) {
+        this.columnID = columnID;
+    }
+
+    public String getRecommendPage() {
+        return recommendPage;
+    }
+
+    public void setRecommendPage(String recommendPage) {
+        this.recommendPage = recommendPage;
+    }
+
+    public boolean isRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(boolean recommend) {
+        this.recommend = recommend;
+    }
 
     public String getMovieID() {
         return movieID;

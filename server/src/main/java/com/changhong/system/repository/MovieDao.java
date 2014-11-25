@@ -10,6 +10,8 @@ import com.changhong.system.domain.movietype.TypeEnum;
  */
 public interface MovieDao extends EntityObjectDao {
 
+    String findIndexRecommend(String page, int size);
+
     String findMovieType(TypeEnum type);
 
     String findColumns();
@@ -17,4 +19,6 @@ public interface MovieDao extends EntityObjectDao {
     String findMovies(String query);
 
     String findMovieByID(String movieID);
+
+    String findMovieRecommend(String columnID, String typeID);
 }

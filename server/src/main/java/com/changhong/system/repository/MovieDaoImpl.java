@@ -23,6 +23,10 @@ import java.util.List;
 @Repository("movieDao")
 public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao {
 
+    public String findIndexRecommend(String page, int size) {
+        return "";
+    }
+
     public String findMovieType(TypeEnum type) {
         Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 
@@ -274,8 +278,11 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
         movieInfo.put("MovieName", movie.getMovieName());
         movieInfo.put("MovieAliasName", movie.getMovieAliasName());
         movieInfo.put("Area", movie.getArea());
+        movieInfo.put("AreaID", movie.getAreaID());
         movieInfo.put("Type", movie.getType());
+        movieInfo.put("TypeID", movie.getTypeID());
         movieInfo.put("DramaType", movie.getDramaType());
+        movieInfo.put("DramaTypeID", movie.getDramaTypeID());
         movieInfo.put("Year", movie.getYear());
         movieInfo.put("Director", movie.getDirector());
         movieInfo.put("Actor", movie.getActor());
@@ -339,6 +346,48 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
         /**
          * 返回结果
          */
+        return result.toJSONString();
+    }
+
+    public String findMovieRecommend(String columnID, String typeID) {
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        SQLQuery sqlQuery = null;
+
+        /**
+         * 查询MOVIE
+         */
+        StringBuilder builder = new StringBuilder();
+        builder.append("SELECT movie_id,movie_name,movie_alias_name,movie_runtime,movie_suggestprice,poster_id,poster_imageurl,poster_aspectratio FROM movie_info");
+        builder.append(" WHERE column_id = '" + columnID + "' AND movie_type_id = '" + typeID + "'");
+        builder.append(" ORDER BY movie_recommendclass1 DESC");
+        builder.append(" LIMIT 5");
+        sqlQuery = session.createSQLQuery(builder.toString());
+        List list = sqlQuery.list();
+
+        /**
+         * 处理返回的结果
+         */
+        JSONObject result = new JSONObject();
+        JSONObject total = new JSONObject();
+        total.put("TotalNumber", 5);
+        result.put("ItemNumber", total);
+
+        JSONArray items = new JSONArray();
+        for (Object loop : list) {
+            JSONObject item = new JSONObject();
+            Object[] values = (Object[]) loop;
+            item.put("MovieID", values[0]);
+            item.put("MovieName", values[1]);
+            item.put("MovieAliasName", values[2]);
+            item.put("RunTime", values[3]);
+            item.put("SuggestPrice", values[4]);
+            item.put("PosterID", values[5]);
+            item.put("ImageUrl", values[6]);
+            item.put("AspectRatio", values[7]);
+            items.add(item);
+        }
+        result.put("Items", items);
+
         return result.toJSONString();
     }
 }

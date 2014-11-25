@@ -1,6 +1,9 @@
 package com.changhong.client.web.servlet;
 
-import org.json.JSONObject;
+import com.changhong.client.service.ClientMovieService;
+import com.changhong.common.web.application.ApplicationEventPublisher;
+import com.changhong.system.domain.movietype.TypeEnum;
+import org.springframework.web.bind.ServletRequestUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +19,8 @@ import java.io.PrintWriter;
  */
 public class ClientDispatcherServlet extends HttpServlet {
 
+    private ClientMovieService clientMovieService;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        doPost(request, response);
@@ -23,12 +28,40 @@ public class ClientDispatcherServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (clientMovieService == null) {
+            clientMovieService = (ClientMovieService) ApplicationEventPublisher.getCtx().getBean("clientMovieService");
+        }
+
         String requestURL = request.getRequestURI();
         String responseJSON = "";
 
         //首页推荐操作
-        if ("/ott/client/indexcommend.action".equals(requestURL)) {
-            responseJSON = "[]";
+        if ("/ott/client/moviecolumn.action".equals(requestURL)) {
+            String page = ServletRequestUtils.getStringParameter(request, "page", "");
+            responseJSON = clientMovieService.obtainColumns(page);
+
+        } else if ("/ott/client/movietype.action".equals(requestURL)) {
+            String type = ServletRequestUtils.getStringParameter(request, "type", "");
+            responseJSON = clientMovieService.obtainMovieType(TypeEnum.valueOf(type));
+
+        } else if ("/ott/client/moviequery.action".equals(requestURL)) {
+            String json = ServletRequestUtils.getStringParameter(request, "json", "");
+            responseJSON = clientMovieService.obtainMovies(json);
+
+        } else if ("/ott/client/moviedetails.action".equals(requestURL)) {
+            String movieID = ServletRequestUtils.getStringParameter(request, "movieID", "");
+            responseJSON = clientMovieService.obtainMovieByID(movieID);
+
+        } else if ("/ott/client/movierecommend.action".equals(requestURL)) {
+            String columnID = ServletRequestUtils.getStringParameter(request, "columnID", "");
+            String typeID = ServletRequestUtils.getStringParameter(request, "typeID", "");
+            responseJSON = clientMovieService.obtainMovieRecommend(columnID, typeID);
+
+        } else if ("/ott/client/indexrecommend.action".equals(requestURL)) {
+            String page = ServletRequestUtils.getStringParameter(request, "page", "");
+            int size = ServletRequestUtils.getIntParameter(request, "size", 1);
+            responseJSON = clientMovieService.obtainIndexRecommend(page, size);
+
         }
 
         //返回结果

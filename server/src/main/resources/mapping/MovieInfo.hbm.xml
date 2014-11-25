@@ -10,6 +10,10 @@
         </id>
         <property name="timestamp" column="timestamp" type="java.util.Date"/>
 
+        <property name="recommendPage" column="recommend_page" insert="true" update="true" type="java.lang.String"/>
+        <property name="recommend" column="recommend" insert="true" update="true" type="java.lang.Boolean"/>
+        <property name="columnID" column="column_id" insert="true" update="true" type="java.lang.String"/>
+
         <property name="movieID" column="movie_id" insert="true" update="true" type="java.lang.String"/>
         <property name="movieName" column="movie_name" insert="true" update="true" type="java.lang.String"/>
         <property name="movieAliasName" column="movie_alias_name" insert="true" update="true" type="java.lang.String"/>
