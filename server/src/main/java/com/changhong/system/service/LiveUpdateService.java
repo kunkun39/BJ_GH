@@ -8,7 +8,9 @@ package com.changhong.system.service;
  * To change this template use File | Settings | File Templates.
  */
 public interface LiveUpdateService {
-    void updateliveChannel();
-    void updateliveProgram();
+
+    void updateLiveChannel();
+
+    void updateLiveProgram();
 
 }

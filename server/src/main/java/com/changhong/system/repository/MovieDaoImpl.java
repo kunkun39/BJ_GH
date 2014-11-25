@@ -98,6 +98,39 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
                 items.add(yearItem);
                 result.put("Year", items);
             }
+        } else if (TypeEnum.ClientType.equals(type)) {
+            query = session.createSQLQuery("SELECT client_type_id,client_type_name FROM movie_client_type");
+            list = query.list();
+            for (Object loop : list) {
+                JSONObject item = new JSONObject();
+                Object[] values = (Object[]) loop;
+                item.put("ID", values[0]);
+                item.put("Name", values[1]);
+                items.add(item);
+            }
+            result.put("Client", items);
+        } else if (TypeEnum.ChannelType.equals(type)) {
+            query = session.createSQLQuery("SELECT channel_type_id,channel_type_name FROM movie_channel_type");
+            list = query.list();
+            for (Object loop : list) {
+                JSONObject item = new JSONObject();
+                Object[] values = (Object[]) loop;
+                item.put("ID", values[0]);
+                item.put("Name", values[1]);
+                items.add(item);
+            }
+            result.put("Channel", items);
+        } else if (TypeEnum.EventType.equals(type)) {
+            query = session.createSQLQuery("SELECT event_type_id,event_type_name FROM movie_event_type");
+            list = query.list();
+            for (Object loop : list) {
+                JSONObject item = new JSONObject();
+                Object[] values = (Object[]) loop;
+                item.put("ID", values[0]);
+                item.put("Name", values[1]);
+                items.add(item);
+            }
+            result.put("Event", items);
         }
 
         /**

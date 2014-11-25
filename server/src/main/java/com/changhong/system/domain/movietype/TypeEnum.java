@@ -12,6 +12,7 @@ public enum TypeEnum {
     AreaGroup,
     Year,
     ClientType,
+    ChannelType,
     EventType,
     Provider
 }

@@ -1,6 +1,7 @@
 package com.changhong.system.domain.live;
 
 import com.changhong.common.domain.EntityBase;
+import com.changhong.system.domain.movielist.MovieInfo;
 
 /**
  * Created by IntelliJ IDEA.
