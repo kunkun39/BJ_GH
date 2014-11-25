@@ -88,6 +88,7 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
+
         }
         if (StringUtils.hasText(response)) {
             List<LiveProgramInfo> programInfos = new ArrayList<LiveProgramInfo>();

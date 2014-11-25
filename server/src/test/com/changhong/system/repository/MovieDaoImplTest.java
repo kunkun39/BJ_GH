@@ -1,13 +1,11 @@
 package com.changhong.system.repository;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.changhong.common.utils.PagingUtils;
 import com.changhong.system.domain.column.Column;
 import com.changhong.system.domain.movielist.MovieInfo;
 import com.changhong.system.domain.movietype.*;
-import com.sun.webpane.webkit.GlobalHistory;
 import junit.framework.TestCase;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -22,7 +20,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -38,8 +35,12 @@ public class MovieDaoImplTest extends TestCase {
     @Resource
     SessionFactory sessionFactory;
 
-    @Resource
+    @Resource(name = "movieDao")
     MovieDao movieDao;
+    @Resource(name = "liveChannelProgramDao")
+     LiveChannelProgramDao liveChannelProgramDao;
+    @Resource(name="liveChannelDao")
+      LiveChannelDao liveChannelDao;
 
     HibernateTemplate hibernateTemplate;
 

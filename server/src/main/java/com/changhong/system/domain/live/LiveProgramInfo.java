@@ -3,6 +3,8 @@ package com.changhong.system.domain.live;
 import com.changhong.common.domain.EntityBase;
 import com.changhong.system.domain.movielist.MovieInfo;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: maren
@@ -30,6 +32,15 @@ public class LiveProgramInfo extends EntityBase{
     private String contentProvider;
     private String localEntryUID;
     private String productOfferin;
+    private MovieInfo movie;
+
+    public MovieInfo getMovie() {
+        return movie;
+    }
+
+    public void setMovie(MovieInfo movie) {
+        this.movie = movie;
+    }
 
     public int getProgramID() {
         return programID;

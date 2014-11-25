@@ -41,6 +41,9 @@ public class UserDaoImplTest extends TestCase {
         hibernateTemplate = null;
     }
 
+
+
+
     @Test
     public void testFindUserByName() {
         UserDetails user = userDao.findUserByName("jack");

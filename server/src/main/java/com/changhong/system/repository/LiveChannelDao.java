@@ -1,7 +1,10 @@
 package com.changhong.system.repository;
 
 import com.changhong.common.repository.EntityObjectDao;
+import com.changhong.system.domain.live.LiveChannel;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Repository;
  * Time: 下午2:23
  * To change this template use File | Settings | File Templates.
  */
- @Repository
 public interface LiveChannelDao extends EntityObjectDao{
+   public  String  loadliveChannelsByType(String sql);
+   public  List<LiveChannel>  loadliveChannelByID(int id);
 }

@@ -11,14 +11,14 @@
         <property name="timestamp" column="timestamp" type="java.util.Date"/>
         <property name="channelID" column="channel_id" insert="true" update="true" type="java.lang.Integer"/>
         <property name="channelName" column="channel_name" insert="true" update="true" type="java.lang.String"/>
-        <property name="dvb_TSID" column="dvb_ts_id" insert="true" update="true" type="java.lang.String"/>
-         <property name="dvb_ServiceID" column="dvb_Service_id" insert="true" update="true" type="java.lang.String"/>
-         <property name="dvb_LogicChannelID" column="dvb_logicchannel_id" insert="true" update="true" type="java.lang.String"/>
-         <property name="dvb_VideoCodec" column="dvb_videocodec" insert="true" update="true" type="java.lang.String"/>
-         <property name="dvb_AudioCodec" column="dvb_audiocodec" insert="true" update="true" type="java.lang.String"/>
+        <property name="dvbTSID" column="dvb_ts_id" insert="true" update="true" type="java.lang.String"/>
+         <property name="dvbServiceID" column="dvb_Service_id" insert="true" update="true" type="java.lang.String"/>
+         <property name="dvbLogicChannelID" column="dvb_logicchannel_id" insert="true" update="true" type="java.lang.String"/>
+         <property name="dvbVideoCodec" column="dvb_videocodec" insert="true" update="true" type="java.lang.String"/>
+         <property name="dvbAudioCodec" column="dvb_audiocodec" insert="true" update="true" type="java.lang.String"/>
          <property name="dec" column="channel_dec" insert="true" update="true" type="java.lang.String"/>
-         <property name="dvb_BitRate" column="dvb_bitrate" insert="true" update="true" type="java.lang.String"/>
-         <property name="dvb_Resolution" column="dvb_resolution" insert="true" update="true" type="java.lang.String"/>
+         <property name="dvbBitRate" column="dvb_bitrate" insert="true" update="true" type="java.lang.String"/>
+         <property name="dvbResolution" column="dvb_resolution" insert="true" update="true" type="java.lang.String"/>
          <property name="channelTypeID" column="channel_type_id" insert="true" update="true" type="java.lang.String"/>
          <property name="channelType" column="channel_type" insert="true" update="true" type="java.lang.String"/>
          <property name="channelIcon" column="channel_icon" insert="true" update="true" type="java.lang.String"/>
@@ -57,6 +57,7 @@
          <property name="contentProvider" column="content_provider" insert="true" update="true" type="java.lang.String"/>
          <property name="localEntryUID" column="local_entry_uid" insert="true" update="true" type="java.lang.String"/>
          <property name="productOfferin" column="product_offerin" insert="true" update="true" type="java.lang.String"/>
+         <one-to-one name="movie" cascade="all" class="com.changhong.system.domain.movielist.MovieInfo" lazy="proxy" foreign-key="programID" />
 
     </class>
 

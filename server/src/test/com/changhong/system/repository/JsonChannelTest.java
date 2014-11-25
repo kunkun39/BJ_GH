@@ -101,12 +101,12 @@ public  class JsonChannelTest {
             String videoCodeInfo=object.getString("VideoCodecInfo");
             String videoType=object.getString("VideoType");
             String dvbFrequency=object.getString("DVBFrequency");
-            liveChannel.setDvb_LogicChannelID(dvbLogicChannelId);
-            liveChannel.setDvb_NetworkID(dvbNetworkId);
+            liveChannel.setDvbLogicChannelID(dvbLogicChannelId);
+            liveChannel.setDvbNetworkID(dvbNetworkId);
             liveChannel.setResolutionInfo(dvbResolutionc);
-            liveChannel.setDvb_ServiceID(dvbServiceId);
-            liveChannel.setDvb_TSID(dvbTSID);
-            liveChannel.setDvb_VideoCodec(dvbVideoCodec);
+            liveChannel.setDvbServiceID(dvbServiceId);
+            liveChannel.setDvbTSID(dvbTSID);
+            liveChannel.setDvbVideoCodec(dvbVideoCodec);
             liveChannel.setFeeType(feeType);
             liveChannel.setAudioCodeInfo(dvbAudioCodec);
             liveChannel.setChannelName(channelName);
@@ -120,7 +120,7 @@ public  class JsonChannelTest {
             liveChannel.setResolutionInfo(resolutionInfo);
             liveChannel.setVideoCodeInfo(videoCodeInfo);
             liveChannel.setVideoType(videoType);
-            liveChannel.setDvb_BitRate(dvbBitRate);
+            liveChannel.setDvbBitRate(dvbBitRate);
             channels.add(liveChannel);
 
         }

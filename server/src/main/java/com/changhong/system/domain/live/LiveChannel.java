@@ -14,15 +14,15 @@ import java.util.Map;
 public class LiveChannel extends EntityBase{
     private int channelID;
     private String channelName;
-    private String dvb_TSID;
-    private String dvb_ServiceID;
-    private String dvb_NetworkID;
-    private String dvb_LogicChannelID;
-    private String dvb_VideoCodec;
-    private String dvb_AudioCodec;
+    private String dvbTSID;
+    private String dvbServiceID;
+    private String dvbNetworkID;
+    private String dvbLogicChannelID;
+    private String dvbVideoCodec;
+    private String dvbAudioCodec;
     private String dec;
-    private String dvb_BitRate;
-    private String dvb_Resolution;
+    private String dvbBitRate;
+    private String dvbResolution;
     private String channelTypeID;
     private String channelType;
     private String channelIcon;
@@ -57,52 +57,52 @@ public class LiveChannel extends EntityBase{
         this.channelName = channelName;
     }
 
-    public String getDvb_TSID() {
-        return dvb_TSID;
+    public String getDvbTSID() {
+        return dvbTSID;
     }
 
-    public void setDvb_TSID(String dvb_TSID) {
-        this.dvb_TSID = dvb_TSID;
+    public void setDvbTSID(String dvbTSID) {
+        this.dvbTSID = dvbTSID;
     }
 
-    public String getDvb_ServiceID() {
-        return dvb_ServiceID;
+    public String getDvbServiceID() {
+        return dvbServiceID;
     }
 
-    public void setDvb_ServiceID(String dvb_ServiceID) {
-        this.dvb_ServiceID = dvb_ServiceID;
+    public void setDvbServiceID(String dvbServiceID) {
+        this.dvbServiceID = dvbServiceID;
     }
 
-    public String getDvb_NetworkID() {
-        return dvb_NetworkID;
+    public String getDvbNetworkID() {
+        return dvbNetworkID;
     }
 
-    public void setDvb_NetworkID(String dvb_NetworkID) {
-        this.dvb_NetworkID = dvb_NetworkID;
+    public void setDvbNetworkID(String dvbNetworkID) {
+        this.dvbNetworkID = dvbNetworkID;
     }
 
-    public String getDvb_LogicChannelID() {
-        return dvb_LogicChannelID;
+    public String getDvbLogicChannelID() {
+        return dvbLogicChannelID;
     }
 
-    public void setDvb_LogicChannelID(String dvb_LogicChannelID) {
-        this.dvb_LogicChannelID = dvb_LogicChannelID;
+    public void setDvbLogicChannelID(String dvbLogicChannelID) {
+        this.dvbLogicChannelID = dvbLogicChannelID;
     }
 
-    public String getDvb_VideoCodec() {
-        return dvb_VideoCodec;
+    public String getDvbVideoCodec() {
+        return dvbVideoCodec;
     }
 
-    public void setDvb_VideoCodec(String dvb_VideoCodec) {
-        this.dvb_VideoCodec = dvb_VideoCodec;
+    public void setDvbVideoCodec(String dvbVideoCodec) {
+        this.dvbVideoCodec = dvbVideoCodec;
     }
 
-    public String getDvb_AudioCodec() {
-        return dvb_AudioCodec;
+    public String getDvbAudioCodec() {
+        return dvbAudioCodec;
     }
 
-    public void setDvb_AudioCodec(String dvb_AudioCodec) {
-        this.dvb_AudioCodec = dvb_AudioCodec;
+    public void setDvbAudioCodec(String dvbAudioCodec) {
+        this.dvbAudioCodec = dvbAudioCodec;
     }
 
     public String getDec() {
@@ -113,20 +113,20 @@ public class LiveChannel extends EntityBase{
         this.dec = dec;
     }
 
-    public String getDvb_BitRate() {
-        return dvb_BitRate;
+    public String getDvbBitRate() {
+        return dvbBitRate;
     }
 
-    public void setDvb_BitRate(String dvb_BitRate) {
-        this.dvb_BitRate = dvb_BitRate;
+    public void setDvbBitRate(String dvbBitRate) {
+        this.dvbBitRate = dvbBitRate;
     }
 
-    public String getDvb_Resolution() {
-        return dvb_Resolution;
+    public String getDvbResolution() {
+        return dvbResolution;
     }
 
-    public void setDvb_Resolution(String dvb_Resolution) {
-        this.dvb_Resolution = dvb_Resolution;
+    public void setDvbResolution(String dvbResolution) {
+        this.dvbResolution = dvbResolution;
     }
 
     public String getChannelTypeID() {

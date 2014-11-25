@@ -5,7 +5,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.changhong.system.domain.live.LiveChannel;
 import com.changhong.system.domain.live.LiveProgramInfo;
+import com.changhong.system.domain.live.Poster;
+import com.changhong.system.domain.live.ProgramItem;
+import com.changhong.system.domain.movielist.MovieInfo;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,12 +55,12 @@ public class LiveJSONAssember {
             String videoCodeInfo=object.getString("VideoCodecInfo");
             String videoType=object.getString("VideoType");
             String dvbFrequency=object.getString("DVBFrequency");
-            liveChannel.setDvb_LogicChannelID(dvbLogicChannelId);
-            liveChannel.setDvb_NetworkID(dvbNetworkId);
+            liveChannel.setDvbLogicChannelID(dvbLogicChannelId);
+            liveChannel.setDvbNetworkID(dvbNetworkId);
             liveChannel.setResolutionInfo(dvbResolutionc);
-            liveChannel.setDvb_ServiceID(dvbServiceId);
-            liveChannel.setDvb_TSID(dvbTSID);
-            liveChannel.setDvb_VideoCodec(dvbVideoCodec);
+            liveChannel.setDvbServiceID(dvbServiceId);
+            liveChannel.setDvbTSID(dvbTSID);
+            liveChannel.setDvbVideoCodec(dvbVideoCodec);
             liveChannel.setFeeType(feeType);
             liveChannel.setAudioCodeInfo(dvbAudioCodec);
             liveChannel.setChannelName(channelName);
@@ -70,7 +74,7 @@ public class LiveJSONAssember {
             liveChannel.setResolutionInfo(resolutionInfo);
             liveChannel.setVideoCodeInfo(videoCodeInfo);
             liveChannel.setVideoType(videoType);
-            liveChannel.setDvb_BitRate(dvbBitRate);
+            liveChannel.setDvbBitRate(dvbBitRate);
             channels.add(liveChannel);
         }
 
@@ -79,35 +83,54 @@ public class LiveJSONAssember {
          return channels;
     }
 
-    public static List<LiveProgramInfo> toLiveProgramList(String json){
+
+
+    public static List<ProgramItem> toLiveProgramList(String json){
+        List<ProgramItem> program_item=new ArrayList<ProgramItem>();
         List<LiveProgramInfo> programInfos=new ArrayList<LiveProgramInfo>();
+        List<MovieInfo> movieInfos=new ArrayList<MovieInfo>();
+
         JSONObject object=JSON.parseObject(json);
         JSONObject objectResponse=object.getJSONObject("ResponseHeader");
         if(objectResponse.getIntValue("Status")==0){
-            JSONObject programItem=object.getJSONObject("ProgramList");
-            JSONArray programItems=programItem.getJSONArray("Program_item");
+            JSONObject programList=object.getJSONObject("ProgramList");
+            JSONArray programItems=programList.getJSONArray("Program_item");
+
             for (int i=0;i<programItems.size();i++){
+
                 JSONObject program=programItems.getJSONObject(i);
+
+                ProgramItem programItem=new ProgramItem();
+
+                JSONObject programInfo1=program.getJSONObject("ProgramInfo");
                 LiveProgramInfo programInfo=new LiveProgramInfo();
-                int programID=program.getIntValue("ProgramID");
-                int channelID=program.getIntValue("ChannelID");
-                String programName=program.getString("ProgramName");
-                String channelName=program.getString("ChannelName");
-                String eventDate=program.getString("EventDate");
-                String eventDateID=program.getString("EventDateID");
-                String eventType=program.getString("eventType");
-                String playTime=program.getString("playTime");
-                String endTime=program.getString("endTime");
-                String eventDesc=program.getString("eventDesc");
-                String videoType=program.getString("videoType");
-                String viewLevel=program.getString("viewLevel");
-                String playUrl=program.getString("playUrl");
-                String bitRateInfo=program.getString("bitRateInfo");
-                String eventImageUrl=program.getString("eventImageUrl");
-                String assertID=program.getString("assertID");
-                String contentProvider=program.getString("contentProvider");
-                String localEntryUID=program.getString("localEntryUID");
-                String productOfferin=program.getString("productOfferin");
+
+                JSONObject basic=program.getJSONObject("MovieInfo");
+                MovieInfo movie=new MovieInfo();
+
+                JSONObject posterInfo=program.getJSONObject("Poster");
+
+
+
+                int programID=programInfo1.getIntValue("ProgramID");
+                int channelID=programInfo1.getIntValue("ChannelID");
+                String programName=programInfo1.getString("ProgramName");
+                String channelName=programInfo1.getString("ChannelName");
+                String eventDate=programInfo1.getString("EventDate");
+                String eventDateID=programInfo1.getString("EventDateID");
+                String eventType=programInfo1.getString("eventType");
+                String playTime=programInfo1.getString("playTime");
+                String endTime=programInfo1.getString("endTime");
+                String eventDesc=programInfo1.getString("eventDesc");
+                String videoType=programInfo1.getString("videoType");
+                String viewLevel=programInfo1.getString("viewLevel");
+                String playUrl=programInfo1.getString("playUrl");
+                String bitRateInfo=programInfo1.getString("bitRateInfo");
+                String eventImageUrl=programInfo1.getString("eventImageUrl");
+                String assertID=programInfo1.getString("assertID");
+                String contentProvider=programInfo1.getString("contentProvider");
+                String localEntryUID=programInfo1.getString("localEntryUID");
+                String productOfferin=programInfo1.getString("productOfferin");
                 programInfo.setProgramID(programID);
                 programInfo.setChannelID(channelID);
                 programInfo.setProgramName(programName);
@@ -129,9 +152,99 @@ public class LiveJSONAssember {
                 programInfo.setProductOfferin(productOfferin);
                 programInfos.add(programInfo);
 
+
+
+
+                movie.setMovieID(basic.getString("MovieID"));
+                movie.setMovieName(basic.getString("MovieName"));
+                movie.setMovieAliasName(basic.getString("MovieAliasName"));
+                movie.setTypeID(basic.getString("TypeID"));
+                movie.setType(basic.getString("Type"));
+                movie.setDramaTypeID(basic.getString("DramaTypeID"));
+                movie.setDramaType(basic.getString("DramaType"));
+                movie.setAreaID(basic.getString("AreaID"));
+                movie.setArea(basic.getString("Area"));
+                movie.setYear(basic.getString("Year"));
+                movie.setDirector(basic.getString("Director"));
+                movie.setActor(basic.getString("Actor"));
+                movie.setHost(basic.getString("Host"));
+                movie.setStation(basic.getString("Station"));
+                movie.setAuthor(basic.getString("Author"));
+                movie.setRunTime(basic.getString("RunTime"));
+                movie.setCount(basic.getIntValue("Count"));
+                movie.setSummaryShort(basic.getString("SummaryShort"));
+                movie.setCommentary(basic.getString("Commentary"));
+                movie.setTag(basic.getString("Tag"));
+                movie.setSuggestPrice(basic.getString("SuggestPrice"));
+
+
+                movie.setPosterID(posterInfo.getString("PosterID"));
+                movie.setImageUrl(posterInfo.getString("ImageUrl"));
+                movie.setAspectRatio(posterInfo.getString("AspectRatio"));
+                movie.setSeries3(posterInfo.getString("Series"));
+                movieInfos.add(movie);
+
+                programItem.setMovieInfos(movieInfos);
+                programItem.setProgramInfos(programInfos);
+
+                program_item.add(programItem);
+
             }
 
+
         }
-        return  programInfos;
+        return  program_item;
     }
+
+     /**
+     * 以json格式数据输出到客户端
+     * @param liveChannels
+     * @return
+     */
+
+    public static JSONObject toChannelJsonObjec(List<LiveChannel> liveChannels){
+        JSONArray channelList=new JSONArray();
+        for(LiveChannel liveChannel:liveChannels){
+            JSONObject channelItem=new JSONObject();
+            channelItem.put("ChannelIcon",liveChannel.getChannelIcon());
+            channelItem.put("ChannelImage",liveChannel.getChannelImage());
+            channelItem.put("ChannelType",liveChannel.getChannelType());
+            channelItem.put("PlayUrl",liveChannel.getPlayUrl());
+            channelItem.put("FeeType",liveChannel.getFeeType());
+            channelItem.put("VideoType",liveChannel.getVideoType());
+            channelItem.put("ChannelItem",channelItem);
+            channelList.add(channelItem);
+        }
+        JSONObject channels=new JSONObject();
+        channels.put("ChannelList",channelList);
+        return channels;
+
+    }
+
+    public static JSONObject toProgramJsonObject(List<LiveProgramInfo> liveProgramInfos){
+        JSONArray liveProgramList=new JSONArray();
+        for(LiveProgramInfo liveProgramInfo:liveProgramInfos){
+            JSONObject programItem=new JSONObject();
+            JSONObject liveProgram=new JSONObject();
+            programItem.put("ProgramName",liveProgramInfo.getProgramName());
+            programItem.put("PlayTime",liveProgramInfo.getPlayTime());
+            programItem.put("EndTime",liveProgramInfo.getEndTime());
+            programItem.put("EventType",liveProgramInfo.getEventType());
+            programItem.put("EventDesc",liveProgramInfo.getEventDesc());
+            programItem.put("VideoType",liveProgramInfo.getVideoType());
+            programItem.put("ViewLevel",liveProgramInfo.getViewLevel());
+            programItem.put("PlayUrl",liveProgramInfo.getPlayUrl());
+            programItem.put("EventImageUrl",liveProgramInfo.getEventImageUrl());
+            programItem.put("ContentProvider",liveProgramInfo.getContentProvider());
+            programItem.put("LocalEntryUID",liveProgramInfo.getLocalEntryUID());
+            liveProgram.put("ProgramInfo",programItem);
+            liveProgramList.add(liveProgram);
+
+        }
+        JSONObject livePrograms=new JSONObject();
+        livePrograms.put("ProgramList",liveProgramList);
+        return livePrograms;
+    }
+
+
 }

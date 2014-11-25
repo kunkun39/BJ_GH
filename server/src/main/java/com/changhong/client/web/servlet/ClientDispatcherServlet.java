@@ -5,18 +5,30 @@ import com.changhong.common.web.application.ApplicationEventPublisher;
 import com.changhong.system.domain.movietype.TypeEnum;
 import org.springframework.web.bind.ServletRequestUtils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
+import com.changhong.system.domain.live.LiveChannel;
+import com.changhong.system.repository.LiveChanneDaoImpl;
+import com.changhong.system.repository.LiveChannelDao;
+import com.changhong.system.web.facade.assember.LiveJSONAssember;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
 
 /**
  * User: Jack Wang
  * Date: 14-11-21
  * Time: 下午3:00
  */
+
 public class ClientDispatcherServlet extends HttpServlet {
 
     private ClientMovieService clientMovieService;
@@ -33,7 +45,27 @@ public class ClientDispatcherServlet extends HttpServlet {
         }
 
         String requestURL = request.getRequestURI();
-        String responseJSON = "";
+        String jsonString=request.getParameter("json");
+        String responseJSON="";
+        JSONObject requestJson= JSON.parseObject(jsonString);
+        JSONObject requestParams=requestJson.getJSONObject("RequestParams");
+        String channelType=requestParams.getString("ChannelTypeID");
+        int channelID=requestParams.getInteger("ChannelID");
+        String channelName=requestParams.getString("ChannelName");
+        LiveChannelDao liveChannelDao=new LiveChanneDaoImpl();
+        java.util.List<LiveChannel> channels=new ArrayList<LiveChannel>();
+        if(channelType!=null&&channelType.length()>0){
+
+
+
+        }else {
+           channels=liveChannelDao.loadliveChannelByID(channelID);
+
+        }
+
+        JSONObject responseChannels= LiveJSONAssember.toChannelJsonObjec(channels);
+        responseJSON=responseChannels.toString();
+
 
         //首页推荐操作
         if ("/ott/client/moviecolumn.action".equals(requestURL)) {
