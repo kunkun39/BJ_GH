@@ -15,7 +15,5 @@ public interface LiveDao extends EntityObjectDao {
 
     String loadLiveChannelsByType(String sql);
 
-    List<LiveChannel> loadLiveChannelByID(int id);
-
     String findLiveProgramEPG(int channelID, String dateFrom, String dateTo, boolean loadMovieInfo);
 }

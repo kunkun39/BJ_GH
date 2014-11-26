@@ -2,17 +2,18 @@ package com.changhong.client.web.servlet;
 
 import com.changhong.client.service.ClientLiveChannelService;
 import com.changhong.client.service.ClientLiveProgramService;
+import com.changhong.client.service.ClientLiveService;
 import com.changhong.client.service.ClientMovieService;
 import com.changhong.common.web.application.ApplicationEventPublisher;
 import com.changhong.system.domain.movietype.TypeEnum;
 import org.springframework.web.bind.ServletRequestUtils;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 
 
 /**
@@ -24,8 +25,8 @@ import java.io.PrintWriter;
 public class ClientDispatcherServlet extends HttpServlet {
 
     private ClientMovieService clientMovieService;
-    private ClientLiveChannelService clientLiveChannelService;
-    private ClientLiveProgramService clientLiveProgramService;
+
+    private ClientLiveService clientLiveService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,19 +38,12 @@ public class ClientDispatcherServlet extends HttpServlet {
         if (clientMovieService == null) {
             clientMovieService = (ClientMovieService) ApplicationEventPublisher.getCtx().getBean("clientMovieService");
         }
-        if (clientLiveChannelService == null) {
-            clientLiveChannelService = (ClientLiveChannelService) ApplicationEventPublisher.getCtx().getBean("clientLiveChannelService");
-        }
-        if(clientLiveProgramService==null){
-            clientLiveProgramService= (ClientLiveProgramService) ApplicationEventPublisher.getCtx().getBean("clientLiveProgramService");
-
+        if (clientLiveService == null) {
+            clientLiveService = (ClientLiveService) ApplicationEventPublisher.getCtx().getBean("clientLiveService");
         }
 
         String requestURL = request.getRequestURI();
         String responseJSON = "";
-
-
-
 
         //首页推荐操作
         if ("/ott/client/moviecolumn.action".equals(requestURL)) {
@@ -78,13 +72,13 @@ public class ClientDispatcherServlet extends HttpServlet {
             int size = ServletRequestUtils.getIntParameter(request, "size", 1);
             responseJSON = clientMovieService.obtainIndexRecommend(page, size);
 
-        } else if("/ott/client/liveChannel.action".equals(requestURL)){
-            String json= ServletRequestUtils.getStringParameter(request,"json","");
-            responseJSON=clientLiveChannelService.loadliveChannelsByType(json);
+        } else if ("/ott/client/livechannel.action".equals(requestURL)) {
+            String json = ServletRequestUtils.getStringParameter(request, "json", "");
+            responseJSON = clientLiveService.loadLiveChannelsByType(json);
 
-        } else if("/ott/client/liveProgram.action".equals(requestURL)){
-            int channelID=ServletRequestUtils.getIntParameter(request,"channelID",1);
-            responseJSON=clientLiveProgramService.obtainLiveProgram(channelID);
+        } else if ("/ott/client/programepg.action".equals(requestURL)) {
+            int channelID = ServletRequestUtils.getIntParameter(request, "channelID", 1);
+            responseJSON = clientLiveService.obtainLiveProgramEPG(channelID, false);
         }
 
         //返回结果

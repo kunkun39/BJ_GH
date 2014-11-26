@@ -47,16 +47,6 @@ public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
         return channels.toJSONString();
     }
 
-    public List<LiveChannel> loadLiveChannelByID(int id) {
-        List<LiveChannel> liveChannels;
-        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-        SQLQuery query = null;
-        query = session.createSQLQuery("select * from live_channel where channel_id = " + id);
-        liveChannels = query.list();
-
-        return liveChannels;
-    }
-
     public String findLiveProgramEPG(int channelID, String dateFrom, String dateTo, boolean loadMovieInfo) {
         List<LiveProgram> programs = getHibernateTemplate().find("FROM LiveProgram l WHERE l.channelID = ? AND l.eventDate >= ? AND l.eventDate <= ? ORDER BY l.eventDate ASC",
                 new Object[]{channelID, dateFrom, dateTo});

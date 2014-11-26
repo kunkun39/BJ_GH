@@ -18,6 +18,10 @@ public class ClientLiveServiceImpl implements ClientLiveService {
     @Resource(name = "liveDao")
     private LiveDao liveDao;
 
+    public String loadLiveChannelsByType(String type) {
+        return liveDao.loadLiveChannelsByType(type);
+    }
+
     public String obtainLiveProgramEPG(int channelID, boolean loadMovieInfo) {
         LocalDate today = new LocalDate();
         String dateFrom = today.toString("YYYY-MM-DD");
