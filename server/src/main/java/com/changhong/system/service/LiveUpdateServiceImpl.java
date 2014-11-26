@@ -62,6 +62,7 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
 
     public void updateLiveProgram() {
         String response = null;
+
         if (LOCAL) {
             response = FakeJDONDataProvider.Live_Program_DATA;
         } else {
@@ -79,17 +80,15 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
-
         }
+
         if (StringUtils.hasText(response)) {
-            List<LiveProgram> programInfos = new ArrayList<LiveProgram>();
+            List<LiveProgram> programInfos = LiveJSONAssember.toLiveProgramList(response);
             if (programInfos != null && !programInfos.isEmpty()) {
                 liveDao.saveAll(programInfos);
             }
-
         }
     }
-
 }
 
 

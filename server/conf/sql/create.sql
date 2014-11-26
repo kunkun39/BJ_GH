@@ -11,6 +11,7 @@ CREATE TABLE `system_user` (
   `enabled` tinyint(1) default '0' COMMENT '1 for YES or 0 for NO',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+ALTER TABLE `system_user` ADD INDEX  system_user_index_name(`name`);
 
 DROP TABLE IF EXISTS `live_channel`;
 CREATE TABLE `live_channel` (
@@ -42,31 +43,34 @@ CREATE TABLE `live_channel` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-DROP TABLE IF EXISTS `live_program_info`;
-CREATE TABLE `live_program_info` (
+DROP TABLE IF EXISTS `live_program`;
+CREATE TABLE `live_program` (
   `id` int(36) NOT NULL auto_increment,
   `program_id` int default 0,
   `timestamp` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `program_name` varchar(120) default '',
   `channel_id` int default 0,
-  `channel_name` varchar(255) default '',
-  `event_date` varchar(255) default '',
-  `event_date_id` varchar(255) default '',
-  `event_type` varchar(255) default '',
-  `play_time` varchar(255) default '',
-  `end_time` varchar(255) default '',
+  `channel_name` varchar(40) default '',
+  `event_date` varchar(20) default '',
+  `event_date_id` varchar(10) default '',
+  `event_type` varchar(20) default '',
+  `play_time` varchar(20) default '',
+  `end_time` varchar(20) default '',
   `event_desc` varchar(255) default '',
-  `video_type` varchar(255) default '',
-  `view_level` varchar(255) default '',
+  `video_type` varchar(40) default '',
+  `view_level` varchar(40) default '',
   `play_url` varchar(255) default '',
-  `bit_rate_info` varchar(255) default '',
+  `bit_rate_info` varchar(80) default '',
   `event_image_url` varchar(255) default '',
   `assert_id` varchar(36) default '',
-  `content_provider` varchar(255) default '',
-  `local_entry_uid` varchar(255) default '',
-  `product_offerin` varchar(255) default '',
-  PRIMARY KEY  (`id`)
+  `content_provider` varchar(40) default '',
+  `local_entry_uid` varchar(40) default '',
+  `product_offering_uid` varchar(40) default '',
+  `movieinfo_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`movieinfo_id`) REFERENCES movie_info (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+ALTER TABLE `live_program` ADD INDEX live_program_index_channelid(`channel_id`);
 
 
 

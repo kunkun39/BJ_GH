@@ -92,49 +92,31 @@ public class LiveJSONAssember {
 
             for (int i = 0; i < programItems.size(); i++) {
                 JSONObject program = programItems.getJSONObject(i);
+
                 /**
-                 * program
+                 * program info
                  */
-                LiveProgram liveProgram = new LiveProgram();
+                LiveProgram item = new LiveProgram();
                 JSONObject programInfo1 = program.getJSONObject("ProgramInfo");
-                int programID = programInfo1.getIntValue("ProgramID");
-                int channelID = programInfo1.getIntValue("ChannelID");
-                String programName = programInfo1.getString("ProgramName");
-                String channelName = programInfo1.getString("ChannelName");
-                String eventDate = programInfo1.getString("EventDate");
-                String eventDateID = programInfo1.getString("EventDateID");
-                String eventType = programInfo1.getString("eventType");
-                String playTime = programInfo1.getString("playTime");
-                String endTime = programInfo1.getString("endTime");
-                String eventDesc = programInfo1.getString("eventDesc");
-                String videoType = programInfo1.getString("videoType");
-                String viewLevel = programInfo1.getString("viewLevel");
-                String playUrl = programInfo1.getString("playUrl");
-                String bitRateInfo = programInfo1.getString("bitRateInfo");
-                String eventImageUrl = programInfo1.getString("eventImageUrl");
-                String assertID = programInfo1.getString("assertID");
-                String contentProvider = programInfo1.getString("contentProvider");
-                String localEntryUID = programInfo1.getString("localEntryUID");
-                String productOfferin = programInfo1.getString("productOfferin");
-                liveProgram.setProgramID(programID);
-                liveProgram.setChannelID(channelID);
-                liveProgram.setProgramName(programName);
-                liveProgram.setChannelName(channelName);
-                liveProgram.setEventDate(eventDate);
-                liveProgram.setEventDateID(eventDateID);
-                liveProgram.setEventType(eventType);
-                liveProgram.setPlayTime(playTime);
-                liveProgram.setEndTime(endTime);
-                liveProgram.setEventDesc(eventDesc);
-                liveProgram.setVideoType(videoType);
-                liveProgram.setViewLevel(viewLevel);
-                liveProgram.setPlayUrl(playUrl);
-                liveProgram.setBitRateInfo(bitRateInfo);
-                liveProgram.setEventImageUrl(eventImageUrl);
-                liveProgram.setAssertID(assertID);
-                liveProgram.setContentProvider(contentProvider);
-                liveProgram.setLocalEntryUID(localEntryUID);
-                liveProgram.setProductOfferin(productOfferin);
+                item.setProgramID(programInfo1.getIntValue("ProgramID"));
+                item.setChannelID(programInfo1.getIntValue("ChannelID"));
+                item.setProgramName(programInfo1.getString("ProgramName"));
+                item.setChannelName(programInfo1.getString("ChannelName"));
+                item.setEventDate(programInfo1.getString("EventDate"));
+                item.setEventDateID(programInfo1.getString("EventDateID"));
+                item.setEventType(programInfo1.getString("eventType"));
+                item.setPlayTime(programInfo1.getString("playTime"));
+                item.setEndTime(programInfo1.getString("endTime"));
+                item.setEventDesc(programInfo1.getString("eventDesc"));
+                item.setVideoType(programInfo1.getString("videoType"));
+                item.setViewLevel(programInfo1.getString("viewLevel"));
+                item.setPlayUrl(programInfo1.getString("playUrl"));
+                item.setBitRateInfo(programInfo1.getString("bitRateInfo"));
+                item.setEventImageUrl(programInfo1.getString("eventImageUrl"));
+                item.setAssertID(programInfo1.getString("assertID"));
+                item.setContentProvider(programInfo1.getString("contentProvider"));
+                item.setLocalEntryUID(programInfo1.getString("localEntryUID"));
+                item.setProductOfferingUID(programInfo1.getString("productOfferingUID"));
 
                 /**
                  * movie info
@@ -171,9 +153,9 @@ public class LiveJSONAssember {
                 movie.setImageUrl(posterInfo.getString("ImageUrl"));
                 movie.setAspectRatio(posterInfo.getString("AspectRatio"));
                 movie.setSeries3(posterInfo.getString("Series"));
-                liveProgram.setMovie(movie);
+                item.setMovie(movie);
 
-                items.add(liveProgram);
+                items.add(item);
             }
 
         }
@@ -182,12 +164,8 @@ public class LiveJSONAssember {
 
     /**
      * 以json格式数据输出到客户端
-     *
-     * @param liveChannels
-     * @return
      */
-
-    public static JSONObject toChannelJsonObjec(List<LiveChannel> liveChannels) {
+    public static JSONObject toChannelJsonObject(List<LiveChannel> liveChannels) {
         JSONArray channelList = new JSONArray();
         for (LiveChannel liveChannel : liveChannels) {
             JSONObject channelItem = new JSONObject();

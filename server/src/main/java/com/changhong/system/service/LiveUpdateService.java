@@ -12,5 +12,4 @@ public interface LiveUpdateService {
     void updateLiveChannel();
 
     void updateLiveProgram();
-
 }

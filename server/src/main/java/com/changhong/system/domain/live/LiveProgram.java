@@ -13,6 +13,10 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class LiveProgram extends EntityBase {
+
+    /**
+     * 节目信息
+     */
     private int programID;
     private String programName;
     private int channelID;
@@ -31,8 +35,11 @@ public class LiveProgram extends EntityBase {
     private String assertID;
     private String contentProvider;
     private String localEntryUID;
-    private String productOfferin;
+    private String productOfferingUID;
 
+    /**
+     * 节目
+     */
     private MovieInfo movie;
 
     /************************************************GETTER/SETTER*****************************************************/
@@ -181,12 +188,12 @@ public class LiveProgram extends EntityBase {
         this.localEntryUID = localEntryUID;
     }
 
-    public String getProductOfferin() {
-        return productOfferin;
+    public String getProductOfferingUID() {
+        return productOfferingUID;
     }
 
-    public void setProductOfferin(String productOfferin) {
-        this.productOfferin = productOfferin;
+    public void setProductOfferingUID(String productOfferingUID) {
+        this.productOfferingUID = productOfferingUID;
     }
 
     public MovieInfo getMovie() {
