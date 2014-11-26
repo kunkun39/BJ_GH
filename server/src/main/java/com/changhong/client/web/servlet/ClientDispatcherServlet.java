@@ -1,7 +1,5 @@
 package com.changhong.client.web.servlet;
 
-import com.changhong.client.service.ClientLiveChannelService;
-import com.changhong.client.service.ClientLiveProgramService;
 import com.changhong.client.service.ClientLiveService;
 import com.changhong.client.service.ClientMovieService;
 import com.changhong.common.web.application.ApplicationEventPublisher;
