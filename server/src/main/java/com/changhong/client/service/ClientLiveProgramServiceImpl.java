@@ -14,7 +14,7 @@ import java.security.PrivateKey;
  * Time: 下午5:56
  * To change this template use File | Settings | File Templates.
  */
-@Service("ClientLiveProgramService")
+@Service("clientLiveProgramService")
 public class ClientLiveProgramServiceImpl implements ClientLiveProgramService {
     @Resource(name = "liveDao")
     private LiveDao liveDao;

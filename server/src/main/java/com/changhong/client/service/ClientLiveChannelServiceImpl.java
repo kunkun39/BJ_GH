@@ -14,7 +14,7 @@ import java.util.List;
  * Time: 下午3:41
  * To change this template use File | Settings | File Templates.
  */
-@Service("ClientLiveChannelService")
+@Service("clientLiveChannelService")
 public class ClientLiveChannelServiceImpl implements ClientLiveChannelService{
     @Resource
     private LiveDao liveDao;
