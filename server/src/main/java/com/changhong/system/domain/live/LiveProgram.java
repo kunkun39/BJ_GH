@@ -6,11 +6,9 @@ import com.changhong.system.domain.movielist.MovieInfo;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: maren
  * Date: 14-11-20
  * Time: 上午11:13
- * To change this template use File | Settings | File Templates.
  */
 public class LiveProgram extends EntityBase {
 
@@ -33,7 +31,7 @@ public class LiveProgram extends EntityBase {
     private String bitRateInfo;
     private String eventImageUrl;
     private String assertID;
-    private String contentProvider;
+    private String contentProviderID;
     private String localEntryUID;
     private String productOfferingUID;
 
@@ -172,12 +170,12 @@ public class LiveProgram extends EntityBase {
         this.assertID = assertID;
     }
 
-    public String getContentProvider() {
-        return contentProvider;
+    public String getContentProviderID() {
+        return contentProviderID;
     }
 
-    public void setContentProvider(String contentProvider) {
-        this.contentProvider = contentProvider;
+    public void setContentProviderID(String contentProviderID) {
+        this.contentProviderID = contentProviderID;
     }
 
     public String getLocalEntryUID() {

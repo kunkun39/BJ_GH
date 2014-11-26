@@ -5,11 +5,9 @@ import com.changhong.common.domain.EntityBase;
 import java.util.Map;
 
 /**
- * Created by IntelliJ IDEA.
  * User: maren
  * Date: 14-11-20
  * Time: 上午10:34
- * To change this template use File | Settings | File Templates.
  */
 public class LiveChannel extends EntityBase{
     private int channelID;

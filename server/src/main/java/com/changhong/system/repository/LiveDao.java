@@ -7,11 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: maren
  * Date: 14-11-20
  * Time: 下午2:23
- * To change this template use File | Settings | File Templates.
  */
 public interface LiveDao extends EntityObjectDao {
 
@@ -19,5 +17,5 @@ public interface LiveDao extends EntityObjectDao {
 
     List<LiveChannel> loadLiveChannelByID(int id);
 
-    String obtainLiveProgram(int channelID);
+    String findLiveProgramEPG(int channelID, String dateFrom, String dateTo, boolean loadMovieInfo);
 }

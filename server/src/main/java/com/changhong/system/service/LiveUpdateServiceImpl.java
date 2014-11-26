@@ -17,11 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: maren
  * Date: 14-11-20
  * Time: 下午6:39
- * To change this template use File | Settings | File Templates.
  */
 @Repository
 public class LiveUpdateServiceImpl implements LiveUpdateService {
@@ -45,8 +43,8 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
             requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
-            requestParams.put("ChannelID", 12);
-            requestParams.put("ChannelTypeID", "12");
+            requestParams.put("ChannelID", "");
+            requestParams.put("ChannelTypeID", "");
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
@@ -76,7 +74,7 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
             requestParams.put("ChannelID", 27);
             requestParams.put("EventTypeID", "27");
             requestParams.put("Date", "2013-11-21");
-            requestParams.put("PosterAspectRatio", "10240768");
+            requestParams.put("PosterAspectRatio", "");
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);

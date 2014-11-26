@@ -56,7 +56,7 @@
         <property name="bitRateInfo" column="bit_rate_info" insert="true" update="true" type="java.lang.String"/>
         <property name="eventImageUrl" column="event_image_url" insert="true" update="true" type="java.lang.String"/>
         <property name="assertID" column="assert_id" insert="true" update="true" type="java.lang.String"/>
-        <property name="contentProvider" column="content_provider" insert="true" update="true" type="java.lang.String"/>
+        <property name="contentProviderID" column="content_provider" insert="true" update="true" type="java.lang.String"/>
         <property name="localEntryUID" column="local_entry_uid" insert="true" update="true" type="java.lang.String"/>
         <property name="productOfferingUID" column="product_offering_uid" insert="true" update="true" type="java.lang.String"/>
 

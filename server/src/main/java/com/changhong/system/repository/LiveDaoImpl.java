@@ -15,11 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: maren
  * Date: 14-11-20
  * Time: 下午2:24
- * To change this template use File | Settings | File Templates.
  */
 @Repository("liveDao")
 public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
@@ -53,62 +51,68 @@ public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
         List<LiveChannel> liveChannels;
         Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
         SQLQuery query = null;
-        query = session.createSQLQuery("select * from live_channel where channel_id=" + id);
+        query = session.createSQLQuery("select * from live_channel where channel_id = " + id);
         liveChannels = query.list();
 
         return liveChannels;
     }
 
-    public String obtainLiveProgram(int channelID) {
-        HibernateTemplate hibernateTemplate = getHibernateTemplate();
-        List<LiveProgram> programInfos = new ArrayList<LiveProgram>();
-        programInfos = hibernateTemplate.find("from LiveProgram lp where lp.channelID=?", new Object[]{channelID});
-        JSONArray programs = new JSONArray();
-        JSONObject programItem=new JSONObject();
-        for(LiveProgram programInfo:programInfos){
+    public String findLiveProgramEPG(int channelID, String dateFrom, String dateTo, boolean loadMovieInfo) {
+        List<LiveProgram> programs = getHibernateTemplate().find("FROM LiveProgram l WHERE l.channelID = ? AND l.eventDate >= ? AND l.eventDate <= ? ORDER BY l.eventDate ASC",
+                new Object[]{channelID, dateFrom, dateTo});
 
-            JSONObject program=new JSONObject();
-            JSONObject programInfo1=new JSONObject();
-            JSONObject movie=new JSONObject();
-            JSONObject movieInfo1=new JSONObject();
-            program.put("ProgramName",programInfo.getProgramName());
-            program.put("Playtime",programInfo.getPlayTime());
-            program.put("EventType",programInfo.getEventType());
-            program.put("EventDesc",programInfo.getEventDesc());
-            program.put("VideoType",programInfo.getVideoType());
-            program.put("ViewLevel",programInfo.getViewLevel());
-            program.put("PlayUrl",programInfo.getPlayUrl());
-            program.put("EventImageUrl",programInfo.getEventImageUrl());
-            program.put("ContentProvider",programInfo.getContentProvider());
-            program.put("LocalEntryUID",programInfo.getLocalEntryUID());
-            if (programInfo.getMovie() != null) {
-                MovieInfo movieInfo = programInfo.getMovie();
-                movie.put("MovieName", movieInfo.getMovieName());
-                movie.put("Type", movieInfo.getType());
-                movie.put("DramaType", movieInfo.getDramaType());
-                movie.put("Year", movieInfo.getYear());
-                movie.put("Actor", movieInfo.getActor());
-                movie.put("Author", movieInfo.getAuthor());
-                movie.put("RunTime", movieInfo.getRunTime());
-                movie.put("Count", movieInfo.getCount());
-                movie.put("SummaryShort", movieInfo.getSummaryShort());
-                movie.put("Commentary", movieInfo.getCommentary());
-                movie.put("SuggestPrice", movieInfo.getSuggestPrice());
-                movie.put("RecommendClass1", movieInfo.getRecommendClass1());
-                movie.put("RecommendClass2", movieInfo.getRecommendClass2());
-                movie.put("RecommendClass3", movieInfo.getRecommendClass3());
-                movie.put("RecommendClass3", movieInfo.getRecommendClass4());
-                movie.put("ImageUrl", movieInfo.getImageUrl());
-                movieInfo1.put("MovieInfo", movie);
-                programs.add(movieInfo1);
+        JSONObject result = new JSONObject();
+        JSONArray items = new JSONArray();
+        for (LiveProgram program : programs) {
+            JSONObject item = new JSONObject();
+            /**
+             * 组装节目的信息
+             */
+            JSONObject programJSON = new JSONObject();
+            programJSON.put("ProgramID", program.getProgramName());
+            programJSON.put("ProgramName", program.getProgramName());
+            programJSON.put("EventDate", program.getEventDate());
+            programJSON.put("EventType", program.getEventType());
+            programJSON.put("EventDesc", program.getEventDesc());
+            programJSON.put("PlayTime", program.getPlayTime());
+            programJSON.put("EndTime", program.getEndTime());
+            programJSON.put("VideoType", program.getVideoType());
+            programJSON.put("ViewLevel", program.getViewLevel());
+            programJSON.put("PlayUrl", program.getPlayUrl());
+            programJSON.put("BitRateInfo", program.getBitRateInfo());
+            programJSON.put("EventImageUrl", program.getEventImageUrl());
+            programJSON.put("AssetID", program.getAssertID());
+            programJSON.put("ContentProviderID", program.getContentProviderID());
+            programJSON.put("LocalEntryUID", program.getLocalEntryUID());
+            programJSON.put("ProductOfferingUID", program.getProductOfferingUID());
+            item.put("ProgramInfo", programJSON);
+
+            /**
+             * 加载Movie的信息
+             */
+            if (loadMovieInfo) {
+                JSONObject movieJSON = new JSONObject();
+                JSONObject posterJSON = new JSONObject();
+                if (program.getMovie() != null) {
+                    MovieInfo movieInfo = program.getMovie();
+                    movieJSON.put("MovieID", movieInfo.getMovieName());
+                    movieJSON.put("MovieName", movieInfo.getMovieName());
+                    movieJSON.put("MovieAliasName", movieInfo.getMovieName());
+                    item.put("MovieInfo", movieJSON);
+
+                    posterJSON.put("ImageUrl", movieInfo.getImageUrl());
+                    posterJSON.put("AspectRatio", movieInfo.getAspectRatio());
+                    item.put("Poster", posterJSON);
+                }
             }
-            programInfo1.put("ProgramInfo", program);
-            programs.add(programInfo1);
 
+            /**
+             * 添加结果
+             */
+            items.add(item);
         }
-        programItem.put("Program_item", programs);
-        JSONObject programList=new JSONObject();
-        programList.put("ProgramList",programItem);
-        return programList.toJSONString();
+
+        result.put("ProgramList", items);
+        return result.toJSONString();
     }
 }
