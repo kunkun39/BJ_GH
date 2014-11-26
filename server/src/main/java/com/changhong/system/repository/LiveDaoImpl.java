@@ -62,7 +62,7 @@ public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
     public String obtainLiveProgram(int channelID) {
         HibernateTemplate hibernateTemplate = getHibernateTemplate();
         List<LiveProgram> programInfos = new ArrayList<LiveProgram>();
-        programInfos = hibernateTemplate.find("from LiveProgramInfo lp where lp.channelID=?", new Object[]{channelID});
+        programInfos = hibernateTemplate.find("from LiveProgram lp where lp.channelID=?", new Object[]{channelID});
         JSONArray programs = new JSONArray();
         JSONObject programItem=new JSONObject();
         for(LiveProgram programInfo:programInfos){
