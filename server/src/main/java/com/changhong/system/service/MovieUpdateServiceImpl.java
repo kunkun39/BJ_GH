@@ -370,6 +370,31 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
     }
 
+    public void getMovieDetails(String movieID) {
+        String response = null;
+        if (LOCAL) {
+            response = FakeJDONDataProvider.MOVIE_DETAILS_DATA;
+        } else {
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.moviedetails");
+            JSONObject json = new JSONObject();
+            JSONObject requestHeader = new JSONObject();
+            requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
+            json.put("RequestHeader", requestHeader);
+            JSONObject requestParams = new JSONObject();
+            requestParams.put("MovieID", movieID);
+            requestParams.put("GetInfoType", "");//TODO:获取的客户端
+            json.put("RequestParams", requestParams);
+            postMethod.addParameter("json", json.toJSONString());
+            response = WebUtils.httpPostRequest(postMethod);
+        }
+
+        if (StringUtils.hasText(response)) {
+            MovieInfo movieInfo = MovieListJSONAssember.toMovieDetailInfo(response);
+            movieDao.saveOrUpdate(movieInfo);
+        }
+    }
+
     public static void main(String[] args) {
         MovieUpdateServiceImpl movieService = new MovieUpdateServiceImpl();
 //        movieService.updateMovieType();

@@ -21,4 +21,9 @@ public interface MovieChangeService {
      * 更新影片分类的栏目
      */
     void serverMovieInfoChange(String json);
+
+    /**
+     * 更新MOVIE的播放资源
+     */
+    void serverPlayInfoChange(String json);
 }

@@ -82,9 +82,13 @@ public class MovieChangeServiceImpl implements MovieChangeService {
         String id = message.getString("ColumnID");
 
         if (INSERT.equals(opType)) {
-
+            movieUpdateService.getMovieDetails(id);
         } else if(DELETE.equals(opType)) {
             movieDao.deleteMovieInfo(id);
         }
+    }
+
+    public void serverPlayInfoChange(String json) {
+        //TODO: not yet inplemented
     }
 }

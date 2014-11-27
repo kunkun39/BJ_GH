@@ -319,9 +319,117 @@ public class FakeJDONDataProvider {
             "}}";
 
 
+     public static String MOVIE_DETAILS_DATA="{\"ResponseHeader\":{\n" +
+             "    \"TransactionId\":\"TransactionId\",\n" +
+             "    \"Status\":0,\n" +
+             "    \"Params\":{\n" +
+             "        \"MovieID\":\"101818\",\n" +
+             "        \"GetInfoType\":\"\"\n" +
+             "    }\n" +
+             "},\"Movie_list\":{\n" +
+             "    \"Movie_item\":[\n" +
+             "        {\n" +
+             "            \"MovieInfo\":{\n" +
+             "                \"MovieID\":\"101818\",\n" +
+             "                \"MovieName\":\"\\u7a81\\u88ad\",\n" +
+             "                \"MovieAliasName\":\"\\u5168\\u9762\\u7a81\\u88ad\\/\\u7a81\\u51fb\\u6b7b\\u4ea1\\u5854\\/The Raid: Redemption\\/Serbuan maut\",\n" +
+             "                \"TypeID\":\"1\",\n" +
+             "                \"DramaTypeID\":\"1,2,12\",\n" +
+             "                \"AreaID\":\"51\",\n" +
+             "                \"Year\":\"2012\",\n" +
+             "                \"Director\":\";\\u52a0\\u96f7\\u65af\\u00b7\\u57c3\\u6587\\u65af;\",\n" +
+             "                \"Actor\":\";Iko Uwais;Doni Alamsyah;Ananda George;\",\n" +
+             "                \"Host\":\"\",\n" +
+             "                \"Station\":\"\",\n" +
+             "                \"Author\":\"\",\n" +
+             "                \"RunTime\":\"101\",\n" +
+             "                \"Count\":\"0\",\n" +
+             "                \"SummaryShort\":\"    \\u4e00\\u652f\\u7279\\u8b66\\u961f\\u51c6\\u5907\\u7a81\\u88ad\\u4e00\\u5e2e\\u8eb2\\u572830\\u5c42\\u9ad8\\u697c\\u7684\\u6bd2\\u8d29\\uff0c\\u4ed6\\u4eec\\u6df1\\u5165\\u5168\\u4e16\\u754c\\u6700\\u5371\\u9669\\u7684\\u6740\\u624b\\u805a\\u96c6\\u5730\\uff0c%E\",\n" +
+             "                \"Commentary\":\"\\u6709\\u8282\\u594f\\u65e0\\u8282\\u5236\\u7684\\u66b4\\u529b\",\n" +
+             "                \"Tag\":\"\\u52b2\\u7206\\u52a8\\u4f5c\\u7247\",\n" +
+             "                \"SuggestPrice\":null,\n" +
+             "                \"RecommendClass1\":\"7.8\",\n" +
+             "                \"RecommendClass2\":null,\n" +
+             "                \"RecommendClass3\":null,\n" +
+             "                \"RecommendClass4\":null,\n" +
+             "                \"Type\":\"\\u7535\\u5f71\",\n" +
+             "                \"DramaType\":\"\\u52a8\\u4f5c,\\u60ca\\u609a,\\u72af\\u7f6a\",\n" +
+             "                \"Area\":\"\\u5185\\u5730\",\n" +
+             "                \"OtherInfoArray\":[\"\"]\n" +
+             "            },\n" +
+             "            \"Playinfo_list\":{\n" +
+             "                \"Playinfo_count\":3,\n" +
+             "                \"Playinfo_item\":[\n" +
+             "                    {\n" +
+             "                        \"PlayPlatform\":\"WEB\",\n" +
+             "                        \"AssetID\":\"\",\n" +
+             "                        \"AssetName\":\"\",\n" +
+             "                        \"ContentProviderID\":\"youku\",\n" +
+             "                        \"ProductOfferingUID\":\"\",\n" +
+             "                        \"PlayUrl\":\"http:\\/\\/v.youku.com\\/v_show\\/id_XNTcxODA2ODM2.html\",\n" +
+             "                        \"PlayUrlID\":\"8438686\",\n" +
+             "                        \"PlaySwfUrl\":\"http:\\/\\/player.youku.com\\/player.php\\/sid\\/XNTcxODA2ODM2\\/v.swf\",\n" +
+             "                        \"MainCacheUrl\":\"\",\n" +
+             "                        \"Series\":\"\",\n" +
+             "                        \"SinglePriceInfo\":\"\",\n" +
+             "                        \"CopyRightInfo\":\"\",\n" +
+             "                        \"VideoCodecInfo\":\"\",\n" +
+             "                        \"AudioCodecInfo\":\"\",\n" +
+             "                        \"MuxInfo\":\"\",\n" +
+             "                        \"RunTimeInfo\":\"\",\n" +
+             "                        \"ResolutionInfo\":\"\",\n" +
+             "                        \"BitRateInfo\":\"\",\n" +
+             "                        \"OtherInfoArray\":\"\"\n" +
+             "                    },\n" +
+             "                    {\n" +
+             "                        \"PlayPlatform\":\"WEB\",\n" +
+             "                        \"AssetID\":\"\",\n" +
+             "                        \"AssetName\":\"\",\n" +
+             "                        \"ContentProviderID\":\"letv\",\n" +
+             "                        \"ProductOfferingUID\":\"\",\n" +
+             "                        \"PlayUrl\":\"http:\\/\\/www.letv.com\\/ptv\\/vplay\\/1706796.html\",\n" +
+             "                        \"PlayUrlID\":\"8077488\",\n" +
+             "                        \"PlaySwfUrl\":\"http:\\/\\/i7.imgs.letv.com\\/player\\/swfPlayer.swf?id=1706796&autoplay=0\",\n" +
+             "                        \"MainCacheUrl\":\"\",\n" +
+             "                        \"Series\":\"\",\n" +
+             "                        \"SinglePriceInfo\":\"\",\n" +
+             "                        \"CopyRightInfo\":\"\",\n" +
+             "                        \"VideoCodecInfo\":\"\",\n" +
+             "                        \"AudioCodecInfo\":\"\",\n" +
+             "                        \"MuxInfo\":\"\",\n" +
+             "                        \"RunTimeInfo\":\"\",\n" +
+             "                        \"ResolutionInfo\":\"\",\n" +
+             "                        \"BitRateInfo\":\"\",\n" +
+             "                        \"OtherInfoArray\":\"\"\n" +
+             "                    },\n" +
+             "                    {\n" +
+             "                        \"PlayPlatform\":\"WEB\",\n" +
+             "                        \"AssetID\":\"\",\n" +
+             "                        \"AssetName\":\"\",\n" +
+             "                        \"ContentProviderID\":\"56\",\n" +
+             "                        \"ProductOfferingUID\":\"\",\n" +
+             "                        \"PlayUrl\":\"http:\\/\\/www.56.com\\/u74\\/v_Njg3OTA1NjM.html\",\n" +
+             "                        \"PlayUrlID\":\"8077489\",\n" +
+             "                        \"PlaySwfUrl\":\"http:\\/\\/player.56.com\\/v_Njg3OTA1NjM.swf\",\n" +
+             "                        \"MainCacheUrl\":\"\",\n" +
+             "                        \"Series\":\"\",\n" +
+             "                        \"SinglePriceInfo\":\"\",\n" +
+             "                        \"CopyRightInfo\":\"\",\n" +
+             "                        \"VideoCodecInfo\":\"\",\n" +
+             "                        \"AudioCodecInfo\":\"\",\n" +
+             "                        \"MuxInfo\":\"\",\n" +
+             "                        \"RunTimeInfo\":\"\",\n" +
+             "                        \"ResolutionInfo\":\"\",\n" +
+             "                        \"BitRateInfo\":\"\",\n" +
+             "                        \"OtherInfoArray\":\"\"\n" +
+             "                    }\n" +
+             "                ]\n" +
+             "            }\n" +
+             "        }\n" +
+             "    ]\n" +
+             "}}";
 
-
-public  static String LIVE_CHANNEL_DATA="{\"ResponseHeader\":{\n" +
+    public  static String LIVE_CHANNEL_DATA="{\"ResponseHeader\":{\n" +
             "    \"TransactionId\":\"TransactionId\",\n" +
             "    \"Status\":0,\n" +
             "    \"Params\":{\n" +

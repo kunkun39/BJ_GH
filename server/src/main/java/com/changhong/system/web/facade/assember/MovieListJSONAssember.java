@@ -41,6 +41,9 @@ public class MovieListJSONAssember {
                 MovieInfo movie = new MovieInfo();
                 movie.setColumnID(columnID);
 
+                /**
+                 * 基本信息
+                 */
                 movie.setMovieID(basic.getString("MovieID"));
                 movie.setMovieName(basic.getString("MovieName"));
                 movie.setMovieAliasName(basic.getString("MovieAliasName"));
@@ -84,6 +87,9 @@ public class MovieListJSONAssember {
                 }
                 movie.setOtherInfoArray1(basic.getString("OtherInfoArray"));
 
+                /**
+                 * 播放信息
+                 */
                 JSONObject play = object.getJSONObject("PlayInfo");
                 movie.setPlayPlatform(play.getString("PlayPlatform"));
                 movie.setAssetID(play.getString("AssetID"));
@@ -108,6 +114,9 @@ public class MovieListJSONAssember {
                 movie.setContentProviderIDArray(play.getString("ContentProviderIDArray"));
                 movie.setSeriesArray(play.getString("SeriesArray"));
 
+                /**
+                 * 海报信息
+                 */
                 JSONArray posters = object.getJSONArray("Poster");
                 JSONObject poster = null;
                 if (posters.size() > 0) {
@@ -124,6 +133,129 @@ public class MovieListJSONAssember {
             }
 
             return movies;
+        }
+
+        return null;
+    }
+
+    public static MovieInfo toMovieDetailInfo(String json) {
+        JSONObject o = JSON.parseObject(json);
+        int status = o.getJSONObject("ResponseHeader").getIntValue("Status");
+        if (status == 0) {
+            JSONObject typeJSON = o.getJSONObject("Movie_list");
+            JSONArray itemsJSON = typeJSON.getJSONArray("Movie_item");
+
+            JSONObject object = itemsJSON.getJSONObject(0);
+            JSONObject basic = object.getJSONObject("MovieInfo");
+
+            MovieInfo movie = new MovieInfo();
+            //movie.setColumnID(columnID);//TODO:影片详情中没有这个字段
+
+            /**
+             * 基本信息
+             */
+            movie.setMovieID(basic.getString("MovieID"));
+            movie.setMovieName(basic.getString("MovieName"));
+            movie.setMovieAliasName(basic.getString("MovieAliasName"));
+            movie.setTypeID(basic.getString("TypeID"));
+            movie.setType(basic.getString("Type"));
+            movie.setDramaTypeID(basic.getString("DramaTypeID"));
+            movie.setDramaType(basic.getString("DramaType"));
+            movie.setAreaID(basic.getString("AreaID"));
+            movie.setArea(basic.getString("Area"));
+            movie.setYear(basic.getString("Year"));
+            movie.setDirector(basic.getString("Director"));
+            movie.setActor(basic.getString("Actor"));
+            movie.setHost(basic.getString("Host"));
+            movie.setStation(basic.getString("Station"));
+            movie.setAuthor(basic.getString("Author"));
+            movie.setRunTime(basic.getString("RunTime"));
+            movie.setCount(basic.getIntValue("Count"));
+            movie.setSummaryShort(basic.getString("SummaryShort"));
+            movie.setCommentary(basic.getString("Commentary"));
+            movie.setTag(basic.getString("Tag"));
+            movie.setSuggestPrice(basic.getString("SuggestPrice"));
+            try {
+                movie.setRecommendClass1(basic.getDouble("RecommendClass1"));
+            } catch (Exception e) {
+                movie.setRecommendClass1(0);
+            }
+            try {
+                movie.setRecommendClass2(basic.getDouble("RecommendClass2"));
+            } catch (Exception e) {
+                movie.setRecommendClass2(0);
+            }
+            try {
+                movie.setRecommendClass3(basic.getDouble("RecommendClass3"));
+            } catch (Exception e) {
+                movie.setRecommendClass3(0);
+            }
+            try {
+                movie.setRecommendClass4(basic.getDouble("RecommendClass4"));
+            } catch (Exception e) {
+                movie.setRecommendClass4(0);
+            }
+            movie.setOtherInfoArray1(basic.getString("OtherInfoArray"));
+
+            /**
+             * 播放信息
+             */
+            JSONObject list = object.getJSONObject("Playinfo_list");
+            JSONArray plays = list.getJSONArray("Playinfo_item");
+            JSONObject play = null;
+            for (int i = 0; i < plays.size(); i++) {
+                String platForm = plays.getJSONObject(i).getString("PlayPlatform");
+                if ("TV".equals(platForm)) {
+                    play = plays.getJSONObject(i);
+                    continue;
+                }
+            }
+
+            movie.setPlayPlatform(play.getString("PlayPlatform"));
+            movie.setAssetID(play.getString("AssetID"));
+            movie.setAssetName(play.getString("AssetName"));
+            movie.setContentProviderID(play.getString("ContentProviderID"));
+            movie.setLocalEntryUID("");
+            movie.setProductOfferingUID(play.getString("ProductOfferingUID"));
+            movie.setPlayUrl(play.getString("PlayUrl"));
+            movie.setPlayUrlID(play.getString("PlayUrlID"));
+            movie.setPlaySwfUrl(play.getString("PlaySwfUrl"));
+            movie.setMainCacheUrl(play.getString("MainCacheUrl"));
+            movie.setSeries2(play.getString("Series"));
+            movie.setSinglePriceInfo(play.getString("SinglePriceInfo"));
+            movie.setCopyRightInfo(play.getString("CopyRightInfo"));
+            movie.setVideoCodecInfo(play.getString("VideoCodecInfo"));
+            movie.setAudioCodecInfo(play.getString("AudioCodecInfo"));
+            movie.setMuxInfo(play.getString("MuxInfo"));
+            movie.setRunTimeInfo(play.getString("RunTimeInfo"));
+            movie.setResolutionInfo(play.getString("ResolutionInfo"));
+            movie.setBitRateInfo(play.getString("BitRateInfo"));
+            movie.setOtherInfoArray2(play.getString("OtherInfoArray"));
+            movie.setContentProviderIDArray(play.getString("ContentProviderIDArray"));
+            movie.setSeriesArray(play.getString("SeriesArray"));
+
+            /**
+             * 海报信息
+             */
+            JSONObject postersList = object.getJSONObject("Poster_list");
+            if (postersList != null) {
+                JSONArray posters = postersList.getJSONArray("Poster_item");
+                if (posters != null) {
+
+                    JSONObject poster = null;
+                    if (posters.size() > 0) {
+                        poster = posters.getJSONObject(0);
+                    }
+                    if (poster != null) {
+                        movie.setPosterID(poster.getString("PosterID"));
+                        movie.setImageUrl(poster.getString("ImageUrl"));
+                        movie.setAspectRatio(poster.getString("AspectRatio"));
+                        movie.setSeriesArray(poster.getString("Series"));
+                    }
+                }
+            }
+
+            return movie;
         }
 
         return null;
