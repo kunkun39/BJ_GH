@@ -72,11 +72,15 @@ public class ClientDispatcherServlet extends HttpServlet {
 
         } else if ("/ott/client/livechannel.action".equals(requestURL)) {
             String json = ServletRequestUtils.getStringParameter(request, "json", "");
-            responseJSON = clientLiveService.loadLiveChannelsByType(json);
+            responseJSON = clientLiveService.obtainLiveChannelsByType(json);
 
         } else if ("/ott/client/programepg.action".equals(requestURL)) {
             int channelID = ServletRequestUtils.getIntParameter(request, "channelID", 1);
             responseJSON = clientLiveService.obtainLiveProgramEPG(channelID, false);
+
+        } else if ("/ott/client/programrollback.action".equals(requestURL)) {
+            int channelID = ServletRequestUtils.getIntParameter(request, "channelID", 1);
+            responseJSON = clientLiveService.obtainRollackProgramEPG(channelID, true);
         }
 
         //返回结果

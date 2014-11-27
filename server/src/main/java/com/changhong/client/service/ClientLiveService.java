@@ -10,7 +10,7 @@ public interface ClientLiveService {
      /**
      * 根据频道类别获得直播频道列表
      */
-   public String loadLiveChannelsByType(String type);
+   public String obtainLiveChannelsByType(String type);
 
     /**
      * 通过频道获得一段时间内所有的节目信息, loadMovieInfo用于判断是否加载Movie的信息

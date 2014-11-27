@@ -7,23 +7,23 @@ package com.changhong.system.service;
  */
 public interface MovieUpdateService {
 
-    void updateMovieType();
+    void updateMovieType(String id);
 
-    void updateMovieDramaType();
+    void updateMovieDramaType(String id);
 
-    void updateMovieArea();
+    void updateMovieArea(String id);
 
-    void updateMovieAreaGroup();
+    void updateMovieAreaGroup(String id);
 
-    void updateMovieClientType();
+    void updateMovieClientType(String id);
 
-    void updateMovieChannelType();
+    void updateMovieChannelType(String id);
 
-    void updateMovieEventType();
+    void updateMovieEventType(String id);
 
     void updateMovieProvider();
 
-    void updateMovieColumn();
+    void updateMovieColumn(String id);
 
-    void getMovieListByColumn(String movieType);
+    void getMovieListByColumn(String columnID);
 }

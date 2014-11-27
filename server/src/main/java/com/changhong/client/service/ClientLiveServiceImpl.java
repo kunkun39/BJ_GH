@@ -18,7 +18,7 @@ public class ClientLiveServiceImpl implements ClientLiveService {
     @Resource(name = "liveDao")
     private LiveDao liveDao;
 
-    public String loadLiveChannelsByType(String type) {
+    public String obtainLiveChannelsByType(String type) {
         return liveDao.loadLiveChannelsByType(type);
     }
 

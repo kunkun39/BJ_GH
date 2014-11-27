@@ -389,4 +389,55 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
 
         return result.toJSONString();
     }
+
+    /********************************************************变更部分***************************************************/
+
+    public void deleteMovieType(String type, String idValue) {
+        String table = "";
+        String idColumn = "";
+        if ("UAP.Type".equals(type)) {
+            table = "movie_type";
+            idColumn = "type_id";
+
+        } else if ("UAP.Dramatype".equals(type)) {
+            table = "movie_drama_type";
+            idColumn = "drama_type_id";
+
+        } else if ("UAP.Area".equals(type)) {
+            table = "movie_area";
+            idColumn = "area_id";
+
+        } else if ("UAP.Areagroup".equals(type)) {
+            table = "movie_area_group";
+            idColumn = "area_group_id";
+
+        } else if ("UAP.ClientType".equals(type)) {
+            table = "movie_client_type";
+            idColumn = "client_type_id";
+
+        } else if ("UAP.ChannelType".equals(type)) {
+            table = "movie_channel_type";
+            idColumn = "channel_type_id";
+
+        } else if ("UAP.EventType".equals(type)) {
+            table = "movie_event_type";
+            idColumn = "event_type_id";
+        }
+
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        SQLQuery query = session.createSQLQuery("DELETE FROM " + table + " WHERE " + idColumn + " = '" + idValue + "'");
+        query.executeUpdate();
+    }
+
+    public void deleteMovieColumn(String idValue) {
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        SQLQuery query = session.createSQLQuery("DELETE FROM movie_column WHERE column_id = '" + idValue + "'");
+        query.executeUpdate();
+    }
+
+    public void deleteMovieInfo(String idValue) {
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        SQLQuery query = session.createSQLQuery("DELETE FROM movie_info WHERE movie_id = '" + idValue + "'");
+        query.executeUpdate();
+    }
 }

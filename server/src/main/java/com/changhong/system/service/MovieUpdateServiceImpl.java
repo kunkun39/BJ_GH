@@ -34,7 +34,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
     @Resource(name="movieDao")
     private MovieDao movieDao;
 
-    public void updateMovieType() {
+    public void updateMovieType(String id) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_TYPE_DATA;
@@ -47,6 +47,9 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "type");
+            if (StringUtils.hasText(id)) {
+                requestParams.put("ID", id);
+            }
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
@@ -60,7 +63,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
     }
 
-    public void updateMovieDramaType() {
+    public void updateMovieDramaType(String id) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_DRAMATYPE_DATA;
@@ -73,6 +76,9 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "dramatype");
+            if (StringUtils.hasText(id)) {
+                requestParams.put("ID", id);
+            }
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
@@ -86,7 +92,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
     }
 
-    public void updateMovieArea() {
+    public void updateMovieArea(String id) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_AREA_DATA;
@@ -99,6 +105,9 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "area");
+            if (StringUtils.hasText(id)) {
+                requestParams.put("ID", id);
+            }
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
@@ -112,7 +121,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
     }
 
-    public void updateMovieAreaGroup() {
+    public void updateMovieAreaGroup(String id) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_AREAGROUP_DATA;
@@ -125,6 +134,9 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "areagroup");
+            if (StringUtils.hasText(id)) {
+                requestParams.put("ID", id);
+            }
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
@@ -138,7 +150,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
     }
 
-    public void updateMovieClientType() {
+    public void updateMovieClientType(String id) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_CLIENTTYPE_DATA;
@@ -151,6 +163,9 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "clienttype");
+            if (StringUtils.hasText(id)) {
+                requestParams.put("ID", id);
+            }
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
@@ -164,7 +179,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
     }
 
-    public void updateMovieChannelType() {
+    public void updateMovieChannelType(String id) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_CHANNELTYPE_DATA;
@@ -177,6 +192,9 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "channeltype");
+            if (StringUtils.hasText(id)) {
+                requestParams.put("ID", id);
+            }
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
@@ -190,7 +208,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
     }
 
-    public void updateMovieEventType() {
+    public void updateMovieEventType(String id) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_EVENTTYPE_DATA;
@@ -203,6 +221,9 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
             requestParams.put("Class", "eventtype");
+            if (StringUtils.hasText(id)) {
+                requestParams.put("ID", id);
+            }
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
@@ -242,7 +263,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         }
     }
 
-    public void updateMovieColumn() {
+    public void updateMovieColumn(String id) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_INFO_DATA;
@@ -254,7 +275,11 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
             requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
-            requestParams.put("ColumnID", "");
+            if (StringUtils.hasText(id)) {
+                requestParams.put("ColumnID", id);
+            } else {
+                requestParams.put("ColumnID", "");
+            }
             requestParams.put("QueryFlag", "0");
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
