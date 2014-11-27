@@ -1,9 +1,7 @@
 package com.changhong.system.domain.live;
 
 import com.changhong.common.domain.EntityBase;
-import com.changhong.system.domain.movielist.MovieInfo;
-
-import java.util.List;
+import com.changhong.system.domain.movie.MovieInfo;
 
 /**
  * User: maren

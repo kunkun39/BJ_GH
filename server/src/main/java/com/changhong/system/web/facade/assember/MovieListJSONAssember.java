@@ -3,8 +3,9 @@ package com.changhong.system.web.facade.assember;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.changhong.system.domain.movielist.MovieInfo;
-import com.changhong.system.domain.movietype.EventType;
+import com.changhong.system.domain.movie.MovieInfo;
+import com.changhong.system.domain.movie.PlayInfo;
+import com.changhong.system.domain.movie.Poster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,28 +92,30 @@ public class MovieListJSONAssember {
                  * 播放信息
                  */
                 JSONObject play = object.getJSONObject("PlayInfo");
-                movie.setPlayPlatform(play.getString("PlayPlatform"));
-                movie.setAssetID(play.getString("AssetID"));
-                movie.setAssetName(play.getString("AssetName"));
-                movie.setContentProviderID(play.getString("ContentProviderID"));
-                movie.setLocalEntryUID("");
-                movie.setProductOfferingUID(play.getString("ProductOfferingUID"));
-                movie.setPlayUrl(play.getString("PlayUrl"));
-                movie.setPlayUrlID(play.getString("PlayUrlID"));
-                movie.setPlaySwfUrl(play.getString("PlaySwfUrl"));
-                movie.setMainCacheUrl(play.getString("MainCacheUrl"));
-                movie.setSeries2(play.getString("Series"));
-                movie.setSinglePriceInfo(play.getString("SinglePriceInfo"));
-                movie.setCopyRightInfo(play.getString("CopyRightInfo"));
-                movie.setVideoCodecInfo(play.getString("VideoCodecInfo"));
-                movie.setAudioCodecInfo(play.getString("AudioCodecInfo"));
-                movie.setMuxInfo(play.getString("MuxInfo"));
-                movie.setRunTimeInfo(play.getString("RunTimeInfo"));
-                movie.setResolutionInfo(play.getString("ResolutionInfo"));
-                movie.setBitRateInfo(play.getString("BitRateInfo"));
-                movie.setOtherInfoArray2(play.getString("OtherInfoArray"));
-                movie.setContentProviderIDArray(play.getString("ContentProviderIDArray"));
-                movie.setSeriesArray(play.getString("SeriesArray"));
+                PlayInfo playInfo = new PlayInfo();
+                playInfo.setPlayPlatform(play.getString("PlayPlatform"));
+                playInfo.setAssetID(play.getString("AssetID"));
+                playInfo.setAssetName(play.getString("AssetName"));
+                playInfo.setContentProviderID(play.getString("ContentProviderID"));
+                playInfo.setLocalEntryUID("");
+                playInfo.setProductOfferingUID(play.getString("ProductOfferingUID"));
+                playInfo.setPlayUrl(play.getString("PlayUrl"));
+                playInfo.setPlayUrlID(play.getString("PlayUrlID"));
+                playInfo.setPlaySwfUrl(play.getString("PlaySwfUrl"));
+                playInfo.setMainCacheUrl(play.getString("MainCacheUrl"));
+                playInfo.setSeries(play.getString("Series"));
+                playInfo.setSinglePriceInfo(play.getString("SinglePriceInfo"));
+                playInfo.setCopyRightInfo(play.getString("CopyRightInfo"));
+                playInfo.setVideoCodecInfo(play.getString("VideoCodecInfo"));
+                playInfo.setAudioCodecInfo(play.getString("AudioCodecInfo"));
+                playInfo.setMuxInfo(play.getString("MuxInfo"));
+                playInfo.setRunTimeInfo(play.getString("RunTimeInfo"));
+                playInfo.setResolutionInfo(play.getString("ResolutionInfo"));
+                playInfo.setBitRateInfo(play.getString("BitRateInfo"));
+                playInfo.setOtherInfoArray2(play.getString("OtherInfoArray"));
+                playInfo.setContentProviderIDArray(play.getString("ContentProviderIDArray"));
+                playInfo.setSeriesArray(play.getString("SeriesArray"));
+                movie.addPlayInfo(playInfo);
 
                 /**
                  * 海报信息
@@ -123,10 +126,12 @@ public class MovieListJSONAssember {
                     poster = posters.getJSONObject(0);
                 }
                 if (poster != null) {
-                    movie.setPosterID(poster.getString("PosterID"));
-                    movie.setImageUrl(poster.getString("ImageUrl"));
-                    movie.setAspectRatio(poster.getString("AspectRatio"));
-                    movie.setSeriesArray(poster.getString("Series"));
+                    Poster posterInfo = new Poster();
+                    posterInfo.setPosterID(poster.getString("PosterID"));
+                    posterInfo.setImageUrl(poster.getString("ImageUrl"));
+                    posterInfo.setAspectRatio(poster.getString("AspectRatio"));
+                    posterInfo.setSeries(poster.getString("Series"));
+                    movie.addPoster(posterInfo);
                 }
 
                 movies.add(movie);
@@ -202,37 +207,33 @@ public class MovieListJSONAssember {
              */
             JSONObject list = object.getJSONObject("Playinfo_list");
             JSONArray plays = list.getJSONArray("Playinfo_item");
-            JSONObject play = null;
             for (int i = 0; i < plays.size(); i++) {
-                String platForm = plays.getJSONObject(i).getString("PlayPlatform");
-                if ("TV".equals(platForm)) {
-                    play = plays.getJSONObject(i);
-                    continue;
-                }
+                JSONObject play = plays.getJSONObject(i);
+                PlayInfo playInfo = new PlayInfo();
+                playInfo.setPlayPlatform(play.getString("PlayPlatform"));
+                playInfo.setAssetID(play.getString("AssetID"));
+                playInfo.setAssetName(play.getString("AssetName"));
+                playInfo.setContentProviderID(play.getString("ContentProviderID"));
+                playInfo.setLocalEntryUID("");
+                playInfo.setProductOfferingUID(play.getString("ProductOfferingUID"));
+                playInfo.setPlayUrl(play.getString("PlayUrl"));
+                playInfo.setPlayUrlID(play.getString("PlayUrlID"));
+                playInfo.setPlaySwfUrl(play.getString("PlaySwfUrl"));
+                playInfo.setMainCacheUrl(play.getString("MainCacheUrl"));
+                playInfo.setSeries(play.getString("Series"));
+                playInfo.setSinglePriceInfo(play.getString("SinglePriceInfo"));
+                playInfo.setCopyRightInfo(play.getString("CopyRightInfo"));
+                playInfo.setVideoCodecInfo(play.getString("VideoCodecInfo"));
+                playInfo.setAudioCodecInfo(play.getString("AudioCodecInfo"));
+                playInfo.setMuxInfo(play.getString("MuxInfo"));
+                playInfo.setRunTimeInfo(play.getString("RunTimeInfo"));
+                playInfo.setResolutionInfo(play.getString("ResolutionInfo"));
+                playInfo.setBitRateInfo(play.getString("BitRateInfo"));
+                playInfo.setOtherInfoArray2(play.getString("OtherInfoArray"));
+                playInfo.setContentProviderIDArray(play.getString("ContentProviderIDArray"));
+                playInfo.setSeriesArray(play.getString("SeriesArray"));
+                movie.addPlayInfo(playInfo);
             }
-
-            movie.setPlayPlatform(play.getString("PlayPlatform"));
-            movie.setAssetID(play.getString("AssetID"));
-            movie.setAssetName(play.getString("AssetName"));
-            movie.setContentProviderID(play.getString("ContentProviderID"));
-            movie.setLocalEntryUID("");
-            movie.setProductOfferingUID(play.getString("ProductOfferingUID"));
-            movie.setPlayUrl(play.getString("PlayUrl"));
-            movie.setPlayUrlID(play.getString("PlayUrlID"));
-            movie.setPlaySwfUrl(play.getString("PlaySwfUrl"));
-            movie.setMainCacheUrl(play.getString("MainCacheUrl"));
-            movie.setSeries2(play.getString("Series"));
-            movie.setSinglePriceInfo(play.getString("SinglePriceInfo"));
-            movie.setCopyRightInfo(play.getString("CopyRightInfo"));
-            movie.setVideoCodecInfo(play.getString("VideoCodecInfo"));
-            movie.setAudioCodecInfo(play.getString("AudioCodecInfo"));
-            movie.setMuxInfo(play.getString("MuxInfo"));
-            movie.setRunTimeInfo(play.getString("RunTimeInfo"));
-            movie.setResolutionInfo(play.getString("ResolutionInfo"));
-            movie.setBitRateInfo(play.getString("BitRateInfo"));
-            movie.setOtherInfoArray2(play.getString("OtherInfoArray"));
-            movie.setContentProviderIDArray(play.getString("ContentProviderIDArray"));
-            movie.setSeriesArray(play.getString("SeriesArray"));
 
             /**
              * 海报信息
@@ -241,16 +242,14 @@ public class MovieListJSONAssember {
             if (postersList != null) {
                 JSONArray posters = postersList.getJSONArray("Poster_item");
                 if (posters != null) {
-
-                    JSONObject poster = null;
-                    if (posters.size() > 0) {
-                        poster = posters.getJSONObject(0);
-                    }
-                    if (poster != null) {
-                        movie.setPosterID(poster.getString("PosterID"));
-                        movie.setImageUrl(poster.getString("ImageUrl"));
-                        movie.setAspectRatio(poster.getString("AspectRatio"));
-                        movie.setSeriesArray(poster.getString("Series"));
+                    for (int i = 0; i < plays.size(); i++) {
+                        JSONObject poster = posters.getJSONObject(i);
+                        Poster posterInfo = new Poster();
+                        posterInfo.setPosterID(poster.getString("PosterID"));
+                        posterInfo.setImageUrl(poster.getString("ImageUrl"));
+                        posterInfo.setAspectRatio(poster.getString("AspectRatio"));
+                        posterInfo.setSeries(poster.getString("Series"));
+                        movie.addPoster(posterInfo);
                     }
                 }
             }

@@ -39,7 +39,6 @@ CREATE TABLE `live_channel` (
   `resolution_info` varchar(255) default '',
   `other_info_array` varchar(255) default '',
   `play_url` varchar(255) default '',
-
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

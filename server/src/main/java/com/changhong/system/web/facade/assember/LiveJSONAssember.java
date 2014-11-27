@@ -5,17 +5,16 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.changhong.system.domain.live.LiveChannel;
 import com.changhong.system.domain.live.LiveProgram;
-import com.changhong.system.domain.movielist.MovieInfo;
+import com.changhong.system.domain.movie.MovieInfo;
+import com.changhong.system.domain.movie.Poster;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: maren
  * Date: 14-11-21
  * Time: 上午9:22
- * To change this template use File | Settings | File Templates.
  */
 public class LiveJSONAssember {
 
@@ -149,10 +148,11 @@ public class LiveJSONAssember {
                  * poster
                  */
                 JSONObject posterInfo = program.getJSONObject("Poster");
-                movie.setPosterID(posterInfo.getString("PosterID"));
-                movie.setImageUrl(posterInfo.getString("ImageUrl"));
-                movie.setAspectRatio(posterInfo.getString("AspectRatio"));
-                movie.setSeries3(posterInfo.getString("Series"));
+                Poster poster = new Poster();
+                poster.setPosterID(posterInfo.getString("PosterID"));
+                poster.setImageUrl(posterInfo.getString("ImageUrl"));
+                poster.setAspectRatio(posterInfo.getString("AspectRatio"));
+                poster.setSeries(posterInfo.getString("Series"));
                 item.setMovie(movie);
 
                 items.add(item);

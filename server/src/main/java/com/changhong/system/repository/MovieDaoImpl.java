@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.changhong.common.repository.HibernateEntityObjectDao;
 import com.changhong.common.utils.JodaUtils;
 import com.changhong.common.utils.PagingUtils;
-import com.changhong.system.domain.movielist.MovieInfo;
+import com.changhong.system.domain.movie.MovieInfo;
+import com.changhong.system.domain.movie.PlayInfo;
+import com.changhong.system.domain.movie.Poster;
 import com.changhong.system.domain.movietype.TypeEnum;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -305,41 +307,39 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
          * 添加PlayInfo信息
          */
         JSONObject playInfo = new JSONObject();
-
-        playInfo.put("PlayPlatform", movie.getPlayPlatform());
-        playInfo.put("AssetID", movie.getAssetID());
-        playInfo.put("AssetName", movie.getAssetName());
-        playInfo.put("ContentProviderID", movie.getContentProviderID());
-        playInfo.put("ProductOfferingUID", movie.getProductOfferingUID());
-        playInfo.put("PlayUrl", movie.getPlayUrl());
-        playInfo.put("PlayUrlID", movie.getPlayUrlID());
-        playInfo.put("PlaySwfUrl", movie.getPlaySwfUrl());
-        playInfo.put("MainCacheUrl", movie.getMainCacheUrl());
-        playInfo.put("Series", movie.getSeries2());
-        playInfo.put("SinglePriceInfo", movie.getSinglePriceInfo());
-        playInfo.put("CopyRightInfo", movie.getCopyRightInfo());
-        playInfo.put("VideoCodecInfo", movie.getVideoCodecInfo());
-        playInfo.put("AudioCodecInfo", movie.getAudioCodecInfo());
-        playInfo.put("MuxInfo", movie.getMuxInfo());
-        playInfo.put("RunTimeInfo", movie.getRunTimeInfo());
-        playInfo.put("ResolutionInfo", movie.getResolutionInfo());
-        playInfo.put("BitRateInfo", movie.getBitRateInfo());
-        playInfo.put("OtherInfoArray", movie.getOtherInfoArray2());
-        playInfo.put("ContentProviderIDArray", movie.getContentProviderIDArray());
-        playInfo.put("SeriesArray", movie.getSeriesArray());
-
+        PlayInfo tvPlayInfo = movie.getTVPlayInfo();
+        playInfo.put("PlayPlatform", tvPlayInfo.getPlayPlatform());
+        playInfo.put("AssetID", tvPlayInfo.getAssetID());
+        playInfo.put("AssetName", tvPlayInfo.getAssetName());
+        playInfo.put("ContentProviderID", tvPlayInfo.getContentProviderID());
+        playInfo.put("ProductOfferingUID", tvPlayInfo.getProductOfferingUID());
+        playInfo.put("PlayUrl", tvPlayInfo.getPlayUrl());
+        playInfo.put("PlayUrlID", tvPlayInfo.getPlayUrlID());
+        playInfo.put("PlaySwfUrl", tvPlayInfo.getPlaySwfUrl());
+        playInfo.put("MainCacheUrl", tvPlayInfo.getMainCacheUrl());
+        playInfo.put("Series", tvPlayInfo.getSeries());
+        playInfo.put("SinglePriceInfo", tvPlayInfo.getSinglePriceInfo());
+        playInfo.put("CopyRightInfo", tvPlayInfo.getCopyRightInfo());
+        playInfo.put("VideoCodecInfo", tvPlayInfo.getVideoCodecInfo());
+        playInfo.put("AudioCodecInfo", tvPlayInfo.getAudioCodecInfo());
+        playInfo.put("MuxInfo", tvPlayInfo.getMuxInfo());
+        playInfo.put("RunTimeInfo", tvPlayInfo.getRunTimeInfo());
+        playInfo.put("ResolutionInfo", tvPlayInfo.getResolutionInfo());
+        playInfo.put("BitRateInfo", tvPlayInfo.getBitRateInfo());
+        playInfo.put("OtherInfoArray", tvPlayInfo.getOtherInfoArray2());
+        playInfo.put("ContentProviderIDArray", tvPlayInfo.getContentProviderIDArray());
+        playInfo.put("SeriesArray", tvPlayInfo.getSeriesArray());
         result.put("PlayInfo", playInfo);
 
         /**
          * 添加Poster信息
          */
         JSONObject poster = new JSONObject();
-
-        poster.put("PosterID", movie.getPosterID());
-        poster.put("ImageUrl", movie.getImageUrl());
-        poster.put("AspectRatio", movie.getAspectRatio());
-        poster.put("Series3", movie.getSeries3());
-
+        Poster tvPoster = movie.getTVPlayPoster();
+        poster.put("PosterID", tvPoster.getPosterID());
+        poster.put("ImageUrl", tvPoster.getImageUrl());
+        poster.put("AspectRatio", tvPoster.getAspectRatio());
+        poster.put("Series", tvPoster.getSeries());
         result.put("Poster", poster);
 
         /**

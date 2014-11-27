@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.changhong.common.utils.PagingUtils;
 import com.changhong.system.domain.column.Column;
-import com.changhong.system.domain.movielist.MovieInfo;
+import com.changhong.system.domain.movie.MovieInfo;
+import com.changhong.system.domain.movie.PlayInfo;
+import com.changhong.system.domain.movie.Poster;
 import com.changhong.system.domain.movietype.*;
 import junit.framework.TestCase;
 import org.hibernate.SQLQuery;
@@ -172,33 +174,37 @@ public class MovieDaoImplTest extends TestCase {
         movieInfo.setRecommendClass4(6.1);
         movieInfo.setOtherInfoArray1("4");
 
-        movieInfo.setPlayPlatform("WEB");
-        movieInfo.setAssetID("11111");
-        movieInfo.setAssetName("111111");
-        movieInfo.setContentProviderID("youku");
-        movieInfo.setLocalEntryUID("uid");
-        movieInfo.setProductOfferingUID("uid");
-        movieInfo.setPlayUrl("http:\\/\\/v.youku.com\\/v_show\\/id_XNjIxMTU1Mzg4.html");
-        movieInfo.setPlayUrlID("8873125");
-        movieInfo.setPlaySwfUrl("http:\\/\\/player.youku.com\\/player.php\\/sid\\/XNjIxMTU1Mzg4\\/v.swf");
-        movieInfo.setMainCacheUrl("url");
-        movieInfo.setSeries2("2");
-        movieInfo.setSinglePriceInfo("30.00");
-        movieInfo.setCopyRightInfo("right");
-        movieInfo.setVideoCodecInfo("1111");
-        movieInfo.setAudioCodecInfo("1111");
-        movieInfo.setMuxInfo("mux");
-        movieInfo.setRunTimeInfo("120");
-        movieInfo.setResolutionInfo("jfoejfoe");
-        movieInfo.setBitRateInfo("niejfief");
-        movieInfo.setOtherInfoArray2("foejfoe");
-        movieInfo.setContentProviderIDArray("youku,tudou");
-        movieInfo.setSeriesArray("jfoef");
+        PlayInfo playInfo = new PlayInfo();
+        playInfo.setPlayPlatform("WEB");
+        playInfo.setAssetID("11111");
+        playInfo.setAssetName("111111");
+        playInfo.setContentProviderID("youku");
+        playInfo.setLocalEntryUID("uid");
+        playInfo.setProductOfferingUID("uid");
+        playInfo.setPlayUrl("http:\\/\\/v.youku.com\\/v_show\\/id_XNjIxMTU1Mzg4.html");
+        playInfo.setPlayUrlID("8873125");
+        playInfo.setPlaySwfUrl("http:\\/\\/player.youku.com\\/player.php\\/sid\\/XNjIxMTU1Mzg4\\/v.swf");
+        playInfo.setMainCacheUrl("url");
+        playInfo.setSeries("2");
+        playInfo.setSinglePriceInfo("30.00");
+        playInfo.setCopyRightInfo("right");
+        playInfo.setVideoCodecInfo("1111");
+        playInfo.setAudioCodecInfo("1111");
+        playInfo.setMuxInfo("mux");
+        playInfo.setRunTimeInfo("120");
+        playInfo.setResolutionInfo("jfoejfoe");
+        playInfo.setBitRateInfo("niejfief");
+        playInfo.setOtherInfoArray2("foejfoe");
+        playInfo.setContentProviderIDArray("youku,tudou");
+        playInfo.setSeriesArray("jfoef");
+        movieInfo.addPlayInfo(playInfo);
 
-        movieInfo.setPosterID("11");
-        movieInfo.setImageUrl("http:\\/\\/v.youku.com\\/v_show\\/id_XNjIxMTU1Mzg4.html");
-        movieInfo.setAspectRatio("34");
-        movieInfo.setSeries3("e");
+        Poster poster = new Poster();
+        poster.setPosterID("11");
+        poster.setImageUrl("http:\\/\\/v.youku.com\\/v_show\\/id_XNjIxMTU1Mzg4.html");
+        poster.setAspectRatio("34");
+        poster.setSeries("e");
+        movieInfo.addPoster(poster);
 
         hibernateTemplate.save(movieInfo);
     }
@@ -538,47 +544,44 @@ public class MovieDaoImplTest extends TestCase {
         movieInfo.put("RecommendClass3", movie.getRecommendClass3());
         movieInfo.put("RecommendClass4", movie.getRecommendClass4());
         movieInfo.put("OtherInfoArray", movie.getOtherInfoArray1());
-
         result.put("MovieInfo", movieInfo);
         /**
          * 添加PlayInfo信息
          */
         JSONObject playInfo = new JSONObject();
-
-        playInfo.put("PlayPlatform", movie.getPlayPlatform());
-        playInfo.put("AssetID", movie.getAssetID());
-        playInfo.put("AssetName", movie.getAssetName());
-        playInfo.put("ContentProviderID", movie.getContentProviderID());
-        playInfo.put("ProductOfferingUID", movie.getProductOfferingUID());
-        playInfo.put("PlayUrl", movie.getPlayUrl());
-        playInfo.put("PlayUrlID", movie.getPlayUrlID());
-        playInfo.put("PlaySwfUrl", movie.getPlaySwfUrl());
-        playInfo.put("MainCacheUrl", movie.getMainCacheUrl());
-        playInfo.put("Series", movie.getSeries2());
-        playInfo.put("SinglePriceInfo", movie.getSinglePriceInfo());
-        playInfo.put("CopyRightInfo", movie.getCopyRightInfo());
-        playInfo.put("VideoCodecInfo", movie.getVideoCodecInfo());
-        playInfo.put("AudioCodecInfo", movie.getAudioCodecInfo());
-        playInfo.put("MuxInfo", movie.getMuxInfo());
-        playInfo.put("RunTimeInfo", movie.getRunTimeInfo());
-        playInfo.put("ResolutionInfo", movie.getResolutionInfo());
-        playInfo.put("BitRateInfo", movie.getBitRateInfo());
-        playInfo.put("OtherInfoArray", movie.getOtherInfoArray2());
-        playInfo.put("ContentProviderIDArray", movie.getContentProviderIDArray());
-        playInfo.put("SeriesArray", movie.getSeriesArray());
-
+        PlayInfo tvPlayInfo = movie.getTVPlayInfo();
+        playInfo.put("PlayPlatform", tvPlayInfo.getPlayPlatform());
+        playInfo.put("AssetID", tvPlayInfo.getAssetID());
+        playInfo.put("AssetName", tvPlayInfo.getAssetName());
+        playInfo.put("ContentProviderID", tvPlayInfo.getContentProviderID());
+        playInfo.put("ProductOfferingUID", tvPlayInfo.getProductOfferingUID());
+        playInfo.put("PlayUrl", tvPlayInfo.getPlayUrl());
+        playInfo.put("PlayUrlID", tvPlayInfo.getPlayUrlID());
+        playInfo.put("PlaySwfUrl", tvPlayInfo.getPlaySwfUrl());
+        playInfo.put("MainCacheUrl", tvPlayInfo.getMainCacheUrl());
+        playInfo.put("Series", tvPlayInfo.getSeries());
+        playInfo.put("SinglePriceInfo", tvPlayInfo.getSinglePriceInfo());
+        playInfo.put("CopyRightInfo", tvPlayInfo.getCopyRightInfo());
+        playInfo.put("VideoCodecInfo", tvPlayInfo.getVideoCodecInfo());
+        playInfo.put("AudioCodecInfo", tvPlayInfo.getAudioCodecInfo());
+        playInfo.put("MuxInfo", tvPlayInfo.getMuxInfo());
+        playInfo.put("RunTimeInfo", tvPlayInfo.getRunTimeInfo());
+        playInfo.put("ResolutionInfo", tvPlayInfo.getResolutionInfo());
+        playInfo.put("BitRateInfo", tvPlayInfo.getBitRateInfo());
+        playInfo.put("OtherInfoArray", tvPlayInfo.getOtherInfoArray2());
+        playInfo.put("ContentProviderIDArray", tvPlayInfo.getContentProviderIDArray());
+        playInfo.put("SeriesArray", tvPlayInfo.getSeriesArray());
         result.put("PlayInfo", playInfo);
 
         /**
          * 添加Poster信息
          */
         JSONObject poster = new JSONObject();
-
-        poster.put("PosterID", movie.getPosterID());
-        poster.put("ImageUrl", movie.getImageUrl());
-        poster.put("AspectRatio", movie.getAspectRatio());
-        poster.put("Series3", movie.getSeries3());
-
+        Poster tvPoster = movie.getTVPlayPoster();
+        poster.put("PosterID", tvPoster.getPosterID());
+        poster.put("ImageUrl", tvPoster.getImageUrl());
+        poster.put("AspectRatio", tvPoster.getAspectRatio());
+        poster.put("Series", tvPoster.getSeries());
         result.put("Poster", poster);
 
         /**

@@ -62,7 +62,7 @@
         <property name="localEntryUID" column="local_entry_uid" insert="true" update="true" type="java.lang.String"/>
         <property name="productOfferingUID" column="product_offering_uid" insert="true" update="true" type="java.lang.String"/>
 
-        <many-to-one name="movie" column="movieinfo_id" class="com.changhong.system.domain.movielist.MovieInfo" lazy="proxy" cascade="all" insert="true" update="true"/>
+        <many-to-one name="movie" column="movieinfo_id" class="com.changhong.system.domain.movie.MovieInfo" lazy="proxy" cascade="all" insert="true" update="true"/>
     </class>
 
 

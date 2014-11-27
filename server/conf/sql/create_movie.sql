@@ -142,6 +142,21 @@ CREATE TABLE `movie_info` (
   `movie_recommendclass3` double(2,1) default 0,
   `movie_recommendclass4` double(2,1) default 0,
   `movie_otherinfoarray` varchar(40) default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_recommendpage(`recommend_page`);
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_recommend(`recommend`);
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_columnid(`column_id`);
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_id(`movie_id`);
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_typeid(`movie_type_id`);
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_dramatypeid(`drama_type_id`);
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_movieareaid(`movie_area_id`);
+ALTER TABLE `movie_info` ADD INDEX  movie_column_index_movieyear(`movie_year`);
+
+DROP TABLE IF EXISTS `play_info`;
+CREATE TABLE `play_info` (
+  `id` int(11) NOT NULL auto_increment,
+  `timestamp` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `play_platform` varchar(10) default '',
   `play_assetid` varchar(10) default '',
   `play_assetname` varchar(10) default '',
@@ -164,19 +179,22 @@ CREATE TABLE `movie_info` (
   `play_otherinfoarray` varchar(40) default '',
   `play_contentprovideridarray` varchar(40) default '',
   `play_seriesarray` varchar(80) default '',
+  `movieinfo_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`movieinfo_id`) REFERENCES movie_info (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `poster_info`;
+CREATE TABLE `play_info` (
+  `id` int(11) NOT NULL auto_increment,
+  `timestamp` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `poster_id` varchar(10) default '',
   `poster_imageurl` varchar(200) default '',
   `poster_aspectratio` varchar(100) default '',
   `poster_series` varchar(100) default '',
-  PRIMARY KEY  (`id`)
+  `movieinfo_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`movieinfo_id`) REFERENCES movie_info (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-ALTER TABLE `movie_info` ADD INDEX  movie_column_index_recommendpage(`recommend_page`);
-ALTER TABLE `movie_info` ADD INDEX  movie_column_index_recommend(`recommend`);
-ALTER TABLE `movie_info` ADD INDEX  movie_column_index_columnid(`column_id`);
-ALTER TABLE `movie_info` ADD INDEX  movie_column_index_id(`movie_id`);
-ALTER TABLE `movie_info` ADD INDEX  movie_column_index_typeid(`movie_type_id`);
-ALTER TABLE `movie_info` ADD INDEX  movie_column_index_dramatypeid(`drama_type_id`);
-ALTER TABLE `movie_info` ADD INDEX  movie_column_index_movieareaid(`movie_area_id`);
-ALTER TABLE `movie_info` ADD INDEX  movie_column_index_movieyear(`movie_year`);
 
 SET FOREIGN_KEY_CHECKS=1;

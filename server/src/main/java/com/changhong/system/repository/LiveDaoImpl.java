@@ -5,13 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.changhong.common.repository.HibernateEntityObjectDao;
 import com.changhong.system.domain.live.LiveChannel;
 import com.changhong.system.domain.live.LiveProgram;
-import com.changhong.system.domain.movielist.MovieInfo;
+import com.changhong.system.domain.movie.MovieInfo;
 import org.hibernate.SQLQuery;
 import org.hibernate.classic.Session;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,10 +87,6 @@ public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
                     movieJSON.put("MovieName", movieInfo.getMovieName());
                     movieJSON.put("MovieAliasName", movieInfo.getMovieName());
                     item.put("MovieInfo", movieJSON);
-
-                    posterJSON.put("ImageUrl", movieInfo.getImageUrl());
-                    posterJSON.put("AspectRatio", movieInfo.getAspectRatio());
-                    item.put("Poster", posterJSON);
                 }
             }
 

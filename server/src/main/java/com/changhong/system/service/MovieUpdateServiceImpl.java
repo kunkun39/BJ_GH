@@ -6,7 +6,7 @@ import com.changhong.common.utils.PagingUtils;
 import com.changhong.common.utils.WebUtils;
 import com.changhong.system.domain.FakeJDONDataProvider;
 import com.changhong.system.domain.column.Column;
-import com.changhong.system.domain.movielist.MovieInfo;
+import com.changhong.system.domain.movie.MovieInfo;
 import com.changhong.system.domain.movietype.*;
 import com.changhong.system.repository.MovieDao;
 import com.changhong.system.web.facade.assember.MovieColumnJSONAssember;
@@ -302,7 +302,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_INFO_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movielist");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movie");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -340,7 +340,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.MOVIE_INFO_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movielist");
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.movie");
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -391,7 +391,9 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
 
         if (StringUtils.hasText(response)) {
             MovieInfo movieInfo = MovieListJSONAssember.toMovieDetailInfo(response);
-            movieDao.saveOrUpdate(movieInfo);
+            if (movieInfo != null) {
+                movieDao.saveOrUpdate(movieInfo);
+            }
         }
     }
 
