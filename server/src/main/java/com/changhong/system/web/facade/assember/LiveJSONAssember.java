@@ -114,7 +114,7 @@ public class LiveJSONAssember {
                 item.setBitRateInfo(programInfo1.getString("bitRateInfo"));
                 item.setEventImageUrl(programInfo1.getString("eventImageUrl"));
                 item.setAssertID(programInfo1.getString("assertID"));
-                item.setContentProvider(programInfo1.getString("contentProvider"));
+                item.setContentProviderID(programInfo1.getString("contentProvider"));
                 item.setLocalEntryUID(programInfo1.getString("localEntryUID"));
                 item.setProductOfferingUID(programInfo1.getString("productOfferingUID"));
 
@@ -198,7 +198,7 @@ public class LiveJSONAssember {
             programItem.put("ViewLevel", liveProgramInfo.getViewLevel());
             programItem.put("PlayUrl", liveProgramInfo.getPlayUrl());
             programItem.put("EventImageUrl", liveProgramInfo.getEventImageUrl());
-            programItem.put("ContentProvider", liveProgramInfo.getContentProvider());
+            programItem.put("ContentProvider", liveProgramInfo.getContentProviderID());
             programItem.put("LocalEntryUID", liveProgramInfo.getLocalEntryUID());
             liveProgram.put("ProgramInfo", programItem);
             liveProgramList.add(liveProgram);
