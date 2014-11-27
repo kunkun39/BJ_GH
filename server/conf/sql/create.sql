@@ -63,7 +63,7 @@ CREATE TABLE `live_program` (
   `bit_rate_info` varchar(80) default '',
   `event_image_url` varchar(255) default '',
   `assert_id` varchar(36) default '',
-  `content_provider` varchar(40) default '',
+  `content_provider_id` varchar(40) default '',
   `local_entry_uid` varchar(40) default '',
   `product_offering_uid` varchar(40) default '',
   `movieinfo_id` int(11) default NULL,
