@@ -4,6 +4,7 @@ import com.changhong.client.service.ClientLiveService;
 import com.changhong.client.service.ClientMovieService;
 import com.changhong.common.web.application.ApplicationEventPublisher;
 import com.changhong.system.domain.movietype.TypeEnum;
+import com.changhong.system.service.LiveChangeService;
 import org.springframework.web.bind.ServletRequestUtils;
 
 import javax.servlet.ServletException;
@@ -25,6 +26,7 @@ public class ClientDispatcherServlet extends HttpServlet {
     private ClientMovieService clientMovieService;
 
     private ClientLiveService clientLiveService;
+    private LiveChangeService liveChangeService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,6 +40,9 @@ public class ClientDispatcherServlet extends HttpServlet {
         }
         if (clientLiveService == null) {
             clientLiveService = (ClientLiveService) ApplicationEventPublisher.getCtx().getBean("clientLiveService");
+        }
+         if (liveChangeService == null) {
+            liveChangeService = (LiveChangeService) ApplicationEventPublisher.getCtx().getBean("liveChangeService");
         }
 
         String requestURL = request.getRequestURI();
@@ -81,6 +86,9 @@ public class ClientDispatcherServlet extends HttpServlet {
         } else if ("/ott/client/programrollback.action".equals(requestURL)) {
             int channelID = ServletRequestUtils.getIntParameter(request, "channelID", 1);
             responseJSON = clientLiveService.obtainRollackProgramEPG(channelID, true);
+        } else if("/ott/client/liveChange.action".equals(requestURL)){
+            String json = ServletRequestUtils.getStringParameter(request, "json", "");
+            liveChangeService.liveChange(json);
         }
 
         //返回结果
