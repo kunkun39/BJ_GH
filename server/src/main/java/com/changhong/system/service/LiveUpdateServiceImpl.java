@@ -17,9 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Created by IntelliJ IDEA.
  * User: maren
  * Date: 14-11-20
  * Time: 下午6:39
+ * To change this template use File | Settings | File Templates.
  */
 @Repository
 public class LiveUpdateServiceImpl implements LiveUpdateService {
@@ -31,7 +33,7 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
     @Resource(name = "liveDao")
     private LiveDao liveDao;
 
-    public void updateLiveChannel() {
+    public void updateLiveChannel(int chanenlID,String channeType) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.LIVE_CHANNEL_DATA;
@@ -43,8 +45,8 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
             requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
-            requestParams.put("ChannelID", "");
-            requestParams.put("ChannelTypeID", "");
+            requestParams.put("ChannelID", chanenlID);
+            requestParams.put("ChannelTypeID", channeType);
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
@@ -58,7 +60,7 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
         }
     }
 
-    public void updateLiveProgram() {
+    public void updateLiveProgram(int channelID,String eventTypeID) {
         String response = null;
 
         if (LOCAL) {
@@ -71,10 +73,10 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
             requestHeader.put("TransanctionId", TX_FLAG + CHStringUtils.getRandomString(20));
             requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
-            requestParams.put("ChannelID", 27);
-            requestParams.put("EventTypeID", "27");
+            requestParams.put("ChannelID", channelID);
+            requestParams.put("EventTypeID", eventTypeID);
             requestParams.put("Date", "2013-11-21");
-            requestParams.put("PosterAspectRatio", "");
+            requestParams.put("PosterAspectRatio", "10240768");
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);
