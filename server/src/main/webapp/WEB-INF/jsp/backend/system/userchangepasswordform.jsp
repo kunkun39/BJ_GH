@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-    <title>北京歌华后台管理平台</title>
+    <title>后台管理平台</title>
     <script type="text/javascript">
     </script>
 </head>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-    <title>北京歌华后台管理平台</title>
+    <title>后台管理平台</title>
     <script src="${pageContext.request.contextPath}/js/jquery-1.7.2.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/js/jquery-ui/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/js/jstree/jquery.jstree.js" type="text/javascript"></script>

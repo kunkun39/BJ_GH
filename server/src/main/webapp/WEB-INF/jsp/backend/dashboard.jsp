@@ -58,7 +58,7 @@
                                 <c:set var="haveEvent" value="false"/>
                                 <c:if test="${!haveEvent}">
                                     <c:if test="${day == 1}">
-                                        <span class="tip">北京歌华后台管理平台</span>
+                                        <span class="tip">欢迎来到后台管理平台</span>
                                     </c:if>
                                 </c:if>
                             </div>

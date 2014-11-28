@@ -4,7 +4,7 @@
 <head>
     <link rel="Bookmark" href="${pageContext.request.contextPath}/images/favicon.gif">
     <link rel="Shortcut Icon" href="${pageContext.request.contextPath}/images/favicon.gif">
-    <title>北京歌华后台管理平台</title>
+    <title>后台管理平台</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/theme/default/index.css" type="text/css"/>
     <style type="text/css">
         img, div { behavior: url(iepngfix.htc) }
@@ -19,7 +19,7 @@
                 <div id="header">
                 </div>
                 <div id="darkbanner" class="banner320">
-                    <h2>北京歌华后台管理平台</h2>
+                    <h2>后台管理平台</h2>
                 </div>
                 <div id="darkbannerwrap">
                 </div>
