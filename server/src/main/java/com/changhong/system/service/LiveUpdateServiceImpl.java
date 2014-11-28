@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.changhong.common.utils.CHStringUtils;
 import com.changhong.common.utils.WebUtils;
 import com.changhong.system.domain.FakeJDONDataProvider;
+import com.changhong.system.domain.GHUpdateUrl;
 import com.changhong.system.domain.live.LiveChannel;
 import com.changhong.system.domain.live.LiveProgram;
 import com.changhong.system.repository.LiveDao;
@@ -38,7 +39,7 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.LIVE_CHANNEL_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryChannelList.action");
+            PostMethod postMethod = new PostMethod(GHUpdateUrl.CHANNEL_UPDATE_URL);
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
@@ -66,7 +67,7 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
         if (LOCAL) {
             response = FakeJDONDataProvider.Live_Program_DATA;
         } else {
-            PostMethod postMethod = new PostMethod("http://172.16.168.115/cmpAdapter/CMPPlugoutAction!queryProgramList.action");
+            PostMethod postMethod = new PostMethod(GHUpdateUrl.PROGRAM_UPDATE_URL);
             JSONObject json = new JSONObject();
             JSONObject requestHeader = new JSONObject();
             JSONObject requestParams = new JSONObject();

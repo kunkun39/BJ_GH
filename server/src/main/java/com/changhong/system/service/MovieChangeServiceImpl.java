@@ -98,7 +98,7 @@ public class MovieChangeServiceImpl implements MovieChangeService {
         String assetID = message.getString("AssetID");
 
         if (INSERT.equals(opType)) {
-            movieUpdateService.getMoviePlayInfo(movieID);
+            movieUpdateService.getMoviePlayInfo(movieID, assetID, playUrlID);
         } else if(DELETE.equals(opType)) {
             movieDao.deleteMoviePlayInfo(assetID, playUrlID);
         }
