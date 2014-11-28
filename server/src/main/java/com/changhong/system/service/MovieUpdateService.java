@@ -28,4 +28,6 @@ public interface MovieUpdateService {
     void getMovieListByColumn(String columnID);
 
     void getMovieDetails(String movieID);
+
+    void getMoviePlayInfo(String movieID, String assetID, String playUrlIDD);
 }

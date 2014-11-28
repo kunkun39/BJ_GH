@@ -440,4 +440,10 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
         SQLQuery query = session.createSQLQuery("DELETE FROM movie_info WHERE movie_id = '" + idValue + "'");
         query.executeUpdate();
     }
+
+    public void deleteMoviePlayInfo(String assetID, String playUrlID) {
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        SQLQuery query = session.createSQLQuery("DELETE FROM play_info WHERE assetID = '" + assetID + "' OR playUrlID = '" + playUrlID + "'");
+        query.executeUpdate();
+    }
 }

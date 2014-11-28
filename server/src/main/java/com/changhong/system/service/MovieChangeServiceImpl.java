@@ -79,7 +79,7 @@ public class MovieChangeServiceImpl implements MovieChangeService {
         JSONObject message = request.getJSONObject("message");
         String topic = request.getString("topic");
         String opType = message.getString("OpType");
-        String id = message.getString("ColumnID");
+        String id = message.getString("MovieID");
 
         if (INSERT.equals(opType)) {
             movieUpdateService.getMovieDetails(id);
@@ -89,6 +89,18 @@ public class MovieChangeServiceImpl implements MovieChangeService {
     }
 
     public void serverPlayInfoChange(String json) {
-        //TODO: not yet inplemented
+        JSONObject request = JSONObject.parseObject(json);
+        JSONObject message = request.getJSONObject("message");
+        String topic = request.getString("topic");
+        String opType = message.getString("OpType");
+        String movieID = message.getString("MovieID");
+        String playUrlID = message.getString("PlayUrlID");
+        String assetID = message.getString("AssetID");
+
+        if (INSERT.equals(opType)) {
+            movieUpdateService.getMoviePlayInfo(movieID);
+        } else if(DELETE.equals(opType)) {
+            movieDao.deleteMoviePlayInfo(assetID, playUrlID);
+        }
     }
 }

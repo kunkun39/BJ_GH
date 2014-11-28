@@ -259,4 +259,55 @@ public class MovieListJSONAssember {
 
         return null;
     }
+
+    public static PlayInfo toMoviePlayInfo(String json, String assetID, String playUrlID) {
+        JSONObject o = JSON.parseObject(json);
+        int status = o.getJSONObject("ResponseHeader").getIntValue("Status");
+        if (status == 0) {
+            JSONObject typeJSON = o.getJSONObject("Movie_list");
+            JSONArray itemsJSON = typeJSON.getJSONArray("Movie_item");
+            JSONObject object = itemsJSON.getJSONObject(0);
+            /**
+             * 播放信息
+             */
+            JSONObject list = object.getJSONObject("Playinfo_list");
+            JSONArray plays = list.getJSONArray("Playinfo_item");
+            for (int i = 0; i < plays.size(); i++) {
+                JSONObject play = plays.getJSONObject(i);
+                PlayInfo playInfo = null;
+                String assetIDJSON = play.getString("AssetID");
+                String playUrlIDJSON = play.getString("PlayUrlID");
+
+                if(assetIDJSON.equals(assetID) && playUrlIDJSON.equals(playUrlID)) {
+                    playInfo = new PlayInfo();
+                    playInfo.setPlayPlatform(play.getString("PlayPlatform"));
+                    playInfo.setAssetID(assetIDJSON);
+                    playInfo.setAssetName(play.getString("AssetName"));
+                    playInfo.setContentProviderID(play.getString("ContentProviderID"));
+                    playInfo.setLocalEntryUID("");
+                    playInfo.setProductOfferingUID(play.getString("ProductOfferingUID"));
+                    playInfo.setPlayUrl(play.getString("PlayUrl"));
+                    playInfo.setPlayUrlID(playUrlIDJSON);
+                    playInfo.setPlaySwfUrl(play.getString("PlaySwfUrl"));
+                    playInfo.setMainCacheUrl(play.getString("MainCacheUrl"));
+                    playInfo.setSeries(play.getString("Series"));
+                    playInfo.setSinglePriceInfo(play.getString("SinglePriceInfo"));
+                    playInfo.setCopyRightInfo(play.getString("CopyRightInfo"));
+                    playInfo.setVideoCodecInfo(play.getString("VideoCodecInfo"));
+                    playInfo.setAudioCodecInfo(play.getString("AudioCodecInfo"));
+                    playInfo.setMuxInfo(play.getString("MuxInfo"));
+                    playInfo.setRunTimeInfo(play.getString("RunTimeInfo"));
+                    playInfo.setResolutionInfo(play.getString("ResolutionInfo"));
+                    playInfo.setBitRateInfo(play.getString("BitRateInfo"));
+                    playInfo.setOtherInfoArray2(play.getString("OtherInfoArray"));
+                    playInfo.setContentProviderIDArray(play.getString("ContentProviderIDArray"));
+                    playInfo.setSeriesArray(play.getString("SeriesArray"));
+
+                    return playInfo;
+                }
+            }
+        }
+
+        return null;
+    }
 }

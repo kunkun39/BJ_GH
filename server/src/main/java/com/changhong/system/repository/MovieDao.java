@@ -31,4 +31,6 @@ public interface MovieDao extends EntityObjectDao {
     void deleteMovieColumn(String idValue);
 
     void deleteMovieInfo(String idValue);
+
+    void deleteMoviePlayInfo(String movieID, String playUrlID);
 }

@@ -7,6 +7,7 @@ import com.changhong.common.utils.WebUtils;
 import com.changhong.system.domain.FakeJDONDataProvider;
 import com.changhong.system.domain.column.Column;
 import com.changhong.system.domain.movie.MovieInfo;
+import com.changhong.system.domain.movie.PlayInfo;
 import com.changhong.system.domain.movietype.*;
 import com.changhong.system.repository.MovieDao;
 import com.changhong.system.web.facade.assember.MovieColumnJSONAssember;
@@ -392,6 +393,35 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
         if (StringUtils.hasText(response)) {
             MovieInfo movieInfo = MovieListJSONAssember.toMovieDetailInfo(response);
             if (movieInfo != null) {
+                movieDao.saveOrUpdate(movieInfo);
+            }
+        }
+    }
+
+    public void getMoviePlayInfo(String movieID, String assetID, String playUrlID) {
+        String response = null;
+        if (LOCAL) {
+            response = FakeJDONDataProvider.MOVIE_DETAILS_DATA;
+        } else {
+            PostMethod postMethod = new PostMethod("http://app.sdp-esb.yun:9090/com.bgctv.sdp.app.uap.moviedetails");
+            JSONObject json = new JSONObject();
+            JSONObject requestHeader = new JSONObject();
+            requestHeader.put("TransactionId", TX_FLAG + CHStringUtils.getRandomString(20));
+            requestHeader.put("TransactionTime", System.currentTimeMillis());
+            json.put("RequestHeader", requestHeader);
+            JSONObject requestParams = new JSONObject();
+            requestParams.put("MovieID", movieID);
+            requestParams.put("GetInfoType", "");//TODO:获取的客户端
+            json.put("RequestParams", requestParams);
+            postMethod.addParameter("json", json.toJSONString());
+            response = WebUtils.httpPostRequest(postMethod);
+        }
+
+        if (StringUtils.hasText(response)) {
+            PlayInfo playInfo = MovieListJSONAssember.toMoviePlayInfo(response, assetID, playUrlID);
+            if (playInfo != null) {
+                MovieInfo movieInfo = null;
+                movieInfo.addPlayInfo(playInfo);
                 movieDao.saveOrUpdate(movieInfo);
             }
         }
