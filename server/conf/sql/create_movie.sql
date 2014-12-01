@@ -184,8 +184,8 @@ CREATE TABLE `play_info` (
   FOREIGN KEY (`movieinfo_id`) REFERENCES movie_info (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-DROP TABLE IF EXISTS `play_info`;
-CREATE TABLE `play_info` (
+DROP TABLE IF EXISTS `poster_info`;
+CREATE TABLE `poster_info` (
   `id` int(11) NOT NULL auto_increment,
   `timestamp` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `poster_id` varchar(10) default '',
