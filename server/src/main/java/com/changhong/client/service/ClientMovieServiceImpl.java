@@ -22,7 +22,7 @@ public class ClientMovieServiceImpl implements ClientMovieService {
     }
 
     public String obtainColumns(String page) {
-        return movieDao.findColumns();
+        return movieDao.findColumns(page);
     }
 
     public String obtainMovieType(TypeEnum type) {

@@ -22,15 +22,18 @@ public class LiveJSONAssember {
         JSONObject jsonObject = JSON.parseObject(json);
         JSONObject objectResponse = jsonObject.getJSONObject("ResponseHeader");
         List<LiveChannel> channels = new ArrayList<LiveChannel>();
+
         if (objectResponse.getIntValue("Status") == 0) {
             JSONObject channel = jsonObject.getJSONObject("ChannelList");
             JSONArray jsonArray = channel.getJSONArray("Channel_item");
+
             for (int i = 0; i < jsonArray.size(); i++) {
                 JSONObject object = jsonArray.getJSONObject(i);
                 LiveChannel liveChannel = new LiveChannel();
+                /**
+                 * 获得数据
+                 */
                 int id = object.getIntValue("ChannelID");
-                liveChannel.setChannelID(id);
-
                 String dvbBitRate = object.getString("DVBBitRate");
                 String dvbLogicChannelId = object.getString("DVBLogicChannelID");
                 String dvbNetworkId = object.getString("DVBNetworkID");
@@ -52,6 +55,11 @@ public class LiveJSONAssember {
                 String videoCodeInfo = object.getString("VideoCodecInfo");
                 String videoType = object.getString("VideoType");
                 String dvbFrequency = object.getString("DVBFrequency");
+
+                /**
+                 * 添加数据
+                 */
+                liveChannel.setChannelID(id);
                 liveChannel.setDvbLogicChannelID(dvbLogicChannelId);
                 liveChannel.setDvbNetworkID(dvbNetworkId);
                 liveChannel.setResolutionInfo(dvbResolutionc);
@@ -72,6 +80,7 @@ public class LiveJSONAssember {
                 liveChannel.setVideoCodeInfo(videoCodeInfo);
                 liveChannel.setVideoType(videoType);
                 liveChannel.setDvbBitRate(dvbBitRate);
+
                 channels.add(liveChannel);
             }
         }
@@ -161,53 +170,4 @@ public class LiveJSONAssember {
         }
         return items;
     }
-
-    /**
-     * 以json格式数据输出到客户端
-     */
-    public static JSONObject toChannelJsonObject(List<LiveChannel> liveChannels) {
-        JSONArray channelList = new JSONArray();
-        for (LiveChannel liveChannel : liveChannels) {
-            JSONObject channelItem = new JSONObject();
-            channelItem.put("ChannelIcon", liveChannel.getChannelIcon());
-            channelItem.put("ChannelImage", liveChannel.getChannelImage());
-            channelItem.put("ChannelType", liveChannel.getChannelType());
-            channelItem.put("PlayUrl", liveChannel.getPlayUrl());
-            channelItem.put("FeeType", liveChannel.getFeeType());
-            channelItem.put("VideoType", liveChannel.getVideoType());
-            channelItem.put("ChannelItem", channelItem);
-            channelList.add(channelItem);
-        }
-        JSONObject channels = new JSONObject();
-        channels.put("ChannelList", channelList);
-        return channels;
-
-    }
-
-    public static JSONObject toProgramJsonObject(List<LiveProgram> liveProgramInfos) {
-        JSONArray liveProgramList = new JSONArray();
-        for (LiveProgram liveProgramInfo : liveProgramInfos) {
-            JSONObject programItem = new JSONObject();
-            JSONObject liveProgram = new JSONObject();
-            programItem.put("ProgramName", liveProgramInfo.getProgramName());
-            programItem.put("PlayTime", liveProgramInfo.getPlayTime());
-            programItem.put("EndTime", liveProgramInfo.getEndTime());
-            programItem.put("EventType", liveProgramInfo.getEventType());
-            programItem.put("EventDesc", liveProgramInfo.getEventDesc());
-            programItem.put("VideoType", liveProgramInfo.getVideoType());
-            programItem.put("ViewLevel", liveProgramInfo.getViewLevel());
-            programItem.put("PlayUrl", liveProgramInfo.getPlayUrl());
-            programItem.put("EventImageUrl", liveProgramInfo.getEventImageUrl());
-            programItem.put("ContentProviderID", liveProgramInfo.getContentProviderID());
-            programItem.put("LocalEntryUID", liveProgramInfo.getLocalEntryUID());
-            liveProgram.put("ProgramInfo", programItem);
-            liveProgramList.add(liveProgram);
-
-        }
-        JSONObject livePrograms = new JSONObject();
-        livePrograms.put("ProgramList", liveProgramList);
-        return livePrograms;
-    }
-
-
 }

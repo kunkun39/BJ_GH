@@ -44,8 +44,12 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
             requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
             JSONObject requestParams = new JSONObject();
-            requestParams.put("ChannelID", chanenlID);
-            requestParams.put("ChannelTypeID", channeType);
+            if (StringUtils.hasText(chanenlID)) {
+                requestParams.put("ChannelID", chanenlID);
+            }
+            if (StringUtils.hasText(channeType)) {
+                requestParams.put("ChannelTypeID", channeType);
+            }
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
             response = WebUtils.httpPostRequest(postMethod);

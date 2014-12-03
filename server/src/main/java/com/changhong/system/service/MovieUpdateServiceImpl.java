@@ -268,7 +268,7 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
     public void updateMovieColumn(String id) {
         String response = null;
         if (LOCAL) {
-            response = FakeJDONDataProvider.MOVIE_INFO_DATA;
+            response = FakeJDONDataProvider.MOVIE_COLUMN_DATA;
         } else {
             PostMethod postMethod = new PostMethod(GHUpdateUrl.MOVIE_COLUMN_UPDATE_URL);
             JSONObject json = new JSONObject();
@@ -430,15 +430,15 @@ public class MovieUpdateServiceImpl implements MovieUpdateService {
 
     public static void main(String[] args) {
         MovieUpdateServiceImpl movieService = new MovieUpdateServiceImpl();
-//        movieService.updateMovieType();
-//        movieService.updateMovieDramaType();
-//        movieService.updateMovieArea();
-//        movieService.updateMovieAreaGroup();
-//        movieService.updateMovieClientType();
-//        movieService.updateMovieChannelType();
-//        movieService.updateMovieEventType();
-        movieService.updateMovieProvider();
-//        movieService.updateMovieColumn();
-//        movieService.getMovieListByType("1");
+//        movieService.updateMovieType("");
+//        movieService.updateMovieDramaType("");
+//        movieService.updateMovieArea("");
+//        movieService.updateMovieAreaGroup("");
+//        movieService.updateMovieClientType("");
+//        movieService.updateMovieChannelType("");
+//        movieService.updateMovieEventType("");
+//        movieService.updateMovieProvider();
+//        movieService.updateMovieColumn("");
+        movieService.getMovieListByColumn("1");
     }
 }

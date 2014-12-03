@@ -48,7 +48,7 @@ public class ClientDispatcherServlet extends HttpServlet {
         String requestURL = request.getRequestURI();
         String responseJSON = "";
 
-        //首页推荐操作
+        //前台UI部分
         if ("/ott/client/moviecolumn.action".equals(requestURL)) {
             String page = ServletRequestUtils.getStringParameter(request, "page", "");
             responseJSON = clientMovieService.obtainColumns(page);
@@ -86,7 +86,9 @@ public class ClientDispatcherServlet extends HttpServlet {
         } else if ("/ott/client/programrollback.action".equals(requestURL)) {
             int channelID = ServletRequestUtils.getIntParameter(request, "channelID", 1);
             responseJSON = clientLiveService.obtainRollackProgramEPG(channelID, true);
-        } else if("/ott/client/liveChange.action".equals(requestURL)){
+
+        //后台数据更新部分
+        } else if("/ott/client/livechange.action".equals(requestURL)){
             String json = ServletRequestUtils.getStringParameter(request, "json", "");
             liveChangeService.liveChange(json);
         }

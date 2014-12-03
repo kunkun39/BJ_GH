@@ -145,7 +145,7 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
         return result.toJSONString();
     }
 
-    public String findColumns() {
+    public String findColumns(String page) {
         Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 
         /**
@@ -194,17 +194,8 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
         /**
          * 构造分页
          */
-        sqlQuery = session.createSQLQuery("select count(id) FROM movie_info");
-        Object[] count = (Object[]) sqlQuery.list().get(0);
-        int numItems = ((Long) count[0]).intValue();
-        PagingUtils paging = new PagingUtils(numItems);
-        paging.setCurrentPage(currentPage);
-
-        /**
-         * 查询MOVIE
-         */
         StringBuilder builder = new StringBuilder();
-        builder.append("SELECT movie_id,movie_name,movie_alias_name,movie_runtime,movie_suggestprice FROM movie_info WHERE");
+        builder.append(" FROM movie_info WHERE");
         boolean addAnd = false;
         if (StringUtils.hasText(columnID)) {
             addAnd = true;
@@ -238,7 +229,17 @@ public class MovieDaoImpl  extends HibernateEntityObjectDao implements MovieDao 
             addAnd = true;
             builder.append(" movie_area_id='" + areaID + "'");
         }
-        builder.append(" LIMIT " + paging.getStartPosition() + "," + paging.getPageItems());
+
+        sqlQuery = session.createSQLQuery("SELECT count(id)" + builder.toString());
+        Object[] count = (Object[]) sqlQuery.list().get(0);
+        int numItems = ((Long) count[0]).intValue();
+        PagingUtils paging = new PagingUtils(numItems);
+        paging.setCurrentPage(currentPage);
+
+        /**
+         * 查询MOVIE
+         */
+        builder.append("SELECT movie_id,movie_name,movie_alias_name,movie_runtime,movie_suggestprice" + builder.toString() + " LIMIT " + paging.getStartPosition() + "," + paging.getPageItems());
         sqlQuery = session.createSQLQuery(builder.toString());
         List list = sqlQuery.list();
 

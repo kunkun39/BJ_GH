@@ -16,7 +16,7 @@ public interface MovieDao extends EntityObjectDao {
 
     String findMovieType(TypeEnum type);
 
-    String findColumns();
+    String findColumns(String page);
 
     String findMovies(String query);
 

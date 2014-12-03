@@ -30,7 +30,7 @@ public class MovieTypeJSONAssember {
                 type.setTypeID(object.getString("TypeID"));
                 type.setType(object.getString("Type"));
                 type.setTypeSequence(object.getIntValue("TypeSequence"));
-                type.setDramaType(object.getString("TypeSequence"));
+                type.setDramaType(object.getString("DramaType"));
                 types.add(type);
             }
 
