@@ -71,6 +71,18 @@ CREATE TABLE `live_program` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `live_program` ADD INDEX live_program_index_channelid(`channel_id`);
 
+DROP TABLE IF EXISTS `program_update_history`;
+CREATE TABLE `program_update_history` (
+  `id` int(36) NOT NULL auto_increment,
+  `timestamp` timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `program_id` int default 0,
+  `update_date` varchar(10) default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+SET FOREIGN_KEY_CHECKS=0;
+
+
 
 
 

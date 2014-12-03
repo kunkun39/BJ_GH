@@ -9,5 +9,5 @@ public interface LiveUpdateService {
 
     void updateLiveChannel(String channelID, String channelType);
 
-    void updateLiveProgram(int channelID, String eventTypeID);
+    void updateLiveProgram(int channelID, String eventTypeID, String date);
 }

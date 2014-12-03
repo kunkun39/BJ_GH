@@ -63,7 +63,7 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
         }
     }
 
-    public void updateLiveProgram(int channelID,String eventTypeID) {
+    public void updateLiveProgram(int channelID, String eventTypeID, String date) {
         String response = null;
 
         if (LOCAL) {
@@ -76,9 +76,15 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
             requestHeader.put("TransanctionId", TX_FLAG + CHStringUtils.getRandomString(20));
             requestHeader.put("TransactionTime", System.currentTimeMillis());
             json.put("RequestHeader", requestHeader);
-            requestParams.put("ChannelID", channelID);
-            requestParams.put("EventTypeID", eventTypeID);
-            requestParams.put("Date", "2013-11-21");
+            if (channelID > 0) {
+                requestParams.put("ChannelID", channelID);
+            }
+            if (StringUtils.hasText(eventTypeID)) {
+                requestParams.put("EventTypeID", eventTypeID);
+            }
+            if (StringUtils.hasText(date)) {
+                requestParams.put("Date", date);
+            }
             requestParams.put("PosterAspectRatio", "10240768");
             json.put("RequestParams", requestParams);
             postMethod.addParameter("json", json.toJSONString());
