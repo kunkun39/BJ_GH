@@ -21,11 +21,10 @@ import java.util.List;
 public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
 
     public String loadLiveChannelsByType(String sql) {
-        List<LiveChannel> liveChannels;
         Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-        SQLQuery query = null;
-        query = session.createSQLQuery("select channel_icon,channel_image,channel_type,play_url,fee_type,video_type from live_channel where live_channel.channel_type='高清频道' ");
-        liveChannels = query.list();
+        SQLQuery query = session.createSQLQuery("select channel_icon,channel_image,channel_type,play_url,fee_type,video_type from live_channel where live_channel.channel_type='高清频道' ");
+        List<LiveChannel> liveChannels = query.list();
+
         JSONArray channelList = new JSONArray();
         for (Object loop : liveChannels) {
             JSONObject channelItem = new JSONObject();
@@ -57,7 +56,7 @@ public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
              * 组装节目的信息
              */
             JSONObject programJSON = new JSONObject();
-            programJSON.put("ProgramID", program.getProgramName());
+            programJSON.put("ProgramID", program.getProgramID());
             programJSON.put("ProgramName", program.getProgramName());
             programJSON.put("EventDate", program.getEventDate());
             programJSON.put("EventType", program.getEventType());
@@ -80,12 +79,11 @@ public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
              */
             if (loadMovieInfo) {
                 JSONObject movieJSON = new JSONObject();
-                JSONObject posterJSON = new JSONObject();
                 if (program.getMovie() != null) {
                     MovieInfo movieInfo = program.getMovie();
-                    movieJSON.put("MovieID", movieInfo.getMovieName());
+                    movieJSON.put("MovieID", movieInfo.getMovieID());
                     movieJSON.put("MovieName", movieInfo.getMovieName());
-                    movieJSON.put("MovieAliasName", movieInfo.getMovieName());
+                    movieJSON.put("MovieAliasName", movieInfo.getMovieAliasName());
                     item.put("MovieInfo", movieJSON);
                 }
             }
@@ -98,5 +96,17 @@ public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
 
         result.put("ProgramList", items);
         return result.toJSONString();
+    }
+
+    public void deleteChannel(String channelID) {
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        SQLQuery query = session.createSQLQuery("DELETE FROM live_channel WHERE channel_id = '" + channelID + "'");
+        query.executeUpdate();
+    }
+
+    public void deleteProgram(String programID) {
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        SQLQuery query = session.createSQLQuery("DELETE FROM live_program WHERE program_id = '" + programID + "'");
+        query.executeUpdate();
     }
 }

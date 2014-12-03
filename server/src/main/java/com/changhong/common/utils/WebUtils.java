@@ -44,6 +44,23 @@ public class WebUtils {
         return response;
     }
 
+    public static InputStream httpGetRequestAsStream(String url) {
+        HttpClient client = new HttpClient(connectionManager);
+        client.getParams().setSoTimeout(timeOutMilliSeconds);
+        client.getParams().setContentCharset("UTF-8");
+
+        String sendUrl = url.replaceAll(" ", "%20");
+        InputStream response = null;
+        GetMethod httpGet = new GetMethod(sendUrl);
+        try {
+            client.executeMethod(httpGet);
+            response = httpGet.getResponseBodyAsStream();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return response;
+    }
+
     public static String httpGetRequest(GetMethod httpGet) {
         HttpClient client = new HttpClient(connectionManager);
         client.getParams().setSoTimeout(timeOutMilliSeconds);

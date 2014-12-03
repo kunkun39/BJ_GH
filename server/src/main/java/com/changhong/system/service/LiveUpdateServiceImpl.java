@@ -18,11 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: maren
  * Date: 14-11-20
  * Time: 下午6:39
- * To change this template use File | Settings | File Templates.
  */
 @Repository
 public class LiveUpdateServiceImpl implements LiveUpdateService {
@@ -34,7 +32,7 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
     @Resource(name = "liveDao")
     private LiveDao liveDao;
 
-    public void updateLiveChannel(int chanenlID,String channeType) {
+    public void updateLiveChannel(String chanenlID, String channeType) {
         String response = null;
         if (LOCAL) {
             response = FakeJDONDataProvider.LIVE_CHANNEL_DATA;
