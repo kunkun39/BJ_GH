@@ -5,12 +5,13 @@ import com.changhong.common.utils.CHStringUtils;
 import com.changhong.common.utils.WebUtils;
 import com.changhong.system.domain.FakeJDONDataProvider;
 import com.changhong.system.domain.GHUpdateUrl;
-import com.changhong.system.domain.live.LiveChannel;
-import com.changhong.system.domain.live.LiveProgram;
+import com.changhong.system.domain.live.*;
+import com.changhong.system.domain.live.ProgramUpdateHistory;
 import com.changhong.system.repository.LiveDao;
 import com.changhong.system.web.facade.assember.LiveJSONAssember;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -22,7 +23,7 @@ import java.util.List;
  * Date: 14-11-20
  * Time: 下午6:39
  */
-@Repository
+@Service("liveUpdateService")
 public class LiveUpdateServiceImpl implements LiveUpdateService {
 
     private final static String TX_FLAG = "CH_"; //例子中给的 是 System.currentTimeMillis() +　"_" + 5位随机数
@@ -93,7 +94,13 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
 
         if (StringUtils.hasText(response)) {
             List<LiveProgram> programInfos = LiveJSONAssember.toLiveProgramList(response);
+            com.changhong.system.domain.live.ProgramUpdateHistory programUpdateHistory=new ProgramUpdateHistory();
             if (programInfos != null && !programInfos.isEmpty()) {
+                for (LiveProgram programInfo:programInfos){
+                    programUpdateHistory.setProgramID(programInfo.getProgramID());
+                    programUpdateHistory.setUpdateDate(date);
+                    liveDao.saveOrUpdate(programUpdateHistory);
+                }
                 liveDao.saveAll(programInfos);
             }
         }

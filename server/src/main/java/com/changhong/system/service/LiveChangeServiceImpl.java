@@ -7,6 +7,7 @@ import com.changhong.system.domain.live.LiveProgram;
 import com.changhong.system.repository.LiveDao;
 import com.changhong.system.service.LiveUpdateService;
 import com.changhong.system.service.MovieUpdateService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
  * Date: 14-11-27
  * Time: 上午9:38
  */
+@Service("liveChangeService")
 public class LiveChangeServiceImpl implements LiveChangeService {
 
     private final static String INSERT = "insert";
