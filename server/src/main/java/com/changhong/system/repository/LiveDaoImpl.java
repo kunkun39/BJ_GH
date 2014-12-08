@@ -20,6 +20,12 @@ import java.util.List;
 @Repository("liveDao")
 public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
 
+    public List<Integer> findAllChannelIDs() {
+        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        SQLQuery query = session.createSQLQuery("SELECT channel_id FROM live_channel");
+        return query.list();
+    }
+
     public String loadLiveChannelsByType(String sql) {
         Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
         SQLQuery query = session.createSQLQuery("select channel_icon,channel_image,channel_type,play_url,fee_type,video_type from live_channel where live_channel.channel_type='高清频道' ");

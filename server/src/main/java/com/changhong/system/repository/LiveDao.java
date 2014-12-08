@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface LiveDao extends EntityObjectDao {
 
+    List<Integer> findAllChannelIDs();
+
     String loadLiveChannelsByType(String sql);
 
     String findLiveProgramEPG(int channelID, String dateFrom, String dateTo, boolean loadMovieInfo);
@@ -20,4 +22,5 @@ public interface LiveDao extends EntityObjectDao {
     void deleteChannel(String channelID);
 
     void deleteProgram(String programID);
+
 }
