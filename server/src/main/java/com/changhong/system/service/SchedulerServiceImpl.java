@@ -1,14 +1,15 @@
 package com.changhong.system.service;
 
 
-
-
-
 import com.changhong.common.repository.HibernateEntityObjectDao;
+import com.changhong.common.utils.JodaUtils;
+import com.changhong.system.domain.live.ProgramUpdateHistory;
+import com.changhong.system.domain.movietype.Provider;
 import com.changhong.system.repository.LiveDao;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -35,10 +36,16 @@ public class SchedulerServiceImpl extends HibernateEntityObjectDao implements Sc
      * 没有事务
      */
     public void renewProgramHistory() {
+        String date = JodaUtils.parseDateTime(new DateTime().toString()).toString();
         List<Integer> channelIDs = liveDao.findAllChannelIDs();
-
         for (Integer channelID : channelIDs) {
-            liveUpdateService.updateLiveProgram(channelID, null, new LocalDate().toString());
+            if (liveDao.findProgramUpdateHistory(channelID, date)) {
+                continue;
+            } else {
+                liveUpdateService.updateLiveProgram(channelID, null, date);
+            }
+
+
         }
         System.out.println("执行定时任务");
     }

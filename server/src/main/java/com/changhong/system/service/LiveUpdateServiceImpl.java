@@ -96,11 +96,14 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
             List<LiveProgram> programInfos = LiveJSONAssember.toLiveProgramList(response);
             liveDao.saveAll(programInfos);
 
-            ProgramUpdateHistory programUpdateHistory = new ProgramUpdateHistory();
-            for (LiveProgram programInfo:programInfos){
+
+            for (LiveProgram programInfo : programInfos) {
+                ProgramUpdateHistory programUpdateHistory=new ProgramUpdateHistory();
                 programUpdateHistory.setProgramID(programInfo.getProgramID());
+                programUpdateHistory.setChannelID(programInfo.getChannelID());
                 programUpdateHistory.setUpdateDate(date);
                 liveDao.saveOrUpdate(programUpdateHistory);
+                System.out.println("complete");
             }
         }
     }

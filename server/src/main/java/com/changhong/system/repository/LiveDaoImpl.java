@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.changhong.common.repository.HibernateEntityObjectDao;
 import com.changhong.system.domain.live.LiveChannel;
 import com.changhong.system.domain.live.LiveProgram;
+import com.changhong.system.domain.live.ProgramUpdateHistory;
 import com.changhong.system.domain.movie.MovieInfo;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.classic.Session;
 import org.springframework.stereotype.Repository;
@@ -19,11 +21,29 @@ import java.util.List;
  */
 @Repository("liveDao")
 public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
+    public boolean findProgramUpdateHistory(int channelID,String date) {
+        Session session = getHibernateTemplate().getSessionFactory().openSession();
+        SQLQuery query = session.createSQLQuery("select * from program_update_history where channel_id= '" + channelID + "' and update_date= '" +  date + " ' "  );
+        List<ProgramUpdateHistory> list=query.list();
+        session.close();
+        if(list.size()>0){
+            return true;
+        }else{
+            return false;
+        }
+
+
+
+
+    }
+
 
     public List<Integer> findAllChannelIDs() {
-        Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+        Session session = getHibernateTemplate().getSessionFactory().openSession();
         SQLQuery query = session.createSQLQuery("SELECT channel_id FROM live_channel");
-        return query.list();
+        List<Integer> list=query.list();
+        session.close();
+        return list;
     }
 
     public String loadLiveChannelsByType(String sql) {

@@ -9,6 +9,8 @@ import com.changhong.common.domain.EntityBase;
  */
 public class ProgramUpdateHistory extends EntityBase {
 
+    private int channelID;
+
     private int programID;
 
     private String updateDate;
@@ -30,4 +32,12 @@ public class ProgramUpdateHistory extends EntityBase {
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
     }
+    public int getChannelID() {
+          return channelID;
+      }
+
+      public void setChannelID(int channelID) {
+          this.channelID = channelID;
+      }
+
 }
