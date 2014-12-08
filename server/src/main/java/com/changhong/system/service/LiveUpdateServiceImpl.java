@@ -94,14 +94,13 @@ public class LiveUpdateServiceImpl implements LiveUpdateService {
 
         if (StringUtils.hasText(response)) {
             List<LiveProgram> programInfos = LiveJSONAssember.toLiveProgramList(response);
-            com.changhong.system.domain.live.ProgramUpdateHistory programUpdateHistory=new ProgramUpdateHistory();
-            if (programInfos != null && !programInfos.isEmpty()) {
-                for (LiveProgram programInfo:programInfos){
-                    programUpdateHistory.setProgramID(programInfo.getProgramID());
-                    programUpdateHistory.setUpdateDate(date);
-                    liveDao.saveOrUpdate(programUpdateHistory);
-                }
-                liveDao.saveAll(programInfos);
+            liveDao.saveAll(programInfos);
+
+            ProgramUpdateHistory programUpdateHistory = new ProgramUpdateHistory();
+            for (LiveProgram programInfo:programInfos){
+                programUpdateHistory.setProgramID(programInfo.getProgramID());
+                programUpdateHistory.setUpdateDate(date);
+                liveDao.saveOrUpdate(programUpdateHistory);
             }
         }
     }
