@@ -25,7 +25,7 @@ public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
     public boolean findProgramUpdateHistory(int channelID, String date) {
         Session session = getHibernateTemplate().getSessionFactory().openSession();
         SQLQuery query = session.createSQLQuery("SELECT COUNT(id) FROM program_update_history WHERE  channel_id= '" + channelID + "' AND update_date= '" +  date + " ' "  );
-        List<ProgramUpdateHistory> histories = query.list();
+        List<Object> histories = query.list();
         session.close();
         if (histories.isEmpty()) {
             return false;
