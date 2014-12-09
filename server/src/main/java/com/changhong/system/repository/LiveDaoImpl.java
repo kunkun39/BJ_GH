@@ -21,22 +21,20 @@ import java.util.List;
  */
 @Repository("liveDao")
 public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
-    public boolean findProgramUpdateHistory(int channelID,String date) {
+
+    public boolean findProgramUpdateHistory(int channelID, String date) {
         Session session = getHibernateTemplate().getSessionFactory().openSession();
-        SQLQuery query = session.createSQLQuery("select * from program_update_history where channel_id= '" + channelID + "' and update_date= '" +  date + " ' "  );
-        List<ProgramUpdateHistory> list=query.list();
+        SQLQuery query = session.createSQLQuery("select * from program_update_history where channel_id= '" + channelID + "' and update_date= '" + date + " ' ");
+
+        List<ProgramUpdateHistory> histories = query.list();
         session.close();
-        if(list.size()>0){
-            return true;
-        }else{
+
+        if (histories.isEmpty()) {
             return false;
+        } else {
+            return true;
         }
-
-
-
-
     }
-
 
     public List<Integer> findAllChannelIDs() {
         Session session = getHibernateTemplate().getSessionFactory().openSession();

@@ -36,16 +36,15 @@ public class SchedulerServiceImpl extends HibernateEntityObjectDao implements Sc
      * 没有事务
      */
     public void renewProgramHistory() {
-        String date = JodaUtils.parseDateTime(new DateTime().toString()).toString();
+        String date = new LocalDate().toString("yyyy-MM-dd");
         List<Integer> channelIDs = liveDao.findAllChannelIDs();
+
         for (Integer channelID : channelIDs) {
             if (liveDao.findProgramUpdateHistory(channelID, date)) {
                 continue;
             } else {
                 liveUpdateService.updateLiveProgram(channelID, null, date);
             }
-
-
         }
         System.out.println("执行定时任务");
     }

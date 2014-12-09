@@ -18,7 +18,7 @@
             <list>
                 <bean class="org.springframework.scheduling.quartz.CronTriggerBean">
                     <!-- run every day 1AM -->
-                    <!--<property name="cronExpression" value="0 0 0/8 * * ?"/>-->
+                    <!--<property name="cronExpression" value="0 0 0/6 * * ?"/>-->
                     <property name="cronExpression" value="0/30 * 13 * * ?"/>
                     <property name="jobDetail">
                         <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

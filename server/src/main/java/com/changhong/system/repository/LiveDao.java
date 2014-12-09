@@ -15,14 +15,8 @@ public interface LiveDao extends EntityObjectDao {
 
     /**
      * 根据频道和日期查询已更新的节目
-     * @param channelID
-     * @param date
-     * @return
      */
     boolean findProgramUpdateHistory(int channelID,String date);
-
-
-
 
     List<Integer> findAllChannelIDs();
 
