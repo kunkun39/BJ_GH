@@ -24,11 +24,9 @@ public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
 
     public boolean findProgramUpdateHistory(int channelID, String date) {
         Session session = getHibernateTemplate().getSessionFactory().openSession();
-        SQLQuery query = session.createSQLQuery("select * from program_update_history where channel_id= '" + channelID + "' and update_date= '" + date + " ' ");
-
+        SQLQuery query = session.createSQLQuery("SELECT COUNT(id) FROM program_update_history WHERE  channel_id= '" + channelID + "' AND update_date= '" +  date + " ' "  );
         List<ProgramUpdateHistory> histories = query.list();
         session.close();
-
         if (histories.isEmpty()) {
             return false;
         } else {
@@ -46,7 +44,7 @@ public class LiveDaoImpl extends HibernateEntityObjectDao implements LiveDao {
 
     public String loadLiveChannelsByType(String sql) {
         Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-        SQLQuery query = session.createSQLQuery("select channel_icon,channel_image,channel_type,play_url,fee_type,video_type from live_channel where live_channel.channel_type='高清频道' ");
+        SQLQuery query = session.createSQLQuery("SELECT  channel_icon,channel_image,channel_type,play_url,fee_type,video_type FROM  live_channel WHERE  live_channel.channel_type='高清频道' ");
         List<LiveChannel> liveChannels = query.list();
 
         JSONArray channelList = new JSONArray();
