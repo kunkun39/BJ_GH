@@ -110,4 +110,11 @@
         <aop:advisor advice-ref="serviceTxAdvice" pointcut-ref="serviceOperations"/>
     </aop:config>
 
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+       <property name="configLocation">
+           <value>/WEB-INF/architecture/sqlmapconfig.xml</value>
+       </property>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 </beans>
